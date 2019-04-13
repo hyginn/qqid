@@ -20,13 +20,11 @@
 #' @export
 
 QQIDexample <- function() {
-  myQQ <- c(
-    "gram.love-88e-4a13-a1d2-79ee-ec0567354223",
-    "skip.torn-b08-9f14-9032-0baa-5f796fa2a71b",
-    "wave.loaf-df7-652d-1982-0a5c-2c1a88284ee8",
-    "time.pike-f9e-d798-3d22-6894-643b13ed8740",
-    "flee.teak-6e3-4461-3002-99be-eb263a3a14d2"
-  )
+  myQQ <- c("wars.hurt-233-4455-6677-8899-aabbccddeeff",
+            "tick.bath-344-5566-7788-99aa-bbccddeeff00",
+            "quay.dare-455-6677-8899-aabb-ccddeeff0011",
+            "bars.rift-566-7788-99aa-bbcc-ddeeff001122",
+            "mane.junk-677-8899-aabb-ccdd-eeff00112233")
   return(myQQ)
 }
 

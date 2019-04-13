@@ -20,13 +20,11 @@
 #' @export
 
 UUIDexample <- function() {
-  myUU <- c(
-    "6c10088e-4a13-a1d2-79ee-ec0567354223",
-    "e2062b08-9f14-9032-0baa-5f796fa2a71b",
-    "51513df7-652d-1982-0a5c-2c1a88284ee8",
-    "28c24f9e-d798-3d22-6894-643b13ed8740",
-    "965ec6e3-4461-3002-99be-eb263a3a14d2"
-  )
+  myUU <- c("00112233-4455-6677-8899-aabbccddeeff",
+            "11223344-5566-7788-99aa-bbccddeeff00",
+            "22334455-6677-8899-aabb-ccddeeff0011",
+            "33445566-7788-99aa-bbcc-ddeeff001122",
+            "44556677-8899-aabb-ccdd-eeff00112233")
   return(myUU)
 }
 
