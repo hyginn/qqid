@@ -1,0 +1,19 @@
+Package: qqid
+Type: Package
+Title: QQIDs - a human-interpretable representation of UUIDs
+Version: 1.0.0
+Date: 2019-04-13
+Authors@R: c(
+    person("Boris", "Steipe",
+           email = "boris.steipe@utoronto.ca",
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1134-6758"))
+    )
+Description: ..
+License: file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests:
+    qrandom,
+    testthat
+RoxygenNote: 6.1.1
