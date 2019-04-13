@@ -30,6 +30,8 @@
 #' @export
 
 isValidQQID <- function(s, na.map = FALSE) {
+  stopifnot(is.character(s))
+  stopifnot(is.vector(s))
   patt <- paste0("^[a-z]{4}\\.[a-z]{4}", # two Q words separetd by "."
                  "-[0-9a-fA-F]{3}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
   v <- grepl(patt, s)

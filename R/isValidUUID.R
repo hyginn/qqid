@@ -32,6 +32,8 @@
 #' @export
 
 isValidUUID <- function(s, na.map = FALSE) {
+  stopifnot(is.character(s))
+  stopifnot(is.vector(s))
   patt <- paste0("^[0-9a-fA-F]{8}",
                  "-([0-9a-fA-F]{4}-){3}",
                  "[0-9a-fA-F]{12}$")
