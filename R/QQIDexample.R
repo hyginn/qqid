@@ -23,17 +23,17 @@
 #' @examples
 #' QQIDexample()                             # the five stored QQIDs
 #' QQIDexample(2:3)                          # two QQIDs
-#' QQIDexample(rep(1:5, 5))                  # twentyfive QQIDS
+#' QQIDexample(rep(1:5, 5))                  # twentyfive non-random QQIDS
 #' QQIDexample(3) == uu2qq(UUIDexample(3))   # TRUE (testing the conversion)
 #'
 #' @export
 
 QQIDexample <- function(idx = 1:5) {
-  myQQ <- c("fist.cord-233-4455-6677-8899-aabbccddeeff",
-            "mare.drop-344-5566-7788-99aa-bbccddeeff00",
-            "slug.flop-455-6677-8899-aabb-ccddeeff0011",
-            "bits.grip-566-7788-99aa-bbcc-ddeeff001122",
-            "gold.hurt-677-8899-aabb-ccdd-eeff00112233")
+  myQQ <- c("aims.fold-233-4455-6677-8899-aabbccddeeff",
+            "bowl.mild-344-5566-7788-99aa-bbccddeeff00",
+            "cost.soot-455-6677-8899-aabb-ccddeeff0011",
+            "duke.bows-566-7788-99aa-bbcc-ddeeff001122",
+            "foil.gull-677-8899-aabb-ccdd-eeff00112233")
 
   return(myQQ[idx])
 }

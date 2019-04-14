@@ -38,7 +38,7 @@ numbers.
 isValidQQID(QQIDexample(1:2))   # TRUE  TRUE
 
 # check one invalid QQID
-isValidQQID("no.pasaran-df7-652d-1982-0a5c-2c1a88284ee8")
+isValidQQID("no.pasaran-df7-652d-1982-0a5c-2c1a88284ee8")  # FALSE
 
 }
 \seealso{

@@ -12,8 +12,8 @@ test_that("corrupt input generates errors",  {
 test_that("valid input produces the expected output",  {
   expect_equal(uu2qq(character()), character(0))            # zero-length input
   expect_equal(uu2qq(NA_character_), NA_character_)         # one NA
-  expect_equal(uu2qq(UUIDexample(1)), QQIDexample()[1])
-  expect_equal(uu2qq(c(UUIDexample(1), NA)), c(QQIDexample()[1], NA))
+  expect_equal(uu2qq(UUIDexample(1)), QQIDexample(1))
+  expect_equal(uu2qq(c(UUIDexample(1), NA)), c(QQIDexample(1), NA))
   expect_equal(uu2qq(UUIDexample()), QQIDexample())
   expect_equal(uu2qq("00000000-0000-0000-0000-000000000000"),
                "aims.aims-000-0000-0000-0000-000000000000")

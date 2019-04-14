@@ -2,7 +2,7 @@
 
 #' uu2qq.
 #'
-#' \code{uu2qq} convert a vector of UUIDs to QQIDs.
+#' \code{uu2qq} converts a vector of UUIDs to QQIDs.
 #'
 #' Details.
 #'
@@ -75,8 +75,8 @@ x5int <- function(x) {
   # Non-exported helper function. Converts a vector of 5-digit hexadeximal
   # numbers to a two column matrix of integers.
   #
-  # x (character) a 5 digit hex number
-  # return: a 2 integer vector from 2 * 10 bits - in the range [0, 1023]
+  # x (character) a vector of 5 digit hex numbers
+  # return: a 2 column matrix of integers in the range (0, 1023)
   #
   # |--0x[1]--| |--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--|
   # 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -88,9 +88,9 @@ x5int <- function(x) {
   # is an issue we might need to switch conditional on the value of
   # .Platform$endian
 
-  pow2 <- 2^(0:9)
+  pow2 <- 2^(9:0)
   x <- matrix(as.integer(intToBits(strtoi(x))), ncol = 32, byrow = TRUE)
-  x <- x[ , c(17:20,13:16,9:12,5:8,1:4), drop = FALSE]
+  x <- x[ , c(20:17,16:13,12:9,8:5,4:1), drop = FALSE]
   int <- t(rbind(colSums(t(x[ ,  1:10, drop = FALSE]) * pow2),
                  colSums(t(x[ , 11:20, drop = FALSE]) * pow2)))
   return(int)

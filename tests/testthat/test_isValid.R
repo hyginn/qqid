@@ -31,10 +31,12 @@ test_that("a valid input to isValidQQID() produces the expected output",  {
 })
 
 test_that("subtle errors in the QQIDs are caught by isValidQQID()",  {
-  expect_equal(isValidQQID("FIST.cord-233-4455-6677-8899-aabbccddeeff"), FALSE)
-  expect_equal(isValidQQID("fist.CORD-233-4455-6677-8899-aabbccddeeff"), FALSE)
-  expect_equal(isValidQQID("xxxx.cord-233-4455-6677-8899-aabbccddeeff"), FALSE)
-  expect_equal(isValidQQID("fist.xxxx-233-4455-6677-8899-aabbccddeeff"), FALSE)
+  # Q-words should not be capitalized
+  expect_equal(isValidQQID("AIMS.fold-233-4455-6677-8899-aabbccddeeff"), FALSE)
+  expect_equal(isValidQQID("aims.FOLD-233-4455-6677-8899-aabbccddeeff"), FALSE)
+  # words should exist in the Q-words vector
+  expect_equal(isValidQQID("xxxx.fold-233-4455-6677-8899-aabbccddeeff"), FALSE)
+  expect_equal(isValidQQID("aims.xxxx-233-4455-6677-8899-aabbccddeeff"), FALSE)
 })
 
 context("isValidUUID")
@@ -67,10 +69,12 @@ test_that("a valid input to isValidUUID() produces the expected output",  {
 })
 
 test_that("subtle errors in the UUIDs are caught by isValidUUID()",  {
+  # hyphens should be hyphens
   expect_equal(isValidUUID("01234567.89ab-cdef-ABCD-EF0123456789"), FALSE)
   expect_equal(isValidUUID("01234567-89ab.cdef-ABCD-EF0123456789"), FALSE)
   expect_equal(isValidUUID("01234567-89ab-cdef.ABCD-EF0123456789"), FALSE)
   expect_equal(isValidUUID("01234567-89ab-cdef-ABCD.EF0123456789"), FALSE)
+  # character class should not allow blanks
   expect_equal(isValidUUID("012 4567-89ab-cdef-ABCD-EF0123456789"), FALSE)
   expect_equal(isValidUUID("01234567-89ab-c ef-ABCD-EF0123456789"), FALSE)
   expect_equal(isValidUUID("01234567-89ab-cdef-ABCD-EF0123 56789"), FALSE)

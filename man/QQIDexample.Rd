@@ -28,7 +28,7 @@ demonstration and testing.
 \examples{
 QQIDexample()                             # the five stored QQIDs
 QQIDexample(2:3)                          # two QQIDs
-QQIDexample(rep(1:5, 5))                  # twentyfive QQIDS
+QQIDexample(rep(1:5, 5))                  # twentyfive non-random QQIDS
 QQIDexample(3) == uu2qq(UUIDexample(3))   # TRUE (testing the conversion)
 
 }

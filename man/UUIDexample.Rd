@@ -28,7 +28,7 @@ demonstration and testing.
 \examples{
 UUIDexample()              # the five stored UUIDs
 UUIDexample(2:3)           # two UUIDs
-UUIDexample(rep(1:5, 5))   # twentyfive UUIDS
+UUIDexample(rep(1:5, 5))   # twentyfive non-random UUIDS
 UUIDexample(3) == qq2uu(QQIDexample(3)) # TRUE (testing the conversion)
 
 }

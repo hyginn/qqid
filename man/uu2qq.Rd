@@ -13,7 +13,7 @@ uu2qq(uu)
 (character)  a vector of QQIDs
 }
 \description{
-\code{uu2qq} convert a vector of UUIDs to QQIDs.
+\code{uu2qq} converts a vector of UUIDs to QQIDs.
 }
 \details{
 Details.
