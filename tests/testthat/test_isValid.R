@@ -21,20 +21,20 @@ test_that("edge case input generates correct in isValidQQID()", {
 test_that("a valid input to isValidQQID() produces the expected output",  {
   expect_equal(isValidQQID("a"), FALSE)
   expect_equal(isValidQQID(c("a", "a")), c(FALSE, FALSE))
-  expect_equal(isValidQQID(QQIDexample()[1]), TRUE)
-  expect_equal(isValidQQID(QQIDexample()[1:2]), c(TRUE, TRUE))
-  expect_equal(isValidQQID(c(QQIDexample()[1], "a", NA), na.map = NA),
+  expect_equal(isValidQQID(QQIDexample(1)), TRUE)
+  expect_equal(isValidQQID(QQIDexample(1:2)), c(TRUE, TRUE))
+  expect_equal(isValidQQID(c(QQIDexample(1), "a", NA), na.map = NA),
                c(TRUE, FALSE, NA))
-  expect_equal(isValidQQID("love.love-000-0000-0000-0000-000000000000"), TRUE)
-  expect_equal(isValidQQID("pump.pump-fff-ffff-ffff-ffff-ffffffffffff"), TRUE)
+  expect_equal(isValidQQID("aims.aims-000-0000-0000-0000-000000000000"), TRUE)
+  expect_equal(isValidQQID("zone.zone-fff-ffff-ffff-ffff-ffffffffffff"), TRUE)
   expect_equal(isValidQQID("this.that-aAb-BcCd-DeEf-FaAb-BcCdDeEfFaAb"), TRUE)
 })
 
 test_that("subtle errors in the QQIDs are caught by isValidQQID()",  {
-  expect_equal(isValidQQID("WARS.hurt-233-4455-6677-8899-aabbccddeeff"), FALSE)
-  expect_equal(isValidQQID("wars.HURT-233-4455-6677-8899-aabbccddeeff"), FALSE)
-  expect_equal(isValidQQID("xxxx.hurt-233-4455-6677-8899-aabbccddeeff"), FALSE)
-  expect_equal(isValidQQID("wars.xxxx-233-4455-6677-8899-aabbccddeeff"), FALSE)
+  expect_equal(isValidQQID("FIST.cord-233-4455-6677-8899-aabbccddeeff"), FALSE)
+  expect_equal(isValidQQID("fist.CORD-233-4455-6677-8899-aabbccddeeff"), FALSE)
+  expect_equal(isValidQQID("xxxx.cord-233-4455-6677-8899-aabbccddeeff"), FALSE)
+  expect_equal(isValidQQID("fist.xxxx-233-4455-6677-8899-aabbccddeeff"), FALSE)
 })
 
 context("isValidUUID")
@@ -57,9 +57,9 @@ test_that("edge case input generates correct in isValidUUID()", {
 test_that("a valid input to isValidUUID() produces the expected output",  {
   expect_equal(isValidUUID("a"), FALSE)
   expect_equal(isValidUUID(c("a", "a")), c(FALSE, FALSE))
-  expect_equal(isValidUUID(UUIDexample()[1]), TRUE)
-  expect_equal(isValidUUID(UUIDexample()[1:2]), c(TRUE, TRUE))
-  expect_equal(isValidUUID(c(UUIDexample()[1], "a", NA), na.map = NA),
+  expect_equal(isValidUUID(UUIDexample(1)), TRUE)
+  expect_equal(isValidUUID(UUIDexample(1:2)), c(TRUE, TRUE))
+  expect_equal(isValidUUID(c(UUIDexample(1), "a", NA), na.map = NA),
                c(TRUE, FALSE, NA))
   expect_equal(isValidUUID("00000000-0000-0000-0000-000000000000"), TRUE)
   expect_equal(isValidUUID("ffffffff-ffff-ffff-ffff-ffffffffffff"), TRUE)

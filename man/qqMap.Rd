@@ -33,9 +33,9 @@ Details.
 
 \examples{
 # qqMap a number
-qqMap(664)   # "joke"
+qqMap(314)   # "gift"
 # qqMap three words
-qqMap(c("three", "free", "cold", "beer"))  # NA 478  23 261
+qqMap(c("three", "free", "cold", "beer"))  # NA 288  126  35
 # return the entire QQ table
 x <- qqMap(1:1024)
 

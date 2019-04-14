@@ -4,21 +4,32 @@
 \alias{QQIDexample}
 \title{QQIDexample}
 \usage{
-QQIDexample()
+QQIDexample(idx = 1:5)
+}
+\arguments{
+\item{idx}{(numeric) an index vector that defines which of the five
+internally stored example QQIDs to return}
 }
 \value{
-(character) Five QQIDs
+(character) a vector of QQIDs
 }
 \description{
-\code{QQIDexample} returns five QQIDs.
+\code{QQIDexample} returns example QQIDs.
 }
 \details{
 Details.
-The same, fixed five QQIDs are returned every time. They can be mapped
-to the five UUIDs returned by \code{UUIDexample}.
+The function stores five artifical sample QQIDs. Input is an index vector
+that specifies which QQIDs to return. More than five QQIDs can be requested
+by repeating indices. The QQIDs can be converted to the UUIDs provided by
+\code{UUIDexample}. Note: these are not random numbers in the sense of the
+philosophy behind QQIDs. Do not use them for any purpose other than
+demonstration and testing.
 }
 \examples{
-QQIDexample()
+QQIDexample()                             # the five stored QQIDs
+QQIDexample(2:3)                          # two QQIDs
+QQIDexample(rep(1:5, 5))                  # twentyfive QQIDS
+QQIDexample(3) == uu2qq(UUIDexample(3))   # TRUE (testing the conversion)
 
 }
 \seealso{

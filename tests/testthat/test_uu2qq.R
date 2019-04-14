@@ -6,19 +6,19 @@ context("uu2qq")
 test_that("corrupt input generates errors",  {
   expect_error(uu2qq(NULL))
   expect_error(uu2qq(1))
-  expect_error(uu2qq(c(UUIDexample()[1], "oops")))
+  expect_error(uu2qq(c(UUIDexample(1), "oops")))
 })
 
 test_that("valid input produces the expected output",  {
   expect_equal(uu2qq(character()), character(0))            # zero-length input
   expect_equal(uu2qq(NA_character_), NA_character_)         # one NA
-  expect_equal(uu2qq(UUIDexample()[1]), QQIDexample()[1])
-  expect_equal(uu2qq(c(UUIDexample()[1], NA)), c(QQIDexample()[1], NA))
+  expect_equal(uu2qq(UUIDexample(1)), QQIDexample()[1])
+  expect_equal(uu2qq(c(UUIDexample(1), NA)), c(QQIDexample()[1], NA))
   expect_equal(uu2qq(UUIDexample()), QQIDexample())
   expect_equal(uu2qq("00000000-0000-0000-0000-000000000000"),
-               "love.love-000-0000-0000-0000-000000000000")
+               "aims.aims-000-0000-0000-0000-000000000000")
   expect_equal(uu2qq("ffffffff-ffff-ffff-ffff-ffffffffffff"),
-               "pump.pump-fff-ffff-ffff-ffff-ffffffffffff")
+               "zone.zone-fff-ffff-ffff-ffff-ffffffffffff")
 })
 
 # [END]

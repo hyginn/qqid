@@ -4,21 +4,32 @@
 \alias{UUIDexample}
 \title{UUIDexample}
 \usage{
-UUIDexample()
+UUIDexample(idx = 1:5)
+}
+\arguments{
+\item{idx}{(numeric) an index vector that defines which of the five
+internally stored example UUIDs to return}
 }
 \value{
-(character) Five UUIDs
+(character) a vector of UUIDs
 }
 \description{
-\code{UUIDexample} returns five UUIDs.
+\code{UUIDexample} returns example UUIDs.
 }
 \details{
 Details.
-The same, fixed five UUIDs are returned every time. They can be mapped
-to the five QQIDs returned by \code{QQIDexample}.
+The function stores five artifical sample UUIDs. Input is an index vector
+that specifies which UUIDs to return. More than five UUIDs can be requested
+by repeating indices. The UUIDs can be converted to the QQIDs provided by
+\code{QQIDexample}. Note: these are not random numbers in the sense of the
+philosophy behind UUIDs. Do not use them for any purpose other than
+demonstration and testing.
 }
 \examples{
-UUIDexample()
+UUIDexample()              # the five stored UUIDs
+UUIDexample(2:3)           # two UUIDs
+UUIDexample(rep(1:5, 5))   # twentyfive UUIDS
+UUIDexample(3) == qq2uu(QQIDexample(3)) # TRUE (testing the conversion)
 
 }
 \seealso{

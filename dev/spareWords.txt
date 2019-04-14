@@ -1,0 +1,10 @@
+
+spares <- c("acts",
+            "alps",
+            "flue",
+            "hogs",
+            "oust",
+            "pugs",
+            "tons",
+            "whey",
+            "zoom")
