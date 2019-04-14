@@ -1,37 +1,48 @@
-# qqMap.R
+# qMap.R
 
-#' qqMap
+#' qMap
 #'
-#' \code{<function>} maps numbers to QQ words, or words to their index
-#'                   in the QQ table.
+#' \code{qMap} maps numbers to Q-words, or Q-words to their index
+#'                   in the Q-word vector.
 #'
 #' Details.
-#' @section Description: Map words to their index in the QQ table, or indices
-#'                       to the corresponding  word. If x is of type character,
-#'                       the corresponding indices are returned. If x is of
-#'                       type numeric, the corresponding words are returned.
-#'                       The returned vector has the same length as x. Numbers
-#'                       that are not in [1, 2, ... 1024] are mapped to NA.
-#'                       Strings that are not a QQword are mapped to NA.
 #'
-#'                       More details on the QQ words.
+#' @section Description: \code{qMap} accepts strings that are matched to
+#' Q-word indices or NA, or numbers that are matched to Q-words or NA. The
+#' returned vector has the same length as the input. Numbers that are not
+#' in (1, 1024) return NA. Strings that are not a Q-word return NA.
+#'
+#' @section Q-Words: A table of 1,024 four-letter words is encoded
+#' in this function. Four-letter English words were chosen
+#' and manually refined to yield short, unique labels that:
+#' \itemize{
+#'   \item are monosyllabic,
+#'   \item are easy to spell and pronounce,
+#'   \item are individually not offensive,
+#'   \item are unlikely to be offensive in random combination,
+#'   \item are in common use,
+#'   \item avoid homophones and consonant clusters,
+#'   \item do not contain jargon, intentional misspellings, acronyms or overly
+#'   specialized technical or sports terms.
+#' }
 #'
 #' @param x (character or numeric) A vector.
-#' @return (numeric or character) Indices or QQwords.
+#' @return (numeric or character) A vector of Indices, Q-words, or NA of the
+#' same length as the input.
 #'
 #' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
 #'
 #' @examples
-#' # qqMap a number
-#' qqMap(314)   # "gift"
-#' # qqMap three words
-#' qqMap(c("three", "free", "cold", "beer"))  # NA 288  126  35
+#' # qMap a number
+#' qMap(314)   # "gift"
+#' # qMap four words, three can be matched.
+#' qMap(c("three", "free", "cold", "beer"))  # NA 288  126  35
 #' # return the entire QQ table
-#' x <- qqMap(1:1024)
+#' x <- qMap(1:1024)
 #'
 #' @export
 
-qqMap <- function(x) {
+qMap <- function(x) {
 
   w1024 <- c("aims", "ants", "arch", "arms", "arts", "aunt", "back", "bail",
              "bake", "bald", "ball", "balm", "band", "bane", "bank", "bans",
