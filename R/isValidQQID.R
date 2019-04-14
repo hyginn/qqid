@@ -23,7 +23,7 @@
 #'
 #' @examples
 #' # check 2 valid QQIDs
-#' isValidQQID(QQIDexample()[1:2])   # TRUE  TRUE
+#' isValidQQID(QQIDexample(1:2))   # TRUE  TRUE
 #' # check one invalid QQID
 #' isValidQQID("no.pasaran-df7-652d-1982-0a5c-2c1a88284ee8")
 #'

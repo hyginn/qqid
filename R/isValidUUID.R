@@ -25,7 +25,7 @@
 #'
 #' @examples
 #' # check 2 valid UUIDs
-#' isValidUUID(UUIDexample()[3:4])   # TRUE  TRUE
+#' isValidUUID(UUIDexample(3:4))   # TRUE  TRUE
 #' # check one invalid UUID
 #' isValidUUID("2.7182818284590452353602874713526624")
 #'
