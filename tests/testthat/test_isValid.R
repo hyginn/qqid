@@ -1,4 +1,4 @@
-#test_qqMap.R
+#test_isValid.R
 # Author: Boris Steipe <https://orcid.org/0000-0002-1134-6758>
 #
 context("isValidQQID")
@@ -75,6 +75,5 @@ test_that("subtle errors in the UUIDs are caught by isValidUUID()",  {
   expect_equal(isValidUUID("01234567-89ab-c ef-ABCD-EF0123456789"), FALSE)
   expect_equal(isValidUUID("01234567-89ab-cdef-ABCD-EF0123 56789"), FALSE)
 })
-
 
 # [END]

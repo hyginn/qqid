@@ -2,7 +2,7 @@
 
 #' qq2uu.
 #'
-#' \code{qq2uu} convert a vector of QQIDs to UUIDs.
+#' \code{qq2uu} converts a vector of QQIDs to UUIDs.
 #'
 #' Details.
 #' @section <title>: Additional explanation.
