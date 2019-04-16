@@ -15,31 +15,28 @@ qq2uu(qq)
 \description{
 \code{qq2uu} converts a vector of QQIDs to UUIDs.
 }
-\details{
-Details.
-}
 \section{QQIDs}{
- QQIDs are specially formatted UUIDs. See
-\code{\link{uu2qq}} for the the motivation of mapping UUIDs to QQIDs and
-details on how QQIDs are structured. This function reverses the mapping
-exactly to recover the original UUID.
+ QQIDs are specially formatted UUIDs. See \code{\link{uu2qq}}
+  for the the motivation of mapping UUIDs to QQIDs and details on how QQIDs
+  are structured. This function reverses the mapping exactly to recover the
+  original UUID.
 }
 
 \section{Process}{
  To convert a QQID to a UUID, the two "Q-words" that head
-the QQID are mapped to their index in the 1024-element Q-word vector (cf.
-\code{\link{qMap}}), and the indices are converted to two ten bit numbers.
-These twenty bits are expressed as a five-digit hexadecimal number which
-replaces the two Q-words to recover the UUID. For details on UUID format see
-\code{\link{isValidUUID}}. The remaining 18 Base 64 encoded characters are
-converted to their corresponding 27 hex digits via an intermediate mapping to
-bit-patterns.
+  the QQID are mapped to their index in the 1024-element Q-word vector (cf.
+  \code{\link{qMap}}), and the indices are converted to two ten bit numbers.
+  These twenty bits are expressed as a five-digit hexadecimal number which
+  replaces the two Q-words to recover the UUID. For details on UUID format
+  see \code{\link{isValidUUID}}. The remaining 18 Base 64 encoded characters
+  are converted to their corresponding 27 hex digits via an intermediate
+  mapping to bit-patterns.
 }
 
 \section{Endianness}{
  The package \code{qqid} uses its own internal functions
-for bit manipulations and is not affected by the endianness of the processor
-architecture it runs on.
+  for bit manipulations and is not affected by the endianness of the
+  processor architecture it runs on.
 }
 
 \examples{

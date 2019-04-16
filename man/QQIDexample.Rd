@@ -17,7 +17,6 @@ internally stored example QQIDs to return}
 \code{QQIDexample} returns example QQIDs.
 }
 \details{
-Details.
 The function stores five artifical sample QQIDs. Input is an index vector
 that specifies which QQIDs to return. More than five QQIDs can be requested
 by repeating indices. The QQIDs can be converted to the UUIDs provided by

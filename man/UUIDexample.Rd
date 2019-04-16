@@ -17,7 +17,6 @@ internally stored example UUIDs to return}
 \code{UUIDexample} returns example UUIDs.
 }
 \details{
-Details.
 The function stores five artifical sample UUIDs. Input is an index vector
 that specifies which UUIDs to return. More than five UUIDs can be requested
 by repeating indices. The UUIDs can be converted to the QQIDs provided by

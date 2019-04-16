@@ -11,36 +11,28 @@ qMap(x)
 }
 \value{
 (numeric or character) A vector of Indices, Q-words, or NA of the
-same length as the input.
+  same length as the input.
 }
 \description{
-\code{qMap} maps numbers to Q-words, or Q-words to their index
-                  in the Q-word vector.
-}
-\details{
-Details.
+\code{qMap} maps numbers to Q-words, or Q-words to their index in the Q-word
+vector.
 }
 \section{Description}{
- \code{qMap} accepts strings that are matched to
-Q-word indices or NA, or numbers that are matched to Q-words or NA. The
-returned vector has the same length as the input. Numbers that are not
-in (1, 1024) return NA. Strings that are not a Q-word return NA.
+ \code{qMap} accepts strings that are matched to Q-word
+  indices or NA, or numbers that are matched to Q-words or NA. The returned
+  vector has the same length as the input. Numbers that are not in (1, 1024)
+  return NA. Strings that are not a Q-word return NA.
 }
 
 \section{Q-Words}{
- A table of 1,024 four-letter words is encoded
-in this function. Four-letter English words were chosen
-and manually refined to yield short, unique labels that:
-\itemize{
-  \item are monosyllabic,
-  \item are easy to spell and pronounce,
-  \item are individually not offensive,
-  \item are unlikely to be offensive in random combination,
-  \item are in common use,
-  \item avoid homophones and consonant clusters,
-  \item do not contain jargon, intentional misspellings, acronyms or overly
-  specialized technical or sports terms.
-}
+ A table of 1,024 four-letter words is encoded in this
+  function. Four-letter English words were chosen and manually refined to
+  yield short, unique labels that: \itemize{ \item are monosyllabic, \item
+  are easy to spell and pronounce, \item are individually not offensive,
+  \item are unlikely to be offensive in random combination, \item are in
+  common use, \item avoid homophones and consonant clusters, \item do not
+  contain jargon, intentional misspellings, acronyms or overly specialized
+  technical or sports terms. }
 }
 
 \examples{

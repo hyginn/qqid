@@ -15,8 +15,8 @@ or indices.}
   bit-patterns.
 }
 \description{
-\code{b64Map} maps 6-character bit patterns to thier corresponding
-Base 64 characters or characters back to bit patterns.
+\code{b64Map} maps 6-character bit patterns to thier corresponding Base 64
+characters or characters back to bit patterns.
 }
 \section{Description}{
  if the input is a vector of 6-character bit patterns,
@@ -29,7 +29,10 @@ Base 64 characters or characters back to bit patterns.
 }
 
 \section{Base 64}{
- Base 64 is a binary to text encoding specified in \href{https://tools.ietf.org/html/rfc4648}{RFC 1738}; we use the URL and filename-safe alphabet version with the following encoding from \code{000000} to \code{111111}:
+ Base 64 is a binary to text encoding specified in
+  \href{https://tools.ietf.org/html/rfc4648}{RFC 1738}; we use the URL and
+  filename-safe alphabet version with the following encoding from
+  \code{000000} to \code{111111}:
   \code{"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"}
 }
 

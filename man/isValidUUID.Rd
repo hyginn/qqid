@@ -9,27 +9,25 @@ isValidUUID(s, na.map = FALSE)
 \arguments{
 \item{s}{(character) a vector of strings to check.}
 
-\item{na.map}{(logical) replace NA with \code{FALSE} (default), \code{NA},
-or  \code{TRUE}}
+\item{na.map}{(logical) replace NA with \code{FALSE} (default), \code{NA}, or
+\code{TRUE}}
 }
 \value{
-(logical) a vector of the same length as the input, \code{TRUE}
-                  for every element of the input that is a valid UUID.
+(logical) a vector of the same length as the input, \code{TRUE} for
+  every element of the input that is a valid UUID.
 }
 \description{
 \code{isValidUUID} tests whether the function argument is a vector of valid
-                   UUIDs.
+UUIDs.
 }
 \details{
-The function accepts a vector of strings and returns a logical
-vector of the same length, \code{TRUE} for every element of the input that is
-a valid UUID according to
-\href{https://tools.ietf.org/html/rfc4122}{RFC 4122}. \code{NA} values are
- mapped to \code{FALSE} (default) or can
-be replaced with  \code{NA} to preserve them. Note: arguments passed to
-\code{na.map} are implicitly converted to type logical. A valid UUID has
-the form: \code{"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}
-where \code{"x"} is a
+The function accepts a vector of strings and returns a logical vector of the
+same length, \code{TRUE} for every element of the input that is a valid UUID
+according to \href{https://tools.ietf.org/html/rfc4122}{RFC 4122}. \code{NA}
+values are mapped to \code{FALSE} (default) or can be replaced with
+\code{NA} to preserve them. Note: arguments passed to \code{na.map} are
+implicitly converted to type logical. A valid UUID has the form:
+\code{"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"} where \code{"x"} is a
 hexadecimal letter.
 }
 \examples{
