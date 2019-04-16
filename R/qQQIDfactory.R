@@ -1,0 +1,128 @@
+# qQQIDfactory.R
+
+#' qQQIDfactory.
+#'
+#' \code{qQQIDfactory} returns a function to retrieve cached, quantum random
+#' QQIDs.
+#'
+#' The function \code{qrandom::qUUID} retrieves true random UUIDs via the
+#' \href{https://qrng.anu.edu.au/index.php}{ANU Quantum Random Number Generator}
+#' provided by the Australian National University, which serves random numbers
+#' in real-time by measuring quantum fluctuations of the vacuum. The need to
+#' setup communication with the ANU server results in noticeable lag for each
+#' block of numbers retrieved from the qRNG over the Internet.
+#' \code{qQQIDfactory} returns a closure that addresses this latency by
+#' maintainig a local cache of true random QQIDs. A typical use case would
+#' consist of generate a function called \code{qQQID()} in an R session startup
+#' script if there is a connection to the Internet. After that, lag only occurs
+#' when the cache needs to be restocked.
+#'
+#' @section Usage: this is a factory function that returns a function which you
+#'   assign to a variable and call by that variable name (see examples). While
+#'   any legal variable name can be used, assigning to \code{qQQID} is
+#'   recommended. Note: creating the functions's QQID cache requires an internet
+#'   connection. Once the cache is filled, no internet connection is required
+#'   until the cache is depleted.
+#'
+#' @section qQQIds vs. rngQQIDs: In theory the chance of a key collision between
+#'   pseudo-random QQIDs from a RNG which is initialized with a random 64-bit
+#'   number is small: a 50%% probability of at least one collision requires
+#'   about 5^e09 keys. However, in practice this probability depends on the
+#'   chance that two runs of the RNG are accidentally initialized with the same
+#'   number, due to an improper use of \code{set.seed()} in another function,
+#'   script or package. The only way to prevent this with certainty is to use
+#'   true random keys. The true random keys that qQQID returns have a 50%%
+#'   collision probability in 2.7e18 keys, and this is the same at all times,
+#'   regardless of the state of the requesting machine. Thus unless very large
+#'   numbers of keys are required, it is advisable to use \code{qQQIDs} over
+#'   those returned by \code{rngQQID()}, or at least to initialize the RNG with
+#'   a seed returned from \code{qrandom::qrandommaxint()} immediately before
+#'   using \code{rngQQID()}.
+#'
+#' @section cached QQIDs: The high latency of requests for quantum random
+#'   numbers from the ANU server - between 6 to 10 seconds per call - is
+#'   practically independent of the size of the request. This suggests
+#'   requesting a larger number of keys and serving individual keys from a local
+#'   cache. R provides an elegant way of doing this by defining functions as
+#'   closures - i.e. along with their own environment. This environment allows
+#'   to maintain state between function calls. \code{qQQIDfactory} retrieves
+#'   1023 qQQIDs and caches them in the environment of the function it returns.
+#'   This function can serve keys from the cache, remove them from the cache,
+#'   and refill the cache if it gets depleted. The user experience is that the
+#'   function is immediately responsive, and latency arises only occasionaly
+#'   when the cache is restocked.
+#'
+#' @section Disclaimer: Although this function has been written and tested with
+#'   care, no suitability for any particular purpose, in particular not for
+#'   high-value transactions, for applications whose failure could endager life
+#'   or property, or for cryptography is claimed. The source code is published
+#'   in full and it is up to the user to audit the code for such and similar
+#'   purposes.
+#'
+#' @param nBatch (integer) The batch size requested from the ANU server. The
+#'   default 1023 does not normally need to be changed. (Larger batches take
+#'   more time to process, smaller batches offer no speed up.) It can however be
+#'   increased e.g. for using the function when an interruption to Internet
+#'   connectivity is anticipated.
+#'
+#' @return (function)  \code{qQQIDfactory} returns a function that takes an
+#'   argument \code{n} (default: 1), the number of true random QQIDs to return.
+#'   A second argument of the returned closure is \code{inspectOnly} (default:
+#'   \code{FALSE}). If \code{TRUE}, the requested number of QQIDs are only
+#'   printed as a side-effect, the function actually returns \code{NULL}
+#'   invisibly. This is useful to inspect the first \code{n} elements of the
+#'   cache without changing the cache, while making it sufficiently hard to
+#'   accidentally reuse QQIDs.
+#'
+#' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
+#'
+#' @seealso \code{\link{rngQQID}} to generate QQIDs via the inbuilt RNG.
+#'
+#' @examples
+#' \dontrun{
+#' # prepare a qQQID function and use it to retrieve three true random  QQIDs
+#' qQQID <- qQQIDfactory()
+#' qQQID(3)
+#'
+#' # Use the function to return 10 UUIDs from the same cache
+#' qq2uu(qQQID(10))
+#'
+#' # inspect the first 5 QQIDs on the cache ...
+#' qQQID(5, inspectOnly = TRUE)
+#'
+#' # ... retrieve four of them (they are identical
+#' # to the first four we just inspected) ...
+#' qQQID(4)
+#'
+#' # ... show that the four keys are gone from the cache which now
+#' # begins with the fifth QQID we saw before.
+#' qQQID(5, inspectOnly = TRUE)
+#'
+#' }
+#'
+#' @export
+
+qQQIDfactory <- function(nBatch = 1023) {
+  # Fetch QQIDs from cached store. This closure creates a function environment
+  # that keeps a cache of true random QQIDs from which it shifts QQIDs when
+  # required. A call to the ANU server will only be triggered when the cache is
+  # depleted. nBatch: 1,023 is the largest batch that qrandom::qrandom will
+  # fetch in one call. Larger batches take more time to process, smaller batches
+  # offer little benefit.
+  QQ <- uu2qq(qrandom::qUUID(nBatch))
+  return(function(n = 1, inspectOnly = FALSE) {
+    if (inspectOnly) {
+      print(QQ[1:min(n, length(QQ))])
+      return(invisible(NULL))    # return at most all elements
+    }
+    # shift elements from QQ, replenish QQ when it gets smaller than n
+    while (length(QQ) < n) {
+      QQ <<- c(QQ, uu2qq(qrandom::qUUID(nBatch)))
+    }
+    x <- QQ[1:n]
+    QQ <<- QQ[-(1:n)]
+    return(x)
+  })
+}
+
+# [END]

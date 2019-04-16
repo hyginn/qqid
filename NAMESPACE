@@ -2,8 +2,11 @@
 
 export(QQIDexample)
 export(UUIDexample)
+export(b64Map)
 export(isValidQQID)
 export(isValidUUID)
+export(qMap)
+export(qQQIDfactory)
 export(qq2uu)
-export(qqMap)
+export(rngQQID)
 export(uu2qq)

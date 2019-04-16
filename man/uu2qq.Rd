@@ -15,21 +15,20 @@ uu2qq(uu)
 \description{
 \code{uu2qq} converts a vector of UUIDs to QQIDs.
 }
-\details{
-Details.
-}
-\section{UUIDs}{
- UUIDs are specially formatted 128 bit numbers. Randomly
-chosen UUIDs have a collision probability that is small enough to make them
-useful as (practically) unique identifiers in applications where centralized
-management of IDs is not feasible or not desireable. However since they are
-long strings that chiefly consist of hexadecimal numbers, they are hard to
-distingiush by eye and that creates difficulties for development or debugging
-with structured data, or for curation of UUID tagged information.
-These "Q" words - the letter Q evokes the word "cue" i.e. a hint or mnemonic
-- define a unique and invertible mapping to the integers (0, 1023), i.e. all
-numbers that can be encoded with 10 bits. Thus two Q-words can encode 20
-bits, or 5 hexadecimal letters:\cr
+\section{UUIDs and QQIDs}{
+ UUIDs are specially formatted 128 bit numbers.
+  Randomly chosen UUIDs have a collision probability that is small enough to
+  make them useful as (practically) unique identifiers in applications where
+  centralized management of IDs is not feasible or not desireable. However
+  since they are long strings that chiefly consist of hexadecimal numbers,
+  they are hard to distingiush by eye and that creates difficulties for
+  development or debugging with structured data, or for curation of UUID
+  tagged information. The \code{qqid} package provides tools to convert the
+  leading 5 hexadecimal digits to two "Q-words", and the remainder to a
+  string in a Base 64 encoding. The "Q-words" - the letter Q evokes the word
+  "cue" i.e. a hint or mnemonic - define a unique and invertible mapping to
+  the integers (0, 1023), i.e. all numbers that can be encoded with 10 bits.
+  Thus two Q-words can encode 20 bits, or 5 hexadecimal letters:\cr
 \code{         [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]  }\cr
 \code{  hex:  |--0x[1]--| |--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--|}\cr
 \code{  bit:  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}\cr
@@ -40,31 +39,23 @@ bits, or 5 hexadecimal letters:\cr
 
 \section{Process}{
  To convert a UUID to a QQID, the first five hexadecimal
-letters are converted to two ten bit numbers, these two numbers are
-interpreted as an index into the 1024-element Q-Word vector. The QQID has
-the two vectors as a head, and the original characters 6 to 32 of the UUID
-as its tail. Since the mapping is fully reversible, QQIDs have exactly the
-same statistical properties as UUIDs. For details on QQID format see
-\code{\link{isValidQQID}}.
+  letters are converted to two ten bit numbers, these two numbers are
+  interpreted as an index into the 1024-element Q-Word vector. The QQID has
+  the two vectors as a head, and the Base 64 encoded digits 6 to 32 of the
+  UUID as its tail. Since the mapping is fully reversible, QQIDs have exactly
+  the same statistical properties as UUIDs. For details on QQID format see
+  \code{\link{isValidQQID}}.
 }
 
 \section{Endianness}{
- The conversion of hex numbers to Q-words assumes a
-little-endian byte order. This means the mapping may not be reversible
-between different processor architectures. Nearly all platforms on which
-this code is likely to run are little-endian. In addition, a swapped byte
-order will still yield valid and equally random QQIDs. If this issue is of
-concern, check your system with the example code provided here. You can
-also check your architecture with \code{.Platform$endian}.
+ qqid package uses its own functions to convert to and
+  from bits and is not affected by big-endian vs. little-endian processor
+  architectore.
 }
 
 \examples{
 # Convert three example UUIDs and one NA to the corresponding QQIDs
 uu2qq( c(UUIDexample(c(1, 3, 5)), NA) )
-
-# This expression is TRUE and correct if the code
-# is executed on a little-endian processor architecture.
-uu2qq( UUIDexample(1) ) == QQIDexample(1)
 
 }
 \seealso{

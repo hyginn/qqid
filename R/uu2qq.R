@@ -4,20 +4,19 @@
 #'
 #' \code{uu2qq} converts a vector of UUIDs to QQIDs.
 #'
-#' Details.
-#'
-#'
-#' @section UUIDs: UUIDs are specially formatted 128 bit numbers. Randomly
-#' chosen UUIDs have a collision probability that is small enough to make them
-#' useful as (practically) unique identifiers in applications where centralized
-#' management of IDs is not feasible or not desireable. However since they are
-#' long strings that chiefly consist of hexadecimal numbers, they are hard to
-#' distingiush by eye and that creates difficulties for development or debugging
-#' with structured data, or for curation of UUID tagged information.
-#' These "Q" words - the letter Q evokes the word "cue" i.e. a hint or mnemonic
-#' - define a unique and invertible mapping to the integers (0, 1023), i.e. all
-#' numbers that can be encoded with 10 bits. Thus two Q-words can encode 20
-#' bits, or 5 hexadecimal letters:\cr
+#' @section UUIDs and QQIDs: UUIDs are specially formatted 128 bit numbers.
+#'   Randomly chosen UUIDs have a collision probability that is small enough to
+#'   make them useful as (practically) unique identifiers in applications where
+#'   centralized management of IDs is not feasible or not desireable. However
+#'   since they are long strings that chiefly consist of hexadecimal numbers,
+#'   they are hard to distingiush by eye and that creates difficulties for
+#'   development or debugging with structured data, or for curation of UUID
+#'   tagged information. The \code{qqid} package provides tools to convert the
+#'   leading 5 hexadecimal digits to two "Q-words", and the remainder to a
+#'   string in a Base 64 encoding. The "Q-words" - the letter Q evokes the word
+#'   "cue" i.e. a hint or mnemonic - define a unique and invertible mapping to
+#'   the integers (0, 1023), i.e. all numbers that can be encoded with 10 bits.
+#'   Thus two Q-words can encode 20 bits, or 5 hexadecimal letters:\cr
 #' \code{         [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]  }\cr
 #' \code{  hex:  |--0x[1]--| |--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--|}\cr
 #' \code{  bit:  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}\cr
@@ -26,20 +25,16 @@
 #' \code{  Q:          (aims, ..., zone)             (aims, ..., zone)      }\cr
 #'
 #' @section Process: To convert a UUID to a QQID, the first five hexadecimal
-#' letters are converted to two ten bit numbers, these two numbers are
-#' interpreted as an index into the 1024-element Q-Word vector. The QQID has
-#' the two vectors as a head, and the original characters 6 to 32 of the UUID
-#' as its tail. Since the mapping is fully reversible, QQIDs have exactly the
-#' same statistical properties as UUIDs. For details on QQID format see
-#' \code{\link{isValidQQID}}.
+#'   letters are converted to two ten bit numbers, these two numbers are
+#'   interpreted as an index into the 1024-element Q-Word vector. The QQID has
+#'   the two vectors as a head, and the Base 64 encoded digits 6 to 32 of the
+#'   UUID as its tail. Since the mapping is fully reversible, QQIDs have exactly
+#'   the same statistical properties as UUIDs. For details on QQID format see
+#'   \code{\link{isValidQQID}}.
 #'
-#' @section Endianness: The conversion of hex numbers to Q-words assumes a
-#' little-endian byte order. This means the mapping may not be reversible
-#' between different processor architectures. Nearly all platforms on which
-#' this code is likely to run are little-endian. In addition, a swapped byte
-#' order will still yield valid and equally random QQIDs. If this issue is of
-#' concern, check your system with the example code provided here. You can
-#' also check your architecture with \code{.Platform$endian}.
+#' @section Endianness: qqid package uses its own functions to convert to and
+#'   from bits and is not affected by big-endian vs. little-endian processor
+#'   architectore.
 #'
 #' @param uu (character) a vector of UUIDs
 #' @return (character)  a vector of QQIDs
@@ -52,48 +47,95 @@
 #' # Convert three example UUIDs and one NA to the corresponding QQIDs
 #' uu2qq( c(UUIDexample(c(1, 3, 5)), NA) )
 #'
-#' # This expression is TRUE and correct if the code
-#' # is executed on a little-endian processor architecture.
-#' uu2qq( UUIDexample(1) ) == QQIDexample(1)
-#'
 #' @export
 
 uu2qq <- function(uu) {
   stopifnot(all(isValidUUID(uu, na.map = NA), na.rm = TRUE))
-  if (length(uu) == 0) {
-    return(character(0))
-  }
+
+  if (length(uu) == 0) { return(character(0)) }
+
   nas <- is.na(uu)
-  X <- paste0("0x", substr(uu, 1, 5))   # prefix with "0x"
-  iQ <- x5int(X) + 1                    # (0, 1023) -> (1, 1024)
-  qq <- paste0(qMap(iQ[ , 1]), ".", qMap(iQ[ , 2]), "-", substr(uu, 6, 36))
-  qq[nas] <- NA_character_
+  uu <- uu[ ! nas]
+  uu <- tolower(uu)
+  uu <- gsub("-", "", uu)
+
+  bitMat <- x32bit(uu)
+
+  qq <- character(length(nas))
+  qq[ ! nas] <- bitMat2QQ(bitMat)
+  qq[   nas] <- NA_character_
+
   return(qq)
 }
 
-x5int <- function(x) {
-  # Non-exported helper function. Converts a vector of 5-digit hexadeximal
-  # numbers to a two column matrix of integers.
-  #
-  # x (character) a vector of 5 digit hex numbers
-  # return: a 2 column matrix of integers in the range (0, 1023)
-  #
-  # |--0x[1]--| |--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--|
-  # 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  # |----------int[1]-----------| |----------int[2]-----------|
-  #
-  # Note: numbers are interpreted as little-endian and thus the appropriate
-  # columns need to be swapped. This may mean that the mapping of hex to QQ
-  # is not reversible between little-endian and big-endian platforms. If this
-  # is an issue we might need to switch conditional on the value of
-  # .Platform$endian
 
-  pow2 <- 2^(9:0)
-  x <- matrix(as.integer(intToBits(strtoi(x))), ncol = 32, byrow = TRUE)
-  x <- x[ , c(20:17,16:13,12:9,8:5,4:1), drop = FALSE]
-  int <- t(rbind(colSums(t(x[ ,  1:10, drop = FALSE]) * pow2),
-                 colSums(t(x[ , 11:20, drop = FALSE]) * pow2)))
-  return(int)
+bit2int <- function(b) {
+  # Not exported.
+  # b: a matrix of integers {0, 1} and n rows
+  # return: an n length vector of integers
+  pow2 <- 2^((ncol(b)-1):0)
+  return(colSums(t(b) * pow2))
 }
+
+
+bitMat2QQ <- function(x) {
+  # Not exported. Convert a 128 column bit-matrix to a vector of QQIDs
+
+  if (is.null(nrow(x))) { return(character(0)) }
+
+  nr <- nrow(x)
+  QQ <- matrix(character(nr * 22), nrow = nr)
+  QQ[ ,  1] <- qMap(bit2int(x[ , 1:10, drop = FALSE]) + 1)
+  QQ[ ,  2] <- "."
+  QQ[ ,  3] <- qMap(bit2int(x[ ,11:20, drop = FALSE]) + 1)
+  QQ[ ,  4] <- "."
+  for (i in 0:17) {
+    QQ[ , i+5] <- b64Map(apply(x[ ,(21+(i*6)):(26+(i*6)), drop = FALSE],
+                               1,
+                               paste, collapse = ""))
+  }
+
+  QQ <- apply(QQ, 1, paste, collapse = "")
+
+  return(QQ)
+}
+
+
+x32bit <- function(x) {
+  # Not-exported. Converts a vector of n 32-digit hexadeximal
+  # numbers to a n * 128 matrix of bits, {0, 1}
+
+  if (length(x) == 0) { return(numeric(0)) }
+
+  b <- numeric(64)
+  b[ 1:4 ] <- c(0, 0, 0, 0)
+  b[ 5:8 ] <- c(0, 0, 0, 1)
+  b[ 9:12] <- c(0, 0, 1, 0)
+  b[13:16] <- c(0, 0, 1, 1)
+  b[17:20] <- c(0, 1, 0, 0)
+  b[21:24] <- c(0, 1, 0, 1)
+  b[25:28] <- c(0, 1, 1, 0)
+  b[29:32] <- c(0, 1, 1, 1)
+  b[33:36] <- c(1, 0, 0, 0)
+  b[37:40] <- c(1, 0, 0, 1)
+  b[41:44] <- c(1, 0, 1, 0)
+  b[45:48] <- c(1, 0, 1, 1)
+  b[49:52] <- c(1, 1, 0, 0)
+  b[53:56] <- c(1, 1, 0, 1)
+  b[57:60] <- c(1, 1, 1, 0)
+  b[61:64] <- c(1, 1, 1, 1)
+  b <- matrix(b, ncol = 4, byrow = TRUE)
+  rownames(b) <- paste0("0x", unlist(strsplit("0123456789abcdef", "")))
+
+  x <- matrix(paste0("0x", unlist(strsplit(x,""))), nrow=length(x), byrow=TRUE)
+  bit <- matrix(numeric(4 * nrow(x) * ncol(x)), nrow = nrow(x))
+  for (i in seq_len(nrow(x))) {
+    for (j in seq_len(ncol(x))) {
+      bit[i, (((j-1)*4)+1):(((j-1)*4)+4)] <- b[x[i, j], ]
+    }
+  }
+  return(bit)
+}
+
 
 # [END]

@@ -13,7 +13,8 @@ Description: ..
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports:
+    qrandom
 Suggests:
-    qrandom,
     testthat
 RoxygenNote: 6.1.1

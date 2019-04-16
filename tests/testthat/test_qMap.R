@@ -15,7 +15,7 @@ test_that("the w1024 object is sane and intact",  {
   expect_equal(length(unique(qMap(1:1024))), 1024)
   expect_true(all(nchar(qMap(1:1024)) == 4))
   expect_equal(digest::digest(qMap(1:1024), algo = "md5"),
-               "88c215f0f964dd2bf399b38b35313ae0")
+               "9daefc4895c1ec41bcf78d23c99ed4dc")
 })
 
 test_that("a valid numeric input produces the expected output",  {

@@ -25,18 +25,22 @@ test_that("a valid input to isValidQQID() produces the expected output",  {
   expect_equal(isValidQQID(QQIDexample(1:2)), c(TRUE, TRUE))
   expect_equal(isValidQQID(c(QQIDexample(1), "a", NA), na.map = NA),
                c(TRUE, FALSE, NA))
-  expect_equal(isValidQQID("aims.aims-000-0000-0000-0000-000000000000"), TRUE)
-  expect_equal(isValidQQID("zone.zone-fff-ffff-ffff-ffff-ffffffffffff"), TRUE)
-  expect_equal(isValidQQID("this.that-aAb-BcCd-DeEf-FaAb-BcCdDeEfFaAb"), TRUE)
+  expect_equal(isValidQQID("aims.aims.AAAAAAAAAAAAAAAAAA"), TRUE)
+  expect_equal(isValidQQID("zone.zone.__________________"), TRUE)
+  expect_equal(isValidQQID("this.that.ABCDEFghijkl0123-_"), TRUE)
 })
 
 test_that("subtle errors in the QQIDs are caught by isValidQQID()",  {
-  # Q-words should not be capitalized
-  expect_equal(isValidQQID("AIMS.fold-233-4455-6677-8899-aabbccddeeff"), FALSE)
-  expect_equal(isValidQQID("aims.FOLD-233-4455-6677-8899-aabbccddeeff"), FALSE)
-  # words should exist in the Q-words vector
-  expect_equal(isValidQQID("xxxx.fold-233-4455-6677-8899-aabbccddeeff"), FALSE)
-  expect_equal(isValidQQID("aims.xxxx-233-4455-6677-8899-aabbccddeeff"), FALSE)
+  expect_equal(isValidQQID("cost.mice.IiIiIiIiIiIiIiIiIi"), TRUE)
+  # Q-words must not be capitalized
+  expect_equal(isValidQQID("COST.mice.IiIiIiIiIiIiIiIiIi"), FALSE)
+  expect_equal(isValidQQID("cost.MICE.IiIiIiIiIiIiIiIiIi"), FALSE)
+  # QQID words must exist in the Q-words vector
+  expect_equal(isValidQQID("xxxx.mice.IiIiIiIiIiIiIiIiIi"), FALSE)
+  expect_equal(isValidQQID("cost.xxxx.IiIiIiIiIiIiIiIiIi"), FALSE)
+  # illegal characters
+  expect_equal(isValidQQID("this.that.ABCDEFgh.jkl0123-_"), FALSE)
+  expect_equal(isValidQQID("this.that-ABCDEFghijkl0123-_"), FALSE)
 })
 
 context("isValidUUID")

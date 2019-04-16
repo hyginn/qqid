@@ -9,36 +9,39 @@ isValidQQID(s, na.map = FALSE)
 \arguments{
 \item{s}{(character) a vector of strings to check.}
 
-\item{na.map}{(logical) replace NA with \code{FALSE} (default), \code{NA},
-or  \code{TRUE}}
+\item{na.map}{(logical) replace NA with \code{FALSE} (default), \code{NA}, or
+\code{TRUE}}
 }
 \value{
-(logical) a vector of the same length as the input, \code{TRUE}
-                  for every element  of the input that is a valid QQID.
+(logical) a vector of the same length as the input, \code{TRUE} for
+  every element  of the input that is a valid QQID.
 }
 \description{
 \code{isValidQQID} tests whether the function argument is a vector of valid
-                   QQIDs.
+QQIDs.
 }
 \details{
-The function accepts a vector of strings and returns a logical
-vector of the same length,  \code{TRUE} for every element of the input that
-is a valid QQID. \code{NA} values are mapped to \code{FALSE} (default) or can
-be replaced with \code{NA} to preserve them. Note: arguments passed to
-\code{na.map} are implicitly converted to type logical. A valid QQID has
-the form: \code{"qqqq.qqqq-xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}
-where \code{"qqqq"} is a Q-word (cf \code{\link{qMap}}) and \code{"x"} is a
-hexadecimal letter. The two Q-words of the QQID are separated by a "." which
-does not appear in UUIDs and thus the Q-words bead, beef, dead, deaf, deed,
-face, and fade can be easily distinguished from 4 digit hexadecimal
-numbers.
+The function accepts a vector of strings and returns a logical vector of the
+same length,  \code{TRUE} for every element of the input that is a valid
+QQID. \code{NA} values are mapped to \code{FALSE} (default) or can be
+replaced with \code{NA} to preserve them. Note: arguments passed to
+\code{na.map} are implicitly converted to type logical. A valid QQID has the
+form: \code{"qqqq.qqqq.BBBBBBBBBBBBBBBBBB"} where \code{"qqqq"} is a Q-word
+(cf \code{\link{qMap}}) encoding 10 bit each and \code{"B"} is a Base 64
+character encoding 6 bits each for \code{10 + 10 + (18 * 6) == 128} bits. The
+two Q-words of the QQID are separated by a "." which does not appear in UUIDs
+and thus the Q-words bead, beef, dead, deaf, deed, face, and fade can be
+easily distinguished from 4 digit hexadecimal numbers.
 }
 \examples{
+# check one invalid QQID
+isValidQQID("spur.ious.oversimplification")  # FALSE: "ious" is not a Q-word
+
+# check one valid QQID
+isValidQQID("base.less.anthropocentricity")  # TRUE, though regrettably so
+
 # check two valid QQIDs
 isValidQQID(QQIDexample(1:2))   # TRUE  TRUE
-
-# check one invalid QQID
-isValidQQID("no.pasaran-df7-652d-1982-0a5c-2c1a88284ee8")  # FALSE
 
 }
 \seealso{

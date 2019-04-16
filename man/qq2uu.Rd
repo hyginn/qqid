@@ -21,7 +21,7 @@ Details.
 \section{QQIDs}{
  QQIDs are specially formatted UUIDs. See
 \code{\link{uu2qq}} for the the motivation of mapping UUIDs to QQIDs and
-details on how QQIDs are structured. This function reveses the mapping
+details on how QQIDs are structured. This function reverses the mapping
 exactly to recover the original UUID.
 }
 
@@ -31,26 +31,23 @@ the QQID are mapped to their index in the 1024-element Q-word vector (cf.
 \code{\link{qMap}}), and the indices are converted to two ten bit numbers.
 These twenty bits are expressed as a five-digit hexadecimal number which
 replaces the two Q-words to recover the UUID. For details on UUID format see
-\code{\link{isValidUUID}}.
+\code{\link{isValidUUID}}. The remaining 18 Base 64 encoded characters are
+converted to their corresponding 27 hex digits via an intermediate mapping to
+bit-patterns.
 }
 
 \section{Endianness}{
- The conversion of Q-words to hex-numbers assumes a
-little-endian byte order. This means the mapping may not be reversible
-between different processor architectures. Nearly all platforms on which
-this code is likely to run are little-endian. In addition, a swapped byte
-order will still yield valid and equally random UUIDs. If this issue is of
-concern, check your system with the example code provided here. You can
-also check your architecture with \code{.Platform$endian}.
+ The package \code{qqid} uses its own internal functions
+for bit manipulations and is not affected by the endianness of the processor
+architecture it runs on.
 }
 
 \examples{
 # Convert three example QQIDs and one NA to the corresponding UUIDs
 qq2uu( c(QQIDexample(c(1, 3, 5)), NA) )
 
-# This expression is TRUE and correct if the code
-# is executed on a little-endian processor architecture.
-qq2uu( QQIDexample(1) ) == UUIDexample(1)
+# Check that the example QQIDs are correctly converted
+qq2uu( QQIDexample(2:4) ) == UUIDexample(2:4)  # TRUE TRUE TRUE
 
 }
 \seealso{

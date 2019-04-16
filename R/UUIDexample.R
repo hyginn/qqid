@@ -4,7 +4,6 @@
 #'
 #' \code{UUIDexample} returns example UUIDs.
 #'
-#' Details.
 #' The function stores five artifical sample UUIDs. Input is an index vector
 #' that specifies which UUIDs to return. More than five UUIDs can be requested
 #' by repeating indices. The UUIDs can be converted to the QQIDs provided by
@@ -13,7 +12,7 @@
 #' demonstration and testing.
 #'
 #' @param idx (numeric) an index vector that defines which of the five
-#'                      internally stored example UUIDs to return
+#'   internally stored example UUIDs to return
 #' @return (character) a vector of UUIDs
 #'
 #' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
@@ -29,11 +28,12 @@
 #' @export
 
 UUIDexample <- function(idx = 1:5) {
-  myUU <- c("00112233-4455-6677-8899-aabbccddeeff",
-            "11223344-5566-7788-99aa-bbccddeeff00",
-            "22334455-6677-8899-aabb-ccddeeff0011",
-            "33445566-7788-99aa-bbcc-ddeeff001122",
-            "44556677-8899-aabb-ccdd-eeff00112233")
+  myUU <- c("11111111-1111-1111-1111-111111111111",
+            "22222222-2222-2222-2222-222222222222",
+            "33333333-3333-3333-3333-333333333333",
+            "44444444-4444-4444-4444-444444444444",
+            "55555555-5555-5555-5555-555555555555")
+
   return(myUU[idx])
 }
 
