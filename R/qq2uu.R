@@ -85,7 +85,7 @@ qq2uu <- function(qq) {
 
 
 b42x <- function(x) {
-  # Non exported. Convert a 4 column matrix to its
+  # Non exported. Convert a 4 column bit-pattern matrix to its
   # corresponding hexadecimal character.
 
   hMap <- unlist(strsplit("0123456789abcdef", ""))
