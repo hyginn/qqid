@@ -27,12 +27,12 @@
 #'  random unique keys, which is the design use case of \code{qqid}. The only
 #'  way to prevent this with certainty is to use true random keys (see
 #'  \code{\link{qQQIDfactory}}). True random qQQIDs have a 50\% collision
-#'  probability in 2.7e18 keys, and this is the same at all times, regardless of
-#'  the state of the requesting machine. Thus unless throughput of keys is a
-#'  critical concern, it is advisable to use true random QQIDs from a
-#'  \link[=text]{qQQIDfactory} closure over those returned by a
-#'  \code{\link{qQQIDfactory}} closure, or at least to initialize the RNG with a
-#'  true random seed with the default \code{method = "q"}.
+#'  probability in \eqn{\approx 2.7 \times 10^{18}}{=~ 2.7e+18} keys, and this
+#'  is the same at all times, regardless of the state of the requesting machine.
+#'  Thus unless throughput of keys is a critical concern, it is advisable to use
+#'  true random QQIDs from a \link[=text]{qQQIDfactory} closure over those
+#'  returned by a \code{\link{qQQIDfactory}} closure, or at least to initialize
+#'  the RNG with a true random seed with the default \code{method = "q"}.
 #'
 #'@section 128 vs. 122 bit random:  By default, QQIDs produced with
 #'  \code{rngQQID()} can be converted to
@@ -40,8 +40,10 @@
 #'  use 6 bits to identify the method of UUID generation and thus contain only
 #'  122 random bits. It is possible to obtain 128-bit random QQIDs from
 #'  \code{rngQQID()}, by setting the parameter \code{RFC4122compliant} to
-#'  \code{FALSE}. This increases the number space from 2^122 ≈ 5.3e+36 to 2^128
-#'  ≈ 3.4e+38 at the cost of no longer being compliant with the UUID standard.
+#'  \code{FALSE}. This increases the number space from \eqn{2^{122} \approx 5.3
+#'  \times 10^{36}}{2^122 =~ 5.3e+36} to \eqn{2^{128} \approx 3.4 \times
+#'  10^{38}}{2^128 =~ 3.4e+38} at the cost of no longer being compliant with the
+#'  UUID standard.
 #'
 #'@section Random seeds: The function supports three methods to seed R's RNG.
 #'  The default method is \code{"q"} and uses a true random seed retrieved from

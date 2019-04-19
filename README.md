@@ -441,6 +441,11 @@ It's actually quite harmless to hand-pick specific Q-words for some semantic pur
 
 # 6 Notes
 
+#### To Do
+ - Travis CI would not run out of the box, since `libmpfr` could not be built. This is a `qrandom` dependency. Copied instructions from `qrandom`'s `.travis.yml`. This solved the issue. Perhaps need to follow up on this.
+ - Travis CI failed during build of `qqid-manual.pdf` ... this didn't come up on local check. Why? Had to run `R CMD Rd2pdf .` to reproduce - turns out this was due to LaTeX failing on an innocuous "approximately equal" Unicode character in the doc header. Used tow inline latex equations instead. Horrible documentation. Still don't have a sane workflow to reproduce package building from RStudio and catch all errors. Need to follow up.
+ 
+
 &nbsp;
 
 ## 6.1 Disclaimer and caution

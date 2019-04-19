@@ -37,10 +37,12 @@
 #'  true random UUIDs obtained from \code{qrandom::qUUID}. These UUIDs are
 #'  \href{https://tools.ietf.org/html/rfc4122}{RFC 4122} compliant and contain a
 #'  six-bit version code, and 122 random bits. Such RFC compliant QQIDs are
-#'  drawn from 2^122 = 5.3e+36 possibilities, whereas totally random 128-bit
-#'  numbers are drawn from a 3.4e+38 number space. The 50\% collision
-#'  probability of random 122-bit numbers is ~ 2.7e18 numbers, while for 128-bit
-#'  numbers it is ~ 2.2e19.
+#'  drawn from \eqn{2^{122} \approx 5.3 \times 10^{36}}{2^122 =~ 5.3e+36}
+#'  possibilities, whereas totally random 128-bit numbers are drawn from a
+#'  \eqn{\approx 3.4 \times 10^{38}}{=~ 3.4e+38} number space. The 50\%
+#'  collision probability of random 122-bit numbers is \eqn{\approx 2.7 \times
+#'  10^{18}}{=~ 2.7e+18} numbers, while for 128-bit numbers it is \eqn{\approx
+#'  2.2 \times 10^{19}}{=~ 2.2e+19}.
 #'
 #'@section qQQIDs vs. rngQQIDs: Whether to use true random or pseudo-random
 #'  QQIDs is a tradeoff between speed and safety. The ANU quantum  random number
@@ -56,12 +58,13 @@
 #'  it may be for the decentralized generation of random unique keys, which is
 #'  the design use case of \code{qqid}. The only way to prevent this with
 #'  certainty is to use true random keys (as provided with this function). True
-#'  random qQQIDs have a 50\% collision probability in 2.7e18 keys, and this is
-#'  the same at all times, regardless of the state of the requesting machine.
-#'  Thus unless throughput of keys is a critical concern, it is advisable to use
-#'  true random QQIDs from a \code{qQQIDfactory} closure over those returned by
-#'  a \code{\link{rngQQID}} process, or at least to initialize the RNG with a
-#'  true random seed (the default option for \code{\link{rngQQID}}).
+#'  random qQQIDs have a 50\% collision probability in \eqn{\approx 2.7 \times
+#'  10^{18}}{=~ 2.7e+18} keys, and this is the same at all times, regardless of
+#'  the state of the requesting machine. Thus unless throughput of keys is a
+#'  critical concern, it is advisable to use true random QQIDs from a
+#'  \code{qQQIDfactory} closure over those returned by a \code{\link{rngQQID}}
+#'  process, or at least to initialize the RNG with a true random seed (the
+#'  default option for \code{\link{rngQQID}}).
 #'
 #'@section caching QQIDs to avoid latency: The ANU server produces true random
 #'  numbers from quantum fluctuations of the vacuum. The high latency of
