@@ -1,20 +1,31 @@
 Package: qqid
 Type: Package
-Title: QQIDs - a human-interpretable representation of UUIDs
+Title: QQIDs - a human-compatible representation of 128-bit numbers
 Version: 1.0.0
-Date: 2019-04-13
+Date: 2019-04-18
 Authors@R: c(
     person("Boris", "Steipe",
            email = "boris.steipe@utoronto.ca",
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-1134-6758"))
     )
-Description: ..
+Description: QQIDs are a representation of 128-bit numbers constructed from
+             two "cues" of short, common, English words, and Base64 encoded
+             characters. Like RFC 4122 UUIDs, with which they can be identically
+             interconverted, QQIDs are suitable as random unique identifiers for
+             use as database keys and in a host of other applications. However
+             they are more compact than UUIDs and it can be established at a
+             glance whether two keys are different or potentially identical.
+             The qqid package contains functions to generate true random and
+             pseudo-random QQIDs, to validate them, and to interconvert them
+             with other 128-bit number representations.
+             "bird.carp.7TsBWtwqtKAeCTNk8f" is an example.
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
     qrandom
 Suggests:
-    testthat
+    testthat,
+    digest
 RoxygenNote: 6.1.1
