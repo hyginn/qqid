@@ -45,8 +45,8 @@ isValidQQID <- function(s, na.map = FALSE) {
   patt <- paste0("^([a-z]{4}\\.){2}",  # two Q-words separated by "."
                  "[0-9a-zA-Z_-]{18}$") # 18 Base 64 encoded characters
   v <- grepl(patt, s)
-  v[v] <- as.logical(qMap(substr(s[v], 1, 4))) &
-          as.logical(qMap(substr(s[v], 6, 9)))
+  v[v] <- ! is.na(qMap(substr(s[v], 1, 4))) &
+          ! is.na(qMap(substr(s[v], 6, 9)))
   v[is.na(v)] <- FALSE       # replace qMap() NAs with FALSE
   v[is.na(s)] <- na.map      # replace original NAs with na.map
   return(v)

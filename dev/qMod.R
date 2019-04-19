@@ -14,11 +14,11 @@ spares <- c("bide",
 #            "wove",
             "zoom")
 
-Q <- qMap(1:1024)
+Q <- qMap(0:1023)
 Q[grep("xt", Q)]
 grep("xt", Q)
 
-# replace 591 "next" and 884 "text" with "prow" and "wove" - reason: consonant cluster
+# replace 590 "next" and 883 "text" with "prow" and "wove" - reason: consonant cluster
 
 Q <- sort(Q)
 head(Q)
@@ -31,12 +31,9 @@ for(i in seq(0, 1023, by = 8)) {
       Q[i+1], Q[i+2], Q[i+3], Q[i+4], Q[i+5], Q[i+6], Q[i+7], Q[i+8], i+1))
 }
 
-# paste and re-source
-qMap(590:592)
-
 
 for(i in seq(0, 1023, by = 16)) {
-  cat(sprintf("%04d:  %s\n", i+1, paste(qMap((i+1):(i+16)), collapse = " ")))
+  cat(sprintf("%04d:  %s\n", i, paste(qMap((i+1):(i+16)), collapse = " ")))
 }
 
 

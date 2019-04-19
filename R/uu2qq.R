@@ -85,9 +85,9 @@ bitMat2QQ <- function(x) {
 
   nr <- nrow(x)
   QQ <- matrix(character(nr * 22), nrow = nr)
-  QQ[ ,  1] <- qMap(bit2int(x[ , 1:10, drop = FALSE]) + 1)
+  QQ[ ,  1] <- qMap(bit2int(x[ , 1:10, drop = FALSE]))
   QQ[ ,  2] <- "."
-  QQ[ ,  3] <- qMap(bit2int(x[ ,11:20, drop = FALSE]) + 1)
+  QQ[ ,  3] <- qMap(bit2int(x[ ,11:20, drop = FALSE]))
   QQ[ ,  4] <- "."
   for (i in 0:17) {
     QQ[ , i+5] <- b64Map(apply(x[ ,(21+(i*6)):(26+(i*6)), drop = FALSE],

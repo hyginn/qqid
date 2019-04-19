@@ -10,7 +10,7 @@
 #'   original UUID.
 #'
 #' @section Process: To convert a QQID to a UUID, the two "Q-words" that head
-#'   the QQID are mapped to their index in the 1024-element Q-word vector (cf.
+#'   the QQID are mapped to their index in the 0:1023 Q-word vector (cf.
 #'   \code{\link{qMap}}), and the indices are converted to two ten bit numbers.
 #'   These twenty bits are expressed as a five-digit hexadecimal number which
 #'   replaces the two Q-words to recover the UUID. For details on UUID format
@@ -50,8 +50,8 @@ qq2uu <- function(qq) {
   # bit Matrix
   I <- matrix(numeric(128 * length(qq)), ncol = 128)
   # Q-words -> integer -> 2 * 10 digit bit matrix
-  I[ ,  1:10 ] <- i2bit(qMap(substr(qq, 1, 4)) - 1, l = 10)
-  I[ , 11:20 ] <- i2bit(qMap(substr(qq, 6, 9)) - 1, l = 10)
+  I[ ,  1:10 ] <- i2bit(qMap(substr(qq, 1, 4)), l = 10)
+  I[ , 11:20 ] <- i2bit(qMap(substr(qq, 6, 9)), l = 10)
 
   # Base 64 -> integer -> 18 * 6 bit matrix
   for(j in 1:18) {
