@@ -8,11 +8,10 @@
 
 ----
 
-```text
-bird.carp.7TsBWtwqtKAeCTNk8f
-```
+## `bird.carp.7TsBWtwqtKAeCTNk8f`
+
 This is a **QQID**. It is one of 340,282,366,920,938,463,463,374,607,431,768,211,456
-unique numbers that can be produced in this format. That's ~3 x 10<sup>38</sup>, or threehundredfourty undecillion. That's approximately the number of atoms in 3 cubic kilometres of water.  There is no process that would reasonably produce the exact same number you see here again. My number was forged in Australia in a machine that measures the inherent randomness of quantum fluctuations of the vacuum, it was interpreted and formatted in Canada, stored in GitHub's data cloud, and visualized by you. Yet, I would immediately recognize that a number in one of my documents might be this one: Hello, _bird carp_! That's what makes QQIDs interesting.
+unique numbers that can be produced in this format. That's ~3 x 10<sup>38</sup>, or threehundredforty undecillion. That's approximately the number of atoms in 3 cubic kilometres of water.  There is no process that would reasonably produce `bird.carp.7TsBWtwqtKAeCTNk8f` again. `bird.carp.7TsBWtwqtKAeCTNk8f` was forged in Australia in a machine that measures the inherent randomness of quantum fluctuations of the vacuum, it was interpreted and formatted in Canada, stored in GitHub's data cloud, and visualized by you. Yet, I would immediately recognize that a number in one of my documents might be this one: Hello, _bird carp_! That's what makes QQIDs interesting.
 
 ----
 
@@ -422,7 +421,7 @@ The [latest development version of `qqid`](https://github.com/hyginn/qqid) is an
 * to be forked for collaboration and possible inclusion of pull-requests, and
 * to file issues. 
 
-To learn more about GRPS development (GitHub, R package, RStudio), see the template packages [`rpt](https://github.com/hyginn/rpt) and [`rptPlus](https://github.com/hyginn/rptPlus).
+To learn more about GRPS development (GitHub, R package, RStudio), see the template packages [`rpt`](https://github.com/hyginn/rpt) and [`rptPlus`](https://github.com/hyginn/rptPlus).
 
 &nbsp;
 
