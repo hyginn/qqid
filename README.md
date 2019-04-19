@@ -415,8 +415,7 @@ The following functions are included in the `qqid` package:
 
 &nbsp;
 
-
-#3  The `qqid` GitHub project
+# 3 The `qqid` GitHub project
 
 The [latest development version of `qqid`](https://github.com/hyginn/qqid) is an RStudio project hosted on GitHub, and available for 
 * download and experimentation to your local machine, 
