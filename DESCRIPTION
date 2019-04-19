@@ -21,6 +21,7 @@ Description: QQIDs are a representation of 128-bit numbers constructed from
              with other 128-bit number representations.
              "bird.carp.7TsBWtwqtKAeCTNk8f" is an example.
 License: file LICENSE
+Language: en-GB
 Encoding: UTF-8
 LazyData: true
 Imports:
