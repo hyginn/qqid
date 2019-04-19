@@ -6,7 +6,7 @@
 #' development, which are easy to distinguish from "real" UUIDs to prevent their
 #' accidental use as IDs.
 #'
-#' The function stores five artifical sample UUIDs. Input is an index vector
+#' The function stores five artificial sample UUIDs. Input is an index vector
 #' that specifies which UUIDs to return. More than five UUIDs can be requested
 #' by repeating indices. The UUIDs can be converted to the QQIDs provided by
 #' \code{QQIDexample}. Note: these are not random numbers in the sense of the

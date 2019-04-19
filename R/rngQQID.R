@@ -12,7 +12,7 @@
 #'point numbers to a continuous range of integers. The function takes care not
 #'to change the global state of the RNG in \code{.Random.seed}.
 #'
-#'@section qQQIds vs. rngQQIDs: Whether to use true random or pseudo-random
+#'@section qQQIDs vs. rngQQIDs: Whether to use true random or pseudo-random
 #'  QQIDs is a tradeoff between speed and safety. The ANU quantum  random number
 #'  server can have considerable latency (a problem that
 #'  \code{\link{qQQIDfactory}} addresses through caching), but pseudo-random
@@ -38,7 +38,7 @@
 #'  \code{rngQQID()} can be converted to
 #'  \href{https://tools.ietf.org/html/rfc4122}{RFC 4122} compliant UUIDs. These
 #'  use 6 bits to identify the method of UUID generation and thus contain only
-#'  122 random bits. It is possible to obtain 128-bit random QQIds from
+#'  122 random bits. It is possible to obtain 128-bit random QQIDs from
 #'  \code{rngQQID()}, by setting the parameter \code{RFC4122compliant} to
 #'  \code{FALSE}. This increases the number space from 2^122 ≈ 5.3e+36 to 2^128
 #'  ≈ 3.4e+38 at the cost of no longer being compliant with the UUID standard.
@@ -58,7 +58,7 @@
 #'  internally, and then throws an error to exit the function which should
 #'  restore \code{.Random.seed}.
 #'
-#'@section Warning - paralellization: If you are executing code in paralell on
+#'@section Warning - parallelization: If you are executing code in parallel on
 #'  separate processors, you must make sure that every task uses its own,
 #'  separately initialized state of the global variable \code{.Random.seed} and
 #'  not a copy of a single instance of the global environment - such copies will
@@ -68,7 +68,7 @@
 #'@section Disclaimer and caution: Although this function has been written and
 #'  tested with care, no suitability for any particular purpose, in particular
 #'  no suitability for high-value transactions, for applications whose failure
-#'  could endager life or property, or for cryptography is claimed. The source
+#'  could endanger life or property, or for cryptography is claimed. The source
 #'  code is published in full and it is up to the user to audit and adapt the
 #'  code for their own purposes and needs.
 #'

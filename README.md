@@ -11,7 +11,7 @@
 ## `bird.carp.7TsBWtwqtKAeCTNk8f`
 
 This is a **QQID**. It is one of 340,282,366,920,938,463,463,374,607,431,768,211,456
-unique numbers that can be produced in this format. That's ~3 x 10<sup>38</sup>, or threehundredforty undecillion. That's approximately the number of atoms in 3 cubic kilometres of water.  There is no process that would reasonably produce `bird.carp.7TsBWtwqtKAeCTNk8f` again. `bird.carp.7TsBWtwqtKAeCTNk8f` was forged in Australia in a machine that measures the inherent randomness of quantum fluctuations of the vacuum, it was interpreted and formatted in Canada, stored in GitHub's data cloud, and visualized by you. Yet, I would immediately recognize that a number in one of my documents might be this one: Hello, _bird carp_! That's what makes QQIDs interesting.
+unique numbers that can be produced in this format. That's ~3 x 10<sup>38</sup>, or three hundred and forty undecillion. That's approximately the number of atoms in 3 cubic kilometres of water.  There is no process that would reasonably produce `bird.carp.7TsBWtwqtKAeCTNk8f` again. `bird.carp.7TsBWtwqtKAeCTNk8f` was forged in Australia in a machine that measures the inherent randomness of quantum fluctuations of the vacuum, it was interpreted and formatted in Canada, stored in GitHub's data cloud, and visualized by you. Yet, I would immediately recognize that a number in one of my documents might be this one: Hello, _bird carp_! That's what makes QQIDs interesting.
 
 ----
 
@@ -23,7 +23,7 @@ QQIDs are a special way to format [128-bit numbers](https://en.wikipedia.org/wik
 
 ## 1.1 Random unique identifiers and UUIDs
 
-Random unique identifiers are great wherever unique identifiers are needed and we have little or no control over who creates them. A typical use case might be to manage observations by a loosely knit group of researchers who contribute data to a common project. The IDs they use locally should be preserved, so they can find them elsewhere in their notes - but we don't know who the contributers are so we can't provide them with dedicated ranges of identifiers, or they might contribute only intermittently, and administering contributor-specific key prefixes would become a significant effort. However, it must be guaranteed that **every key is unique**. Random unique identifiers solve this problem by drawing IDs randomly from a very large space of numbers. This means: in theory, two such IDs could collide by chance. But in practice, since e.g. a random UUID (**U**niversally **U**nique **ID**) - a popular type of random unique identifiers - is drawn from 2<sup>122</sup> numbers, the chance of observing the same number again is 1 / 5.3e36 - and that is less than winning the 6 of 49 lottery **five times in a row**.  
+Random unique identifiers are great wherever unique identifiers are needed and we have little or no control over who creates them. A typical use case might be to manage observations by a loosely knit group of researchers who contribute data to a common project. The IDs they use locally should be preserved, so they can find them elsewhere in their notes - but we don't know who the contributors are so we can't provide them with dedicated ranges of identifiers, or they might contribute only intermittently, and administering contributor-specific key prefixes would become a significant effort. However, it must be guaranteed that **every key is unique**. Random unique identifiers solve this problem by drawing IDs randomly from a very large space of numbers. This means: in theory, two such IDs could collide by chance. But in practice, since e.g. a random UUID (Universally Unique ID) - a popular type of random unique identifiers - is drawn from 2<sup>122</sup> numbers, the chance of observing the same number again is 1 / 5.3e36 - and that is less than winning the 6 of 49 lottery **five times in a row**.  
 
 UUIDs are defined in an RFC of the governing body of the Internet - [RFC 4122](https://tools.ietf.org/html/rfc4122) - and they are formatted in a characteristic way from strings of 8-4-4-4-12 hyphen-separated hexadecimal characters.
 
@@ -116,7 +116,7 @@ https://en.wikipedia.org/wiki/Universally_unique_identifier
 
 ## 1.4  Q-words
 
-Q-words are the key to making QQIDs useful. Q-words (from "cue") are all the same length, so they align well in layout and tables, don't need to be padded to represent numbers, and they can be retrieved from a QQID with a simple `substr(x, 1, 4)` and `substr(x, 6, 9)`call. Three letter English words don't quite have the required variety to come up with pleasant, easily recognizable words. Five letter words are way more than we need. But four-letter English words are a good source, even though they are notorously not all suited for polite conversation. A table of 1,024 four-letter words was hand-picked from a large frequency-sorted dictionary to yield short, unique words that ...
+Q-words are the key to making QQIDs useful. Q-words (from "cue") are all the same length, so they align well in layout and tables, don't need to be padded to represent numbers, and they can be retrieved from a QQID with a simple `substr(x, 1, 4)` and `substr(x, 6, 9)`call. Three letter English words don't quite have the required variety to come up with pleasant, easily recognizable words. Five letter words are way more than we need. But four-letter English words are a good source, even though they are notoriously not all suited for polite conversation. A table of 1,024 four-letter words was hand-picked from a large frequency-sorted dictionary to yield short, unique words that ...
 
 * are monosyllabic (no `lama` or `lazy`),
 * are easy to spell and pronounce (no `czar`, no `adze`, no `cwms`),
@@ -269,7 +269,7 @@ barplot(sort(myTab),
 ```
 ![](./inst/img/barplotRFC4122conforming.svg?sanitize=true "barplot of UUID conforming BASE64 characters")
 
-The barplot shows that classes of characters have discretely different frequencies. The reason for this is immediatley obvious: QQIDs that are created to be convertible to RFC 4122 compliant UUIDs have six non-random bits, and those are not aligned with the encoding character boundaries. Since the distribution of the underlying 128-bit patterns is not uniformly random, neither is the distribution of the encoding characters. This doe not indicate a problem in that the numbers are in any way less random than 2^122 bits suggests.
+The barplot shows that classes of characters have discretely different frequencies. The reason for this is immediately obvious: QQIDs that are created to be convertible to RFC 4122 compliant UUIDs have six non-random bits, and those are not aligned with the encoding character boundaries. Since the distribution of the underlying 128-bit patterns is not uniformly random, neither is the distribution of the encoding characters. However the distribution of numbers that underlie our QQIDs is just as random as 2^122 bits suggests.
 
 But let's repeat the process with fully random 128-bit numbers:
 
@@ -442,7 +442,7 @@ It's actually quite harmless to hand-pick specific Q-words for some semantic pur
 
 ## 6.1 Disclaimer and caution
 
-Although `qqid` has been written and tested with care, no suitability for any particular purpose, in particular no suitbility for high-value transactions, for applications whose failure could endager life or property, or for cryptography is claimed. The source code is published in full and it is up to the user to audit and adapt the code for their own purposes and needs.
+Although `qqid` has been written and tested with care, no suitability for any particular purpose, in particular no suitability for high-value transactions, for applications whose failure could endanger life or property, or for cryptography is claimed. The source code is published in full and it is up to the user to audit and adapt the code for their own purposes and needs.
 
 &nbsp;
 
@@ -452,7 +452,7 @@ Although `qqid` has been written and tested with care, no suitability for any pa
 * [RFC 4122: A Universally Unique IDentifier (UUID) URN Namespace](https://tools.ietf.org/html/rfc4122)
 * [UUIDs on Wikipedia](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 * [Binary to text encoding (Wikipedia)](https://en.wikipedia.org/wiki/Binary-to-text_encoding) (with links to Base64 and other encoding schemes)
-* The `qrandom` package on [Github](https://github.com/skoestlmeier/qrandom) and [CRAN](https://cran.r-project.org/package=qrandom)
+* The `qrandom` package on [GitHub](https://github.com/skoestlmeier/qrandom) and [CRAN](https://cran.r-project.org/package=qrandom)
 * Dirk Edelbuettel's package [`random`](https://cran.r-project.org/package=random) interface to the [`random.org` server](https://www.random.org/) of radio-static based random numbers.
 
 &nbsp;

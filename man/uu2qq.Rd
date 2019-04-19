@@ -19,9 +19,9 @@ uu2qq(uu)
  UUIDs are specially formatted 128 bit numbers.
   Randomly chosen UUIDs have a collision probability that is small enough to
   make them useful as (practically) unique identifiers in applications where
-  centralized management of IDs is not feasible or not desireable. However
+  centralized management of IDs is not feasible or not desirable. However
   since they are long strings that chiefly consist of hexadecimal numbers,
-  they are hard to distingiush by eye and that creates difficulties for
+  they are hard to distinguish by eye and that creates difficulties for
   development or debugging with structured data, or for curation of UUID
   tagged information. The \code{qqid} package provides tools to convert the
   leading 5 hexadecimal digits of UUIDs (or the first 20 bits of 128-bit

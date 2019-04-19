@@ -9,7 +9,7 @@ qQQIDfactory(nBatch = 1023)
 \arguments{
 \item{nBatch}{(numeric) The batch size requested from the ANU server. The
 default 1023 does not normally need to be changed. (Larger batches take more
-time to process, smaller batches offer no speed beenefit). It might be
+time to process, smaller batches offer no speed benefit). It might be
 increased e.g. for storing a large cache in case an interruption to Internet
 connectivity is anticipated.}
 }
@@ -71,7 +71,7 @@ occasionally when the cache needs to be replenished.
  numbers it is ~ 2.2e19.
 }
 
-\section{qQQIds vs. rngQQIDs}{
+\section{qQQIDs vs. rngQQIDs}{
  Whether to use true random or pseudo-random
  QQIDs is a tradeoff between speed and safety. The ANU quantum  random number
  server can have considerable latency (a problem that \code{qQQIDfactory}
@@ -107,12 +107,12 @@ occasionally when the cache needs to be replenished.
  The \code{qQQID} closure replenishes the cache if it does not contain at
  least the requested number of QQIDs, then it unshifts the QQIDs from the
  cache, and returns them. The user experience is that \code{qQQID} is
- responsive, and latency arises only occasionaly when the cache is
+ responsive, and latency arises only occasionally when the cache is
  replenished.
 }
 
-\section{Warning - paralellization}{
- If you are executing code in paralell on
+\section{Warning - parallelization}{
+ If you are executing code in parallel on
  separate processors, you must make sure that every task uses its own,
  independent copy of \code{qQQID()} and not a copy of an instance of the
  closure - such copies would all contain the same cache! Given the relatively
@@ -124,7 +124,7 @@ occasionally when the cache needs to be replenished.
  Although this function has been written and
  tested with care, no suitability for any particular purpose, in particular
  no suitability for high-value transactions, for applications whose failure
- could endager life or property, or for cryptography is claimed. The source
+ could endanger life or property, or for cryptography is claimed. The source
  code is published in full and it is up to the user to audit and adapt the
  code for their own purposes and needs.
 }
