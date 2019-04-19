@@ -1,7 +1,7 @@
 # qqid
 
 [![Travis build status](https://travis-ci.org/hyginn/qqid.svg?branch=master)](https://travis-ci.org/hyginn/qqid)
-
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hyginn/qqid?branch=master&svg=true)](https://ci.appveyor.com/project/hyginn/qqid)
 
 ###### [Boris Steipe](https://orcid.org/0000-0002-1134-6758), Department of Biochemistry and Department of Molecular Genetics, University of Toronto, Canada. &lt;boris.steipe@utoronto.ca&gt;
 
@@ -444,6 +444,7 @@ It's actually quite harmless to hand-pick specific Q-words for some semantic pur
 #### To Do
  - Travis CI would not run out of the box, since `libmpfr` could not be built. This is a `qrandom` dependency. Copied instructions from `qrandom`'s `.travis.yml`. This solved the issue. Perhaps need to follow up on this.
  - Travis CI failed during build of `qqid-manual.pdf` ... this didn't come up on local check. Why? Had to run `R CMD Rd2pdf .` to reproduce - turns out this was due to LaTeX failing on an innocuous "approximately equal" Unicode character in the doc header. Used tow inline latex equations instead. Horrible documentation. Still don't have a sane workflow to reproduce package building from RStudio and catch all errors. Need to follow up.
+ - Manual shows that preformatted does not respect leading whitespace and linebreaks in uu2qq doc header when converted to pdf. Need to follow up.
  
 
 &nbsp;
