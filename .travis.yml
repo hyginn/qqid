@@ -1,5 +1,19 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
+warnings_are_errors: true
 sudo: false
 cache: packages
+
+before_install:
+  - sudo apt-get install libmpfr-dev
+
+r_packages:
+  - Rmpfr
+
+notifications:
+  email:
+    recipients:
+      - boris.steipe@utoronto.ca
+    on_success: always
+    on_failure: always
