@@ -10,18 +10,19 @@ qMap(x)
 \item{x}{(character or numeric) A vector.}
 }
 \value{
-(numeric or character) A vector of Indices, Q-words, or NA of the
+(numeric or character) A vector of indices, Q-words, or NA of the
   same length as the input.
 }
 \description{
-\code{qMap} maps numbers to Q-words, or Q-words to their index in the Q-word
-vector.
+\code{qMap} maps numbers to Q-words, or Q-words to their index in (0, 1023).
 }
 \section{Description}{
  \code{qMap} accepts strings that are matched to Q-word
   indices or NA, or numbers that are matched to Q-words or NA. The returned
-  vector has the same length as the input. Numbers that are not in (1, 1024)
-  return NA. Strings that are not a Q-word return NA.
+  vector has the same length as the input. Numbers that are not in (0, 1023)
+  return NA. Strings that are not a Q-word return NA. \code{qMap(0)} is
+  "aims", \code{qMap(1023)} is "zone". Note: the first Q-word has index 0,
+  since it represents the bit-pattern "0000000000".
 }
 
 \section{Q-Words}{
@@ -32,16 +33,16 @@ vector.
   \item are unlikely to be offensive in random combination, \item are in
   common use, \item avoid homophones and consonant clusters, \item do not
   contain jargon, intentional misspellings, acronyms or overly specialized
-  technical or sports terms. }
+  technical or sports terms. } The table is alphabetically sorted.
 }
 
 \examples{
 # qMap a number
-qMap(314)   # "gift"
+qMap(313)                                    # "gift"
 # qMap four words, three can be matched.
-qMap(c("three", "free", "cold", "beer"))  # NA 288  126  35
+qMap(c("three", "free", "cold", "beer"))     # NA 287  125  34
 # return the entire QQ table
-x <- qMap(1:1024)
+x <- qMap(0:1023)
 
 }
 \author{

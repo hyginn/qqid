@@ -14,7 +14,9 @@ internally stored example UUIDs to return}
 (character) a vector of UUIDs
 }
 \description{
-\code{UUIDexample} returns example UUIDs.
+\code{UUIDexample} returns synthetic, valid UUIDs for testing and
+development, which are easy to distinguish from "real" UUIDs to prevent their
+accidental use as IDs.
 }
 \details{
 The function stores five artifical sample UUIDs. Input is an index vector
@@ -25,10 +27,10 @@ philosophy behind UUIDs. Do not use them for any purpose other than
 demonstration and testing.
 }
 \examples{
-UUIDexample()              # the five stored UUIDs
-UUIDexample(2:3)           # two UUIDs
-UUIDexample(rep(1:5, 5))   # twentyfive non-random UUIDS
-UUIDexample(3) == qq2uu(QQIDexample(3)) # TRUE (testing the conversion)
+UUIDexample()                             # the five stored UUIDs
+UUIDexample(2:3)                          # two UUIDs
+UUIDexample(rep(1:5, 5))                  # twentyfive non-random UUIDS
+UUIDexample(3) == qq2uu(QQIDexample(3))   # TRUE (testing the conversion)
 
 }
 \seealso{

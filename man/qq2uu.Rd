@@ -2,7 +2,7 @@
 % Please edit documentation in R/qq2uu.R
 \name{qq2uu}
 \alias{qq2uu}
-\title{qq2uu.}
+\title{qq2uu}
 \usage{
 qq2uu(qq)
 }
@@ -24,7 +24,7 @@ qq2uu(qq)
 
 \section{Process}{
  To convert a QQID to a UUID, the two "Q-words" that head
-  the QQID are mapped to their index in the 1024-element Q-word vector (cf.
+  the QQID are mapped to their index in the 0:1023 Q-word vector (cf.
   \code{\link{qMap}}), and the indices are converted to two ten bit numbers.
   These twenty bits are expressed as a five-digit hexadecimal number which
   replaces the two Q-words to recover the UUID. For details on UUID format
@@ -34,16 +34,20 @@ qq2uu(qq)
 }
 
 \section{Endianness}{
- The package \code{qqid} uses its own internal functions
-  for bit manipulations and is not affected by the endianness of the
-  processor architecture it runs on.
+ The \code{qqid} package uses its own functions to
+  convert to and from bits, and is not affected by big-endian vs.
+  little-endian processor architecture.
 }
 
 \examples{
 # Convert three example QQIDs and one NA to the corresponding UUIDs
 qq2uu( c(QQIDexample(c(1, 3, 5)), NA) )
 
-# Check that the example QQIDs are correctly converted
+# forward and back again
+myID <- "bird.carp.7TsBWtwqtKAeCTNk8f"
+myID == uu2qq(qq2uu(myID))             # TRUE
+
+# Confirm that the example QQIDs are converted correctly
 qq2uu( QQIDexample(2:4) ) == UUIDexample(2:4)  # TRUE TRUE TRUE
 
 }

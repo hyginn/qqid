@@ -5,7 +5,7 @@
 #' \code{isValidUUID} tests whether the function argument is a vector of valid
 #' UUIDs.
 #'
-#' The function accepts a vector of strings and returns a logical vector of the
+#' \code{isValidUUID} accepts a vector of strings and returns a logical vector of the
 #' same length, \code{TRUE} for every element of the input that is a valid UUID
 #' according to \href{https://tools.ietf.org/html/rfc4122}{RFC 4122}. \code{NA}
 #' values are mapped to \code{FALSE} (default) or can be replaced with
@@ -30,6 +30,15 @@
 #'
 #' # check one invalid UUID
 #' isValidUUID("2.7182818284590452353602874713526624")   # FALSE
+#'
+#' # convert a QQID and check it
+#' isValidUUID(qq2uu("bird.carp.7TsBWtwqtKAeCTNk8f"))   # TRUE
+#'
+#' # check a valid UUID, not a UUID, and an NA. Map NA to NA, not to FALSE.
+#' isValidUUID(c(UUIDexample(4),
+#'               "7ac3844896e86b62da717e0f4500f99e",
+#'               NA), na.map = NA)                      # TRUE  FALSE  NA
+
 #'
 #' @export
 

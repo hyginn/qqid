@@ -2,7 +2,9 @@
 
 #' QQIDexample
 #'
-#' \code{QQIDexample} returns example QQIDs.
+#' \code{QQIDexample} returns synthetic, valid QQIDs for testing and
+#' development, which are easy to distinguish from "real" QQIDs to prevent their
+#' accidental use as IDs.
 #'
 #' The function stores five artifical sample QQIDs. Input is an index vector
 #' that specifies which QQIDs to return. More than five QQIDs can be requested

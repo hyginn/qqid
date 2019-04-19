@@ -1,6 +1,6 @@
 # uu2qq.R
 
-#' uu2qq.
+#' uu2qq
 #'
 #' \code{uu2qq} converts a vector of UUIDs to QQIDs.
 #'
@@ -12,29 +12,33 @@
 #'   they are hard to distingiush by eye and that creates difficulties for
 #'   development or debugging with structured data, or for curation of UUID
 #'   tagged information. The \code{qqid} package provides tools to convert the
-#'   leading 5 hexadecimal digits to two "Q-words", and the remainder to a
-#'   string in a Base 64 encoding. The "Q-words" - the letter Q evokes the word
-#'   "cue" i.e. a hint or mnemonic - define a unique and invertible mapping to
-#'   the integers (0, 1023), i.e. all numbers that can be encoded with 10 bits.
-#'   Thus two Q-words can encode 20 bits, or 5 hexadecimal letters:\cr
-#' \code{         [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]  }\cr
-#' \code{  hex:  |--0x[1]--| |--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--|}\cr
-#' \code{  bit:  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00}\cr
-#' \code{  int:  |----------int[1]-----------| |----------int[2]-----------|}\cr
-#' \code{                  (0, 1023)                     (0, 1023)          }\cr
-#' \code{  Q:          (aims, ..., zone)             (aims, ..., zone)      }\cr
+#'   leading 5 hexadecimal digits of UUIDs (or the first 20 bits of 128-bit
+#'   numbers) to two "Q-words", and the remainder to a string in a Base 64
+#'   encoding. The "Q-words" - the letter Q evokes the word "cue" i.e. a hint or
+#'   mnemonic - define a unique and invertible mapping to the integers (0,
+#'   1023), i.e. all numbers that can be encoded with 10 bits. Thus two Q-words
+#'   can encode 20 bits, or 5 hexadecimal letters: \preformatted{
+#'
+#'   [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f] hex:  |--0x[1]--|
+#'   |--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--| bit:  00 00 00 00 00 00 00
+#'   00 00 00 00 00 00 00 00 00 00 00 00 00 ... int:
+#'   |----------int[1]-----------| |----------int[2]-----------| (0, 1023)
+#'   (0, 1023) Q:          (aims, ..., zone)     .       (aims, ..., zone)
+#'   . Base64...
+#'
+#'   }
 #'
 #' @section Process: To convert a UUID to a QQID, the first five hexadecimal
 #'   letters are converted to two ten bit numbers, these two numbers are
 #'   interpreted as an index into the 1024-element Q-Word vector. The QQID has
-#'   the two vectors as a head, and the Base 64 encoded digits 6 to 32 of the
+#'   the two Q-words as a head, and the Base64 encoded digits 6 to 32 of the
 #'   UUID as its tail. Since the mapping is fully reversible, QQIDs have exactly
 #'   the same statistical properties as UUIDs. For details on QQID format see
 #'   \code{\link{isValidQQID}}.
 #'
-#' @section Endianness: qqid package uses its own functions to convert to and
-#'   from bits and is not affected by big-endian vs. little-endian processor
-#'   architectore.
+#' @section Endianness: The \code{qqid} package uses its own functions to
+#'   convert to and from bits, and is not affected by big-endian vs.
+#'   little-endian processor architecture.
 #'
 #' @param uu (character) a vector of UUIDs
 #' @return (character)  a vector of QQIDs
@@ -46,6 +50,13 @@
 #' @examples
 #' # Convert three example UUIDs and one NA to the corresponding QQIDs
 #' uu2qq( c(UUIDexample(c(1, 3, 5)), NA) )
+#'
+#' # forward and back again
+#' myID <- "0c460ed3-b015-adc2-ab4a-01e093364f1f"
+#' myID == qq2uu(uu2qq(myID))   # TRUE
+#'
+#' # Confirm that the example UUIDs are converted correctly
+#' uu2qq( UUIDexample(2:4) ) == QQIDexample(2:4)  # TRUE TRUE TRUE
 #'
 #' @export
 

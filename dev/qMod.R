@@ -24,16 +24,15 @@ Q <- sort(Q)
 head(Q)
 tail(Q)
 
-# print
-
+# print, formatted for the function source
 for(i in seq(0, 1023, by = 8)) {
   cat(sprintf('"%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", # %04d\n',
       Q[i+1], Q[i+2], Q[i+3], Q[i+4], Q[i+5], Q[i+6], Q[i+7], Q[i+8], i+1))
 }
 
-
+# print, formatted as a text document
 for(i in seq(0, 1023, by = 16)) {
-  cat(sprintf("%04d:  %s\n", i, paste(qMap((i+1):(i+16)), collapse = " ")))
+  cat(sprintf("%04d:  %s\n", i, paste(qMap((i):(i+15)), collapse = " ")))
 }
 
 

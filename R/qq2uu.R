@@ -1,6 +1,6 @@
 # qq2uu.R
 
-#' qq2uu.
+#' qq2uu
 #'
 #' \code{qq2uu} converts a vector of QQIDs to UUIDs.
 #'
@@ -18,9 +18,9 @@
 #'   are converted to their corresponding 27 hex digits via an intermediate
 #'   mapping to bit-patterns.
 #'
-#' @section Endianness: The package \code{qqid} uses its own internal functions
-#'   for bit manipulations and is not affected by the endianness of the
-#'   processor architecture it runs on.
+#' @section Endianness: The \code{qqid} package uses its own functions to
+#'   convert to and from bits, and is not affected by big-endian vs.
+#'   little-endian processor architecture.
 #'
 #' @param qq (character) a vector of QQIDs
 #' @return (character)  a vector of UUIDs
@@ -33,7 +33,11 @@
 #' # Convert three example QQIDs and one NA to the corresponding UUIDs
 #' qq2uu( c(QQIDexample(c(1, 3, 5)), NA) )
 #'
-#' # Check that the example QQIDs are correctly converted
+#' # forward and back again
+#' myID <- "bird.carp.7TsBWtwqtKAeCTNk8f"
+#' myID == uu2qq(qq2uu(myID))             # TRUE
+#'
+#' # Confirm that the example QQIDs are converted correctly
 #' qq2uu( QQIDexample(2:4) ) == UUIDexample(2:4)  # TRUE TRUE TRUE
 #'
 #' @export

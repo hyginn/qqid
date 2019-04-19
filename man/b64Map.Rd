@@ -8,19 +8,20 @@ b64Map(x)
 }
 \arguments{
 \item{x}{(character or numeric) A vector of encoding characters, bit-patterns
-or indices.}
+or indices. Note: indices are vector indices, not interpreted bit-patterns,
+i.e \code{b64Map("000000") == b64Map(1)}}
 }
 \value{
 (character) A vector of Base 64 characters or their corresponding
   bit-patterns.
 }
 \description{
-\code{b64Map} maps 6-character bit patterns to thier corresponding Base 64
+\code{b64Map} maps 6-character bit patterns to their corresponding Base64
 characters or characters back to bit patterns.
 }
 \section{Description}{
- if the input is a vector of 6-character bit patterns,
-  \code{b64Map} returns the corresponding character from the Base 64
+ If the input is a vector of 6-character bit patterns,
+  \code{b64Map} returns the corresponding character from the Base64
   binary-to-text encoding. If the input is a vector of 1-character strings
   \code{b64Map} returns the corresponding bit pattern. If the input is
   numeric, it is interpreted as indices into the b64 vector. The returned
@@ -28,12 +29,16 @@ characters or characters back to bit patterns.
   done.
 }
 
-\section{Base 64}{
- Base 64 is a binary to text encoding specified in
+\section{Base64}{
+ Base64 is a binary to text encoding specified in
   \href{https://tools.ietf.org/html/rfc4648}{RFC 1738}; we use the URL and
   filename-safe alphabet version with the following encoding from
   \code{000000} to \code{111111}:
   \code{"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"}
+  This is safe for most applications; one exception is Microsoft Excel where
+  strings beginning with a \code{"-"} are silently convert to formulas.
+  (QQIDs are not affected by this problem since they always begin with
+  a lowercase alphabetic character.)
 }
 
 \examples{

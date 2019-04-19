@@ -2,7 +2,7 @@
 
 #' qMap
 #'
-#' \code{qMap} maps numbers to Q-words, or Q-words to their index.
+#' \code{qMap} maps numbers to Q-words, or Q-words to their index in (0, 1023).
 #'
 #' @section Description: \code{qMap} accepts strings that are matched to Q-word
 #'   indices or NA, or numbers that are matched to Q-words or NA. The returned
@@ -28,9 +28,9 @@
 #'
 #' @examples
 #' # qMap a number
-#' qMap(313)   # "gift"
+#' qMap(313)                                    # "gift"
 #' # qMap four words, three can be matched.
-#' qMap(c("three", "free", "cold", "beer"))  # NA 287  125  34
+#' qMap(c("three", "free", "cold", "beer"))     # NA 287  125  34
 #' # return the entire QQ table
 #' x <- qMap(0:1023)
 #'

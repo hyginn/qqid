@@ -2,7 +2,9 @@
 
 #' UUIDexample
 #'
-#' \code{UUIDexample} returns example UUIDs.
+#' \code{UUIDexample} returns synthetic, valid UUIDs for testing and
+#' development, which are easy to distinguish from "real" UUIDs to prevent their
+#' accidental use as IDs.
 #'
 #' The function stores five artifical sample UUIDs. Input is an index vector
 #' that specifies which UUIDs to return. More than five UUIDs can be requested
@@ -20,10 +22,10 @@
 #' @seealso \code{\link{QQIDexample}} Returns five QQIDs
 #'
 #' @examples
-#' UUIDexample()              # the five stored UUIDs
-#' UUIDexample(2:3)           # two UUIDs
-#' UUIDexample(rep(1:5, 5))   # twentyfive non-random UUIDS
-#' UUIDexample(3) == qq2uu(QQIDexample(3)) # TRUE (testing the conversion)
+#' UUIDexample()                             # the five stored UUIDs
+#' UUIDexample(2:3)                          # two UUIDs
+#' UUIDexample(rep(1:5, 5))                  # twentyfive non-random UUIDS
+#' UUIDexample(3) == qq2uu(QQIDexample(3))   # TRUE (testing the conversion)
 #'
 #' @export
 

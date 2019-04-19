@@ -21,27 +21,34 @@ isValidQQID(s, na.map = FALSE)
 QQIDs.
 }
 \details{
-The function accepts a vector of strings and returns a logical vector of the
-same length,  \code{TRUE} for every element of the input that is a valid
-QQID. \code{NA} values are mapped to \code{FALSE} (default) or can be
+\code{isValidQQID} accepts a vector of strings and returns a logical vector
+of the same length,  \code{TRUE} for every element of the input that is a
+valid QQID. \code{NA} values are mapped to \code{FALSE} (default) or can be
 replaced with \code{NA} to preserve them. Note: arguments passed to
 \code{na.map} are implicitly converted to type logical. A valid QQID has the
-form: \code{"qqqq.qqqq.BBBBBBBBBBBBBBBBBB"} where \code{"qqqq"} is a Q-word
-(cf \code{\link{qMap}}) encoding 10 bit each and \code{"B"} is a Base 64
+form: \code{"qqqq.qqqq.BBBBBBBBBBBBBBBBBB"} where each \code{"qqqq"} is a
+Q-word (cf. \code{\link{qMap}}) encoding 10 bit, and \code{"B"} is a Base64
 character encoding 6 bits each for \code{10 + 10 + (18 * 6) == 128} bits. The
 two Q-words of the QQID are separated by a "." which does not appear in UUIDs
-and thus the Q-words bead, beef, dead, deaf, deed, face, and fade can be
-easily distinguished from 4 digit hexadecimal numbers.
+nor in the Base64 alphabet and thus the Q-words bead, beef, dead, deaf, deed,
+face, and fade can be easily distinguished from 4 digit hexadecimal numbers
+in a QQID or a Base64 encoded number.
 }
 \examples{
 # check one invalid QQID
 isValidQQID("spur.ious.oversimplification")  # FALSE: "ious" is not a Q-word
 
 # check one valid QQID
-isValidQQID("base.less.anthropocentricity")  # TRUE, though regrettably so
+isValidQQID("base.less.Anthr0p0centricity")  # TRUE, perhaps regrettably so
 
 # check two valid QQIDs
 isValidQQID(QQIDexample(1:2))   # TRUE  TRUE
+
+# convert a UUID and check it
+isValidQQID(uu2qq("0c460ed3-b015-adc2-ab4a-01e093364f1f"))   # TRUE
+
+# check a valid QQID, not a QQID, and an NA. Map NA to NA, not to FALSE.
+isValidQQID(c(QQIDexample(3), "meh", NA), na.map = NA)   # TRUE  FALSE  NA
 
 }
 \seealso{
