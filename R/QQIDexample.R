@@ -24,7 +24,7 @@
 #' @examples
 #' QQIDexample()                             # the five stored QQIDs
 #' QQIDexample(2:3)                          # two QQIDs
-#' QQIDexample(rep(1:5, 5))                  # twentyfive non-random QQIDS
+#' QQIDexample(rep(1:5, 5))                  # twentyfive non-random QQIDs
 #' QQIDexample(3) == uu2qq(UUIDexample(3))   # TRUE (testing the conversion)
 #'
 #' @export

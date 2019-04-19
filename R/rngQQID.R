@@ -96,7 +96,7 @@
 #' # note the latency incurred by retrieving the seed from the ANU server
 #' rngQQID(5)
 #'
-#' # return 10,000 QQIDS and transform them into UUIDs (takes less than two
+#' # return 10,000 QQIDs and transform them into UUIDs (takes less than two
 #' # seconds); we assume that the RNG is in a sane state since we have just
 #' previously initialized it with a true random number
 #' x <- qq2uu(rngQQID(1e4, method = "n"))
