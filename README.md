@@ -2,6 +2,9 @@
 
 [![Travis build status](https://travis-ci.org/hyginn/qqid.svg?branch=master)](https://travis-ci.org/hyginn/qqid)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hyginn/qqid?branch=master&svg=true)](https://ci.appveyor.com/project/hyginn/qqid)
+[![MIT license](https://raw.github.com/hyginn/qqid/master/inst/img/license-MIT.svg?sanitize=true)](http://opensource.org/licenses/MIT)
+[![qqid-home](https://raw.github.com/hyginn/qqid/master/inst/img/bird.carp.7TsBWtwqtKAeCTNk8f.svg?sanitize=true)](https://github.com/hyginn/qqid)
+
 
 ###### [Boris Steipe](https://orcid.org/0000-0002-1134-6758), Department of Biochemistry and Department of Molecular Genetics, University of Toronto, Canada. &lt;boris.steipe@utoronto.ca&gt;
 
@@ -270,7 +273,7 @@ barplot(sort(myTab),
         cex.axis = 0.8,
         cex.names = 0.67)
 ```
-![](./inst/img/barplotRFC4122conforming.svg?sanitize=true "barplot of UUID conforming BASE64 characters")
+![](https://raw.github.com/hyginn/qqid/master/inst/img/barplotRFC4122conforming.svg?sanitize=true "barplot of UUID conforming BASE64 characters")
 
 The barplot shows that classes of characters have discretely different frequencies. The reason for this is immediately obvious: QQIDs that are created to be convertible to RFC 4122 compliant UUIDs have six non-random bits, and those are not aligned with the encoding character boundaries. Since the distribution of the underlying 128-bit patterns is not uniformly random, neither is the distribution of the encoding characters. However the distribution of numbers that underlie our QQIDs is just as random as 2^122 bits suggests.
 
@@ -305,7 +308,7 @@ barplot(sort(myRTab),
 abline(h=min(myRTab), lwd=0.5, col="#CC000055")
 abline(h=max(myRTab), lwd=0.5, col="#00DD0055")
 ```
-![](./inst/img/barplot128bitRandom.svg?sanitize=true "barplot of 108-bit random BASE64 characters")
+![](https://raw.github.com/hyginn/qqid/master/inst/img/barplot128bitRandom.svg?sanitize=true "barplot of 108-bit random BASE64 characters")
 
 As expected, all encoding characters are equally likely.
 
@@ -358,7 +361,7 @@ cor(q1Tab, q4Tab[names(q1Tab)]) # -0.04621827
 
 # Most and least frequent Q-words between runs are different
 ```
-![](./inst/img/Q-wordRanks.svg?sanitize=true "Ranks of 4 * 2e+06 Q-words")
+![](https://raw.github.com/hyginn/qqid/master/inst/img/Q-wordRanks.svg?sanitize=true "Ranks of 4 * 2e+06 Q-words")
 Counts for 4 runs of 2e+06 Q-words, ranked by count from 1 to 1024 show no apparent deviation from what is expected from random choices.
 
 In summary: we appear to be rolling a fair die when we construct QQIDs, and we appear to
@@ -468,7 +471,9 @@ Although `qqid` has been written and tested with care, no suitability for any pa
 
 # 8 Acknowledgements
 
-I enjoyed contributing to Siegfried Köstlmeier's [`qrandom`](https://cran.r-project.org/package=qrandom) package, whose convenient interface to quantum random numbers at [ANU](https://qrng.anu.edu.au/) made `qqid` possible since the prospect of pseudo-random universal IDs is perhaps less sound than it might seem.
+I enjoyed contributing to Siegfried Köstlmeier's [`qrandom`](https://cran.r-project.org/package=qrandom) package, whose convenient interface to quantum random numbers at [ANU](https://qrng.anu.edu.au/) made `qqid` possible, since the concept of pseudo-random universal IDs is perhaps less sound than it might seem at first.
+
+Thanks to [shields.io](https://shields.io/) for fun with badges.
 
 &nbsp;
 
