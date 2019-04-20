@@ -3,7 +3,7 @@
 [![Travis build status](https://travis-ci.org/hyginn/qqid.svg?branch=master)](https://travis-ci.org/hyginn/qqid)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hyginn/qqid?branch=master&svg=true)](https://ci.appveyor.com/project/hyginn/qqid)
 [![MIT license](https://raw.github.com/hyginn/qqid/master/inst/img/license-MIT.svg?sanitize=true)](http://opensource.org/licenses/MIT)
-[![qqid-home](https://raw.github.com/hyginn/qqid/master/inst/img/bird.carp.7TsBWtwqtKAeCTNk8f.svg?sanitize=true)](https://github.com/hyginn/qqid)
+[![qqid-home](https://raw.github.com/hyginn/qqid/master/inst/img/bird.carp.7TsBWtwqtKAeCTNk8f.svg?sanitize=true)](https://github.com/hyginn/qqid) 
 
 
 ###### [Boris Steipe](https://orcid.org/0000-0002-1134-6758), Department of Biochemistry and Department of Molecular Genetics, University of Toronto, Canada. &lt;boris.steipe@utoronto.ca&gt;
