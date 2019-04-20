@@ -10,9 +10,18 @@ ANUnotReachable <- tryCatch(ifelse(nchar(qrandom::qUUID(1)) == 36, FALSE, TRUE),
 # ==============================================================================
 context("qQQIDfactory")
 
-test_that("corrupt input generates errors",  {
+test_that("corrupt input to the factory function generates errors",  {
   expect_error(testQQ <- qQQIDfactory(NULL))
   expect_error(testQQ <- qQQIDfactory(FALSE))
+  expect_null(qQQIDfactory(-1))   # cause an error thrown from qrandom::qUUID()
+})
+
+test_that("corrupt input to the closure generates errors",  {
+  skip_if(ANUnotReachable)
+  expect_false(is.null(testQQ <- qQQIDfactory(5) ))
+  expect_error(testQQ("0", inspectOnly = TRUE))
+  expect_error(testQQ(0, inspectOnly = TRUE))
+  expect_error(testQQ(1e05 + 1, inspectOnly = TRUE))
 })
 
 test_that("valid input produces the expected output",  {

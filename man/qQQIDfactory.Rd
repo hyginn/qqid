@@ -11,19 +11,20 @@ qQQIDfactory(nBatch = 1023)
 default 1023 does not normally need to be changed. (Larger batches take more
 time to process, smaller batches offer no speed benefit). It might be
 increased e.g. for storing a large cache in case an interruption to Internet
-connectivity is anticipated.}
+connectivity is anticipated. Values < 1 and > 1e05 will cause an error in
+\code{qrandom::qUUID()}.}
 }
 \value{
 \code{qQQIDfactory} returns a closure that takes the following
- arguments: \itemize{ \item \code{n} (numeric) (default: 1): the number of
- true random QQIDs to return. \item \code{inspectOnly} (logical) (default:
- \code{FALSE}). If \code{TRUE}, the requested number of QQIDs are only
- printed as a side-effect, the function returns \code{NULL} invisibly. This
- is useful to inspect the first \code{n} elements of the cache without
- changing the cache, while making it sufficiently hard to accidentally assign
- and reuse QQIDs. } If no connection to ANU can be established and the
- initial cache cannot be filled, \code{qQQIDfactory} returns \code{NULL}
- invisibly.
+ arguments: \itemize{ \item \code{n} (numeric) (default: 1; in interval: (1,
+ 1e+05)): the number of true random QQIDs to return. \item \code{inspectOnly}
+ (logical) (default: \code{FALSE}). If \code{TRUE}, the requested number of
+ QQIDs are only printed as a side-effect, the function returns \code{NULL}
+ invisibly. This is useful to inspect the first \code{n} elements of the
+ cache without changing the cache, while making it sufficiently hard to
+ accidentally assign and reuse QQIDs. } If no connection to ANU can be
+ established and the initial cache cannot be filled, \code{qQQIDfactory}
+ returns \code{NULL} invisibly.
 }
 \description{
 \code{qQQIDfactory} returns a closure (a function with an associated

@@ -115,14 +115,14 @@ i2bit <- function(x, l) {
 }
 
 
-x2i <- function(x) {
-  # Non exported. Convert a vector of hexadeximal characters to their
-  # corresponding integers.
-  xMap <- 0:15
-  names(xMap) <- unlist(strsplit("0123456789abcdef", ""))
-
-  return(xMap[x])
-}
+# x2i <- function(x) {   # Not currently used
+#   # Non exported. Convert a vector of hexadeximal characters to their
+#   # corresponding integers.
+#   xMap <- 0:15
+#   names(xMap) <- unlist(strsplit("0123456789abcdef", ""))
+#
+#   return(xMap[x])
+# }
 
 
 b64i <- function(x) {

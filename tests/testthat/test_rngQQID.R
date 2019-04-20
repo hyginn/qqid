@@ -17,6 +17,14 @@ oSeed <- .Random.seed
 # ==============================================================================
 context("rngQQID")
 
+test_that("If .Random.seed does not exist, rngQQID creates, then removes it.", {
+  if (exists(".Random.seed", envir = .GlobalEnv)) {
+    rm(.Random.seed, envir = .GlobalEnv)
+  }
+  expect_true(isValidQQID(rngQQID(n = 1, method = "n")))
+  expect_false(exists(".Random.seed", envir = .GlobalEnv))
+})
+
 set.seed(112358) # set working RNG state
 intReference <- sample.int(.Machine$integer.max, 2)
 
@@ -31,7 +39,6 @@ test_that("corrupt input generates errors",  {
   expect_error(rngQQID(n = 1:2))
   expect_error(rngQQID(method = "unk"))
   expect_error(rngQQID(RFC4122compliant = "not"))
-
 })
 
 test_that("NULL returns NULL",  {

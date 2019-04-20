@@ -119,6 +119,7 @@ rngQQID <- function(n = 1, method = "q", RFC4122compliant = TRUE) {
   # save the original state of the RNG
   if ( ! exists(".Random.seed", envir = .GlobalEnv)) {
     oSeed <- NULL
+    set.seed(NULL) # initialize with normal inbuilt seed
   } else {
     oSeed <- .Random.seed
   }
