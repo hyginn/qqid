@@ -1,6 +1,7 @@
+^\.codecov\.yml$
 ^\.appveyor\.yml$
 ^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^dev$
-^./inst/.WORDLIST$
+^./inst/WORDLIST$

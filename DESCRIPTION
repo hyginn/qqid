@@ -27,8 +27,9 @@ LazyData: true
 Imports:
     qrandom
 Suggests:
-    testthat,
-    digest
+    covr,
+    digest,
+    testthat
 RoxygenNote: 6.1.1
 URL: https://github.com/hyginn/qqid
 BugReports: https://github.com/hyginn/qqid/issues

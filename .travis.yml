@@ -9,7 +9,11 @@ before_install:
   - sudo apt-get install libmpfr-dev
 
 r_packages:
+  - covr
   - Rmpfr
+
+after_success:
+  - Rscript -e 'covr::codecov()'
 
 notifications:
   email:
