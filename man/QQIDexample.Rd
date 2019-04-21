@@ -7,30 +7,30 @@
 QQIDexample(idx = 1:5)
 }
 \arguments{
-\item{idx}{(numeric) an index vector that defines which of the five
-internally stored example QQIDs to return}
+\item{sel}{(numeric, or logical) a subsetting vector}
 }
 \value{
 (character) a vector of QQIDs
 }
 \description{
 \code{QQIDexample} returns synthetic, valid QQIDs for testing and
-development, which are easy to distinguish from "real" QQIDs to prevent their
-accidental use as IDs.
+development. The synthetic examples are easy to distinguish from "real" IDs
+to prevent their accidental use in an application.
 }
 \details{
-The function stores five artificial sample QQIDs. Input is an index vector
-that specifies which QQIDs to return. More than five QQIDs can be requested
-by repeating indices. The QQIDs can be converted to the UUIDs provided by
-\code{UUIDexample}. Note: these are not random numbers in the sense of the
-philosophy behind QQIDs. Do not use them for any purpose other than
-demonstration and testing.
+The function stores five artificial QQIDs. Input is an index vector that
+specifies which QQIDs to return. More than five IDs can be requested by
+applying the usual subsetting rules. The QQIDs represent the exact same
+numbers provided by \code{\link{xltIDexample}}. However the \code{qqid}
+package provides only one format conversion at this time so the reverse
+comparison will only succeed with \code{xltIDexample("UUID")}.
 }
 \examples{
-QQIDexample()                             # the five stored QQIDs
-QQIDexample(2:3)                          # two QQIDs
-QQIDexample(rep(1:5, 5))                  # twentyfive non-random QQIDs
-QQIDexample(3) == uu2qq(UUIDexample(3))   # TRUE (testing the conversion)
+QQIDexample()                                  # the five stored QQIDs
+QQIDexample(2:3)                               # two QQIDS
+QQIDexample(c(TRUE, FALSE))                    # vector recycling
+QQIDexample(sample(1:5, 17, replace = TRUE))   # seventeen in random order
+QQIDexample() == xlt2qq(xltIDexample())        # TRUE TRUE TRUE TRUE TRUE
 
 }
 \seealso{

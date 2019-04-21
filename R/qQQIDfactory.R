@@ -165,7 +165,7 @@ qQQIDfactory <- function(nBatch = 1023) {
   if (is.null(uu)) {
     return(invisible(NULL))
   } else {
-    QQ <- uu2qq(uu)          # place QQ into the enclosing environment of
+    QQ <- xlt2qq(uu)         # place QQ into the enclosing environment of
                              # the returned closure
   }
 
@@ -199,7 +199,7 @@ qQQIDfactory <- function(nBatch = 1023) {
       if (is.null(uu)) {
         return(invisible(NULL))
       } else {
-        QQ <<- c(QQ, uu2qq(uu))
+        QQ <<- c(QQ, xlt2qq(uu))
       }
     }
     # Regular exit of while-loop: cache was replenished.

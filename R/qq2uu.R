@@ -14,13 +14,14 @@
 #'   \code{\link{qMap}}), and the indices are converted to two ten bit numbers.
 #'   These twenty bits are expressed as a five-digit hexadecimal number which
 #'   replaces the two Q-words to recover the UUID. For details on UUID format
-#'   see \code{\link{isValidUUID}}. The remaining 18 Base 64 encoded characters
-#'   are converted to their corresponding 27 hex digits via an intermediate
-#'   mapping to bit-patterns.
+#'   see \code{\link{is.UUID}}. The remaining 18 Base64 encoded characters are
+#'   converted to their corresponding 27 hex digits via an intermediate mapping
+#'   to bit-patterns.
 #'
 #' @section Endianness: The \code{qqid} package uses its own functions to
 #'   convert to and from bits, and is not affected by big-endian vs.
-#'   little-endian processor architecture.
+#'   little-endian processor architecture or variant byte order. All numbers are
+#'   interpreted to have their lowest order digits on the right.
 #'
 #' @param qq (character) a vector of QQIDs
 #' @return (character)  a vector of UUIDs
@@ -35,15 +36,15 @@
 #'
 #' # forward and back again
 #' myID <- "bird.carp.7TsBWtwqtKAeCTNk8f"
-#' myID == uu2qq(qq2uu(myID))             # TRUE
+#' myID == xlt2qq(qq2uu(myID))             # TRUE
 #'
-#' # Confirm that the example QQIDs are converted correctly
-#' qq2uu( QQIDexample(2:4) ) == UUIDexample(2:4)  # TRUE TRUE TRUE
+#' # Confirm that example QQID No. 3 is formatted correctly as a UUID
+#' qq2uu( QQIDexample(3) ) == xltIDexample("UUID")  # TRUE
 #'
 #' @export
 
 qq2uu <- function(qq) {
-  stopifnot(all(isValidQQID(qq, na.map = NA), na.rm = TRUE))
+  stopifnot(all(is.QQID(qq, na.map = NA), na.rm = TRUE))
   if (length(qq) == 0) {
     return(character(0))
   }
@@ -57,12 +58,12 @@ qq2uu <- function(qq) {
   I[ ,  1:10 ] <- i2bit(qMap(substr(qq, 1, 4)), l = 10)
   I[ , 11:20 ] <- i2bit(qMap(substr(qq, 6, 9)), l = 10)
 
-  # Base 64 -> integer -> 18 * 6 bit matrix
+  # Base64 -> integer -> 18 * 6 bit matrix
   for(j in 1:18) {
     j1 <- (((j-1)*6)+21)
     j2 <- j1 + 5
     jq <- j+10
-    I[ , j1:j2] <- i2bit(b64i(substr(qq, jq, jq)), l = 6)
+    I[ , j1:j2] <- i2bit(olt2i(substr(qq, jq, jq)), l = 6)
   }
 
   # hex Matrix
@@ -70,8 +71,8 @@ qq2uu <- function(qq) {
   for(j in 1:32) {
     j1 <- (((j-1)*4)+1)
     j2 <- j1 + 3
-    # 4 column bit matrix -> hex character
-    X[ , j] <- b42x(I[ , j1:j2, drop = FALSE])
+    # 4 column bit matrix -> quad -> hex character
+    X[ , j] <- quad2x(I[ , j1:j2, drop = FALSE])
   }
 
   uu <- character(lqq)  # make length same as original input
@@ -88,7 +89,7 @@ qq2uu <- function(qq) {
 }
 
 
-b42x <- function(x) {
+quad2x <- function(x) {
   # Non exported. Convert a 4 column bit-pattern matrix to its
   # corresponding hexadecimal character.
 
@@ -125,11 +126,11 @@ i2bit <- function(x, l) {
 # }
 
 
-b64i <- function(x) {
+olt2i <- function(x) {
   # Non exported. Convert a vector of Base 64 characters to their
   # corresponding integers.
-  b64 <- b64Map(1:64)
-  return(match(x, b64) - 1)
+  olt <- oltMap(1:64)
+  return(match(x, olt) - 1)
 }
 
 

@@ -28,15 +28,16 @@ qq2uu(qq)
   \code{\link{qMap}}), and the indices are converted to two ten bit numbers.
   These twenty bits are expressed as a five-digit hexadecimal number which
   replaces the two Q-words to recover the UUID. For details on UUID format
-  see \code{\link{isValidUUID}}. The remaining 18 Base 64 encoded characters
-  are converted to their corresponding 27 hex digits via an intermediate
-  mapping to bit-patterns.
+  see \code{\link{is.UUID}}. The remaining 18 Base64 encoded characters are
+  converted to their corresponding 27 hex digits via an intermediate mapping
+  to bit-patterns.
 }
 
 \section{Endianness}{
  The \code{qqid} package uses its own functions to
   convert to and from bits, and is not affected by big-endian vs.
-  little-endian processor architecture.
+  little-endian processor architecture or variant byte order. All numbers are
+  interpreted to have their lowest order digits on the right.
 }
 
 \examples{
@@ -45,10 +46,10 @@ qq2uu( c(QQIDexample(c(1, 3, 5)), NA) )
 
 # forward and back again
 myID <- "bird.carp.7TsBWtwqtKAeCTNk8f"
-myID == uu2qq(qq2uu(myID))             # TRUE
+myID == xlt2qq(qq2uu(myID))             # TRUE
 
-# Confirm that the example QQIDs are converted correctly
-qq2uu( QQIDexample(2:4) ) == UUIDexample(2:4)  # TRUE TRUE TRUE
+# Confirm that example QQID No. 3 is formatted correctly as a UUID
+qq2uu( QQIDexample(3) ) == xltIDexample("UUID")  # TRUE
 
 }
 \seealso{

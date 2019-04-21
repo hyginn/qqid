@@ -10,7 +10,7 @@ rngQQID(n = 1, method = "q", RFC4122compliant = TRUE)
 \item{n}{(integer) The number of pseudo-random QQIDs to return. Default is 1.}
 
 \item{method}{(character) Which random seed method to use. Default is
-\code{"q"}, a true random number seed. Other options are \code{"r"} (R's
+\code{"q"}, a true random number seed. Other options are \code{"R"} (R's
 inbuilt RNG initialization),  \code{"n"} (no initialization, a reproducible
 random seed can be set prior to this call if one clearly understands the
 risks), \code{"t"} (test of error handling).}

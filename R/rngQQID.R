@@ -76,7 +76,7 @@
 #'
 #'@param n (integer) The number of pseudo-random QQIDs to return. Default is 1.
 #'@param method (character) Which random seed method to use. Default is
-#'  \code{"q"}, a true random number seed. Other options are \code{"r"} (R's
+#'  \code{"q"}, a true random number seed. Other options are \code{"R"} (R's
 #'  inbuilt RNG initialization),  \code{"n"} (no initialization, a reproducible
 #'  random seed can be set prior to this call if one clearly understands the
 #'  risks), \code{"t"} (test of error handling).
@@ -111,7 +111,7 @@ rngQQID <- function(n = 1, method = "q", RFC4122compliant = TRUE) {
   if(is.null(n)) { return(NULL) }
   stopifnot(is.numeric(n))
   stopifnot(length(n) == 1)
-  stopifnot(method %in% c("q", "r", "n", "t"))
+  stopifnot(method %in% c("q", "R", "n", "t"))
   stopifnot(is.logical(RFC4122compliant))
 
   testMode <- FALSE
@@ -148,7 +148,7 @@ rngQQID <- function(n = 1, method = "q", RFC4122compliant = TRUE) {
     } else {
       set.seed(rs)
     }
-  } else if (method == "r") { # use R's initialization
+  } else if (method == "R") { # use R's initialization
     set.seed(NULL)
   } else if (method == "n") { # do nothing, assume seed is already set
     ;
@@ -160,7 +160,14 @@ rngQQID <- function(n = 1, method = "q", RFC4122compliant = TRUE) {
   }
 
   # generate matrix of n * 128 {0, 1}
-  x <- matrix(sample(c(0, 1), 128 * n, replace = TRUE), nrow = n)
+  x <- matrix(sample(c(0, 1), 128 * n, replace = TRUE),
+              byrow = TRUE, #<--- This is both risky and safe: the risk is that
+              nrow = n)         # repeated runs with the same seed will not be
+                                # folded into the columns, but we will get
+                                # identical IDs, and we WILL have collisions.
+                                # The safe part is that we can easily notice
+                                # this by comparing the head()s of the vectors.
+                                # Otherwise there might be hidden correlations.
 
   if (RFC4122compliant) { # stamp UUID version
     x[ , 61] <- 0

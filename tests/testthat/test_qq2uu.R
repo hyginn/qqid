@@ -12,11 +12,10 @@ test_that("corrupt input generates errors",  {
 test_that("valid input produces the expected output",  {
   expect_equal(qq2uu(character()), character(0))            # zero-length input
   expect_equal(qq2uu(NA_character_), NA_character_)         # one NA
-  expect_equal(qq2uu(QQIDexample(1)), UUIDexample(1))
-  expect_equal(qq2uu(c(QQIDexample(1), NA)), c(UUIDexample(1), NA))
-  expect_equal(qq2uu(c(NA, QQIDexample(1:2), NA, QQIDexample(3:5), NA)),
-               c(NA, UUIDexample(1:2), NA, UUIDexample(3:5), NA))
-  expect_equal(qq2uu(QQIDexample()), UUIDexample())
+  expect_equal(qq2uu(QQIDexample(3)), as.vector(xltIDexample(3)))
+  expect_equal(qq2uu(c(QQIDexample(3), NA)), as.vector(c(xltIDexample(3), NA)))
+  expect_equal(qq2uu(c(NA, QQIDexample(3), NA, QQIDexample(3), NA)),
+               as.vector(c(NA, xltIDexample(3), NA, xltIDexample(3), NA)))
   expect_equal(qq2uu("aims.aims.AAAAAAAAAAAAAAAAAA"),
                      "00000000-0000-0000-0000-000000000000")
   expect_equal(qq2uu("zone.zone.__________________"),
