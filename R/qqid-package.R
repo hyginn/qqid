@@ -1,0 +1,68 @@
+# qqid-package.R
+
+#' qqid-pckage
+#'
+#' @section RNG safe:
+#'   Care has been taken that the \code{qqid} functions have
+#'   little risk of inadvertently changing the RNG's global initialization state
+#'   \code{.Random.seed}. Your random-reproducible simulation should not be
+#'   affected if you generate a few QQIDs in-between.
+#'
+#' @references
+#'   See the qqid package \code{README} on GitHub for more Details.
+#' @seealso
+#' \code{\link[qrandom]{qrandom::qQQID}}
+#' @keywords  internal
+#' @alias qqid-package
+#' @alias qqid
+#' @title QQIDs - a human-compatible representation of 128-bit numbers}
+#'
+#' @examples{
+#'   # Use rngQQID() to get a few QQIDS with R's internal RNG
+#'   rngQQID(7, method = "R")
+#'
+#'   # That's fine, but it's better to initialize the RNG with a true-random
+#'   # number. You need to be connected to the Internet ...
+#'   \dontrun{
+#'     rngQQID(7, method = "q")
+#'     # ... of course you won't really notice
+#'     # the difference. Except that it takes a
+#'     # few seconds to fetch the random seed from
+#'     # the quantum-random number server at the
+#'     # Australian National University in Canberra
+#'   }
+#'
+#'   # The best way is to fetch a block of  true-random numbers from the ANU
+#'   # in Canberra and to cache them in a closure...
+#'
+#'   \dontrun{
+#'     qQQID <- qQQIDfactory()   # takes a few seconds to fabricate the closure
+#'
+#'     # then, getting QQIDs works without latency
+#'     qQQID(1)
+#'     qQQID(1)
+#'     qQQID(2)
+#'     qQQID(3)
+#'     qQQID(5)
+#'     qQQID(8)
+#'
+#'     # if you are curious, you can peek what's next in the cache...
+#'     qQQID(5, inspectOnly = TRUE)
+#'     # (the numbers are not returned, only
+#'     #  message()'d so you can't accidentally
+#'     #  assign them)
+#'
+#'     # ... and then retrieve some of those numbers
+#'     qQQID(2)
+#'
+#'     # of course, these two are now no longer on the cache.
+#'     qQQID(5, inspectOnly = TRUE)
+#'
+#'     # Now, you have just looked at a dozen of 128-bit random numbers, and had
+#'     # no trouble figuring out which ones were the same, and which ones were
+#'     # different. That's the point of QQIDs.
+#'   }
+#' }
+"_PACKAGE"
+
+# [END]
