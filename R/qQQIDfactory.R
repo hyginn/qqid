@@ -115,10 +115,11 @@
 #'  established and the initial cache cannot be filled, \code{qQQIDfactory}
 #'  returns \code{NULL} invisibly.
 #'
-#'@author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
-#'
 #'@seealso \code{\link[=rngQQID]{rngQQID()}} to generate QQIDs via the inbuilt
 #'  RNG.
+#'
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
 #'
 #' @examples
 #' \dontrun{

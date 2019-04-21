@@ -1,5 +1,8 @@
 # qMod.R
 
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
+#'
 # util to create new code for the Q-list in case we need to replace words.
 # Possible replacements:
 spares <- c("bide",

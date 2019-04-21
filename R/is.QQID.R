@@ -24,10 +24,11 @@
 #' @return (logical) a vector of the same length as the input, \code{TRUE} for
 #'   every element  of the input that is a valid QQID.
 #'
-#' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
-#'
 #' @seealso \code{\link[=is.xlt]{is.xlt()}} to check UUIDs, MD5s, IPv6 addresses
 #'   and other hexlets.
+#'
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
 #'
 #' @examples
 #' # check one invalid QQID

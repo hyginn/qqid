@@ -101,5 +101,6 @@ xlt2qq( xltIDexample(1:5) ) == QQIDexample(1:4)  # TRUE TRUE TRUE TRUE TRUE
 \code{\link[=qq2uu]{qq2uu()}} to convert a vector of QQIDs to UUIDs.
 }
 \author{
-\href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
+(c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+licensed under MIT (see file \code{LICENSE} in this package).
 }

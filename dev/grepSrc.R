@@ -25,7 +25,8 @@
 #' @return NULL (invisible). Invoked for the side-effect of printing a report
 #'                           to console.
 #'
-#' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
 #'
 #' @examples
 #' # Find all occurrences of a variable named "var" -  i.e. the string "var"

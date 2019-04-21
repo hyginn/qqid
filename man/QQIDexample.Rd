@@ -38,5 +38,6 @@ QQIDexample() == xlt2qq(xltIDexample())        # TRUE TRUE TRUE TRUE TRUE
   as Md5, hex-number, UUID, and IPv6.
 }
 \author{
-\href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
+(c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+licensed under MIT (see file \code{LICENSE} in this package).
 }

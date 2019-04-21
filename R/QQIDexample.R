@@ -16,10 +16,11 @@
 #' @param sel (numeric, or logical) a subsetting vector
 #' @return (character) a vector of QQIDs
 #'
-#' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
-#'
 #' @seealso \code{\link[=xltIDexample]{xltIDexample()}} Returns five 128-bit "hexlets", formatted
 #'   as Md5, hex-number, UUID, and IPv6.
+#'
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
 #'
 #' @examples
 #' QQIDexample()                                  # the five stored QQIDs

@@ -26,10 +26,11 @@
 #' @param qq (character) a vector of QQIDs
 #' @return (character)  a vector of UUIDs
 #'
-#' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
-#'
 #' @seealso \code{\link[=xlt2qq]{xlt2qq()}} to convert a vector of UUIDs, IPv6
 #'   addresses or other hexlets to QQIDs.
+#'
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
 #'
 #' @examples
 #' # Convert three example QQIDs and one NA to the corresponding UUIDs

@@ -63,11 +63,13 @@
 #'
 #' @param xlt (character) a vector of UUIDs, MD5 hashes, IPv6 addresses, or
 #'   generally 32 digit hexadecimal numbers
+#'
 #' @return (character)  a vector of QQIDs
 #'
-#' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
-#'
 #' @seealso \code{\link[=qq2uu]{qq2uu()}} to convert a vector of QQIDs to UUIDs.
+#'
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
 #'
 #' @examples
 #' # Convert three example UUIDs and one NA to the corresponding QQIDs

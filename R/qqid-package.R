@@ -7,6 +7,9 @@
 #'   initialization state \code{.Random.seed}. Your random-reproducible
 #'   simulation should not be affected if you generate a few QQIDs in-between.
 #'
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
+#'
 #' @references See the
 #'   \href{http://hyginn.github.io/qqid/}{\code{qqid} README
 #'   on the Web} for more Details.
@@ -61,6 +64,7 @@
 #'     # different. That's the point of QQIDs.
 #'   }
 #'
+
 "_PACKAGE"
 
 # [END]

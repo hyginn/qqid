@@ -22,6 +22,9 @@
 #'
 #' @seealso \code{\link[=QQIDexample]{QQIDexample()}} Returns five QQIDs
 #'
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
+#'
 #' @examples
 #' xltIDexample()                                  # the five stored hexlets
 #' xltIDexample(2:3)                               # a hex number and a UUID

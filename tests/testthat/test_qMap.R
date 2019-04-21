@@ -1,5 +1,7 @@
-#test_qMap.R
-# Author: Boris Steipe <https://orcid.org/0000-0002-1134-6758>
+# test_qMap.R
+#
+# (c) 2019 Boris Steipe <https://orcid.org/0000-0002-1134-6758>
+#          licensed under MIT (see file ./LICENSE).
 #
 context("qMap")
 

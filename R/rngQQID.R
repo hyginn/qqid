@@ -31,9 +31,9 @@
 #'  10^{18}}{=~ 2.7e+18} keys, and this is the same at all times, regardless of
 #'  the state of the requesting machine. Thus unless throughput of keys is a
 #'  critical concern, it is advisable to use true random QQIDs from a
-#'  \code{qQQIDfactory} closure over those returned by a \code{\link[=rngQQID]{rngQQID()}}
-#'  process, or at least to initialize the RNG with a true random seed (method "q", the
-#'  default option for \code{rngQQID}).
+#'  \code{qQQIDfactory} closure over those returned by a
+#'  \code{\link[=rngQQID]{rngQQID()}} process, or at least to initialize the RNG
+#'  with a true random seed (method "q", the default option for \code{rngQQID}).
 #'
 #'@section 128 vs. 122 bit random:  By default, QQIDs produced with
 #'  \code{rngQQID()} can be converted to
@@ -50,16 +50,16 @@
 #'  The default method is \code{"q"} and uses a true random seed retrieved from
 #'  the ANU quantum random number server. An alternative method is \code{"r"},
 #'  which uses R's inbuilt random initialization (cf. the behaviour of
-#'  \code{set.seed(NULL)} in the \link[=set.seed]{set.seed()} documentation). Finally, the
-#'  function can be run without a random seed with \code{"n"}, which allows
-#'  either to define one's own sane RNG initialization, or use a specific seed
-#'  for reproducible randomization - assuming that the risks are clearly
-#'  understood. In all cases, the current state of R's RNG is saved and restored
-#'  upon exit, even if the function exits with an error. For testing purposes,
-#'  saving the RNG state can be demonstrated with method \code{"t"} which does
-#'  not change the global random seed, creates exactly one random 128-bit number
-#'  internally, and then throws an error to exit the function which should
-#'  restore \code{.Random.seed}.
+#'  \code{set.seed(NULL)} in the \link[=set.seed]{set.seed()} documentation).
+#'  Finally, the function can be run without a random seed with \code{"n"},
+#'  which allows either to define one's own sane RNG initialization, or use a
+#'  specific seed for reproducible randomization - assuming that the risks are
+#'  clearly understood. In all cases, the current state of R's RNG is saved and
+#'  restored upon exit, even if the function exits with an error. For testing
+#'  purposes, saving the RNG state can be demonstrated with method \code{"t"}
+#'  which does not change the global random seed, creates exactly one random
+#'  128-bit number internally, and then throws an error to exit the function
+#'  which should restore \code{.Random.seed}.
 #'
 #'@section Warning - parallelization: If you are executing code in parallel on
 #'  separate processors, you must make sure that every task uses its own,
@@ -87,11 +87,11 @@
 #'
 #'@return (character) a vector of \code{n} QQIDs
 #'
-#'@author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
-#'
 #'@seealso \code{\link[=qQQIDfactory]{qQQIDfactory()}} to create a closure that
-#'  returns cached,
-#'  true random QQIDs.
+#'  returns cached, true random QQIDs.
+#'
+#' @author (c) 2019 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe},
+#' licensed under MIT (see file \code{LICENSE} in this package).
 #'
 #' @examples
 #' \dontrun{
