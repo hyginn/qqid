@@ -6,20 +6,23 @@
 \alias{qqid-package}
 \title{QQIDs - human-compatible representation of 128-bit numbers}
 \description{
-QQIDs are a representation of 128-bit numbers constructed
-             from two "cues" of short, common, English words, and Base64
-             encoded characters. Their primary intended use is for random
-             unique identifiers, e.g. database keys, like RFC 4122 UUIDs.
-             QQIDs can be identically interconverted with UUIDs, IPv6
-             addresses, MD5 hashes etc., and are suitable for a host of
-             applications in which identifiers are read by humans. They
-             are compact, can safely be transmitted in binary and text
-             form, are useable in URLs, and it can be established at a
-             glance whether two QQIDs are different or potentially
-             identical. The qqid package contains functions to generate
-             true random and pseudo-random QQIDs, to validate them, and
-             to interconvert them with other 128-bit number representations.
-             An example QQID is bird.carp.7TsBWtwqtKAeCTNk8f .
+The string "bird.carp.7TsBWtwqtKAeCTNk8f" is a "QQID":
+             a representation of a 128-bit number, constructed
+             from two "cues" of short, common, English words, and
+             Base64 encoded characters.  The primary intended use of
+             QQIDs is as random unique identifiers, e.g. database
+             keys like the "UUIDs" defined in the RFC 4122 Internet
+             standard.  QQIDs can be identically interconverted with
+             UUIDs, IPv6 addresses, MD5 hashes etc., and are suitable
+             for a host of applications in which identifiers are read
+             by humans.   They are compact, can safely be transmitted
+             in binary and text form, can be used as components of
+             URLs, and it can be established at a glance whether two
+             QQIDs are different or potentially identical.  The qqid
+             package contains functions to retrieve true, quantum-random
+             QQIDs, to generate pseudo- random QQIDs, to validate
+             them, and to interconvert them with other 128-bit number
+             representations.
 }
 \section{RNG safe}{
  Care has been taken to ensure that the \code{qqid}
