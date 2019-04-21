@@ -26,10 +26,21 @@ test_that("If .Random.seed does not exist, rngQQID creates, then removes it.", {
   expect_false(exists(".Random.seed", envir = .GlobalEnv))
 })
 
-set.seed(112358) # set working RNG state
+set.seed(112358) # generate three markers for global env RNG State
 rngReference <- sample.int(.Machine$integer.max, 3)
 
-set.seed(112358) # repeat working RNG state
+set.seed(112358) # generate 122 bit Reference State QQID
+sample.int(.Machine$integer.max, 1) # advance working RNG by one
+QQIDrefs <- rngQQID(n = 1, method = "n")
+sample.int(.Machine$integer.max, 1) # advance working RNG by one
+QQIDrefs[2] <- rngQQID(n = 1, method = "n")
+
+set.seed(112358) # generate 128 bit Reference State QQID
+sample.int(.Machine$integer.max, 1) # advance working RNG state
+QQIDrefs[3] <- rngQQID(n = 1, method = "n", RFC4122compliant = FALSE)
+names(QQIDrefs) <- c("122bit", "No.2", "128bit")
+
+set.seed(112358) # reset RNG reference state
 
 test_that("the global RNG state is as expected",  {
   expect_equal(sample.int(.Machine$integer.max, 1), rngReference[1])
@@ -49,26 +60,26 @@ test_that("NULL returns NULL",  {
 # There is no reasonable test for the true random seed
 test_that("valid numeric input produces the expected output",  {
   expect_equal(rngQQID(n = 1, method = "n"),
-               "wolf.pail.jW_nrfROUrepp4nfsR")
+               as.vector(QQIDrefs["122bit"]))
   expect_equal(rngQQID(n = 1, method = "n"),   # same result again since we are
-               "wolf.pail.jW_nrfROUrepp4nfsR") # resetting the RNG
+               as.vector(QQIDrefs["122bit"]))  # resetting the RNG
   expect_equal(rngQQID(n = 1, method = "n", RFC4122compliant = FALSE),
-               "wolf.pail.jW_nrfR-Qrepp4nfsR") # similar but different
-               #                 ^^
+               as.vector(QQIDrefs["128bit"]))  # similar but different
 })
 
 test_that("the RNG state is properly restored after internal reset",  {
   expect_false(rngQQID(n = 1, method = "R") ==
-               "wolf.pail.jW_nrfROUrepp4nfsR") # this time it's different
+                 as.vector(QQIDrefs["122bit"])) # this time it's different
   test_that("the global RNG state has not been changed by our tests",  {
     expect_equal(sample.int(.Machine$integer.max, 1), rngReference[2])
   })
 })
 
 test_that("the RNG state is properly restored on error",  {
-  expect_error(rngQQID(n = 1, method = "t"), "when.drug.Gt_PW-hMlW9TTxO_Yj")
-  expect_equal(rngQQID(n = 1, method = "n"),   # same result - the RNG state
-               "when.drug.Gt_PW-hMlW9TTxO_Yj") # should be unchanged
+  expect_error(rngQQID(n = 1, method = "t"),
+               as.vector(QQIDrefs["No.2"]))
+  expect_equal(rngQQID(n = 1, method = "n"),  # same result - the RNG state
+               as.vector(QQIDrefs["No.2"]))   # should be unchanged by the error
 })
 
 test_that("the global RNG state has not been changed by our tests",  {
