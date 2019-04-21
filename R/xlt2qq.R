@@ -19,17 +19,19 @@
 #'   and the remainder to a string of 18 Base64 encoded characters. The
 #'   "Q-words" - the letter Q evokes the word "cue" i.e. a hint or mnemonic -
 #'   define a unique and invertible mapping to 2^10 integers (0, 1023). Thus two
-#'   Q-words can encode 20 bits, or 5 hexadecimal letters: \preformatted{
-#'
-#'   [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f] hex:  |--0x[1]--|
-#'   |--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--| bit:  00 00 00 00 00 00 00
-#'   00 00 00 00 00 00 00 00 00 00 00 00 00 ... int:
-#'   |----------int[1]-----------| |----------int[2]-----------| (0, 1023) (0,
-#'   1023) Q:          (aims, ..., zone)     .       (aims, ..., zone) .
-#'   Base64...
-#'
+#'   Q-words can encode 20 bits, or 5 hexadecimal letters:
+
+#'   \preformatted{
+#'.
+#'.          [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]
+#'.  hex:  |--0x[1]--| |--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--|
+#'.  bit:  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+#'.        |----------int[1]-----------| |----------int[2]-----------|
+#'.  int:            (0, 1023)                      (0,1023)
+#'.    Q:      (aims, ..., zone)     .       (aims, ..., zone)     .   Base64...
+#'.
 #'   }
-#'
+
 #' @section Process: Input strings are first converted to plain hexadecimal
 #'   strings. A leading "0x" is deleted, the "-" and ":" separators of UUIDs and
 #'   IPv6 addresses respectively are deleted, and all letters are converted to
@@ -37,10 +39,10 @@
 #'   hexadecimal \code{"[0-9a-f]\{32\}"} string. The first five hexadecimal
 #'   letters are interpreted as two ten bit numbers, and mapped as indices into
 #'   the 1024-element Q-Word vector. The QQID has two Q-words as a head
-#'   representing digits 1:5 of the input, and the 18 Base64 encoded digits
-#'   6:32 of the input as its tail. Since the mapping is fully reversible, QQIDs
-#'   have exactly the same statistical properties as the input. For details on
-#'   QQID format see \code{\link[=is.QQID]{is.QQID()}}.
+#'   representing digits 1:5 of the input, and the 18 Base64 encoded digits 6:32
+#'   of the input as its tail. Since the mapping is fully reversible, QQIDs have
+#'   exactly the same statistical properties as the input. For details on QQID
+#'   format see \code{\link[=is.QQID]{is.QQID()}}.
 #'
 #' @section Input formats: A hexlet comprises 16 octets and is written in the
 #'   hexadecimal numeral convention. A canonical MD5 hash is such a string of 32
@@ -65,7 +67,7 @@
 #'
 #' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
 #'
-#' @seealso \code{\link[=qq2uu()]{qq2uu}} to convert a vector of QQIDs to UUIDs.
+#' @seealso \code{\link[=qq2uu]{qq2uu()}} to convert a vector of QQIDs to UUIDs.
 #'
 #' @examples
 #' # Convert three example UUIDs and one NA to the corresponding QQIDs
@@ -81,7 +83,7 @@
 #' myID == qq2uu(xlt2qq(myID))   # TRUE
 #'
 #' # Confirm that the example hexlets are converted correctly
-#' xlt2qq( xltIDExample(1:5) ) == QQIDexample(1:4)  # TRUE TRUE TRUE TRUE TRUE
+#' xlt2qq( xltIDexample(1:5) ) == QQIDexample(1:4)  # TRUE TRUE TRUE TRUE TRUE
 #'
 #' @export
 
