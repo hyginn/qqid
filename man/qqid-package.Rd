@@ -77,7 +77,7 @@ QQIDs are a representation of 128-bit numbers constructed
 }
 \references{
 See the
-  \href{https://rawgit.com/hyginn/qqid/html/README.html}{\code{qqid} README
+  \href{http://hyginn.github.io/qqid/}{\code{qqid} README
   on the Web} for more Details.
 }
 \seealso{

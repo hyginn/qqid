@@ -2,7 +2,6 @@
 output: 
   html_document: 
     smart: no
-    toc: yes
     toc_depth: 2
 ---
 # qqid
@@ -59,7 +58,7 @@ To use many QQIDs all at once, use `rngQQID(n)`. This will take a few seconds to
 
 ## 1.1 Random unique identifiers and UUIDs
 
-There are many uses for 128-bit numbers (or _"hexlets"_), IPv6 addresses for example, or Md5 hashes. But the design use case for QQIDs is for _random unique identifiers_, and in that respect QQIDs are similar to ["UUID"s (Universally Unique ID)](https://en.wikipedia.org/wiki/Universally_unique_identifier) - which are a popular type of random unique identifier that is in widespread use.
+There are many uses for 128-bit numbers (or _"hexlets"_), IPv6 addresses for example, or Md5 hashes. But the design use case for QQIDs is for _random unique identifiers_, and in that respect QQIDs are similar to ["UUID"s (Universally Unique ID)](https://en.wikipedia.org/wiki/Universally_unique_identifier) - a popular type of random unique identifier that is in widespread use.
 
 Random unique identifiers are great wherever unique IDs are needed and we have little or no control over who creates them. A typical use case might be to manage observations by a loosely knit group of researchers who contribute data to a common project. The IDs they use on their local machines be preserved once the observations are uploaded, so that they can stably cross-reference them with their notes - but we don't know who the contributors are so we can't provide them with dedicated ranges of identifiers, or they might contribute only intermittently, and for us to administer contributor-specific ID prefixes would become a significant effort. However, it still must be guaranteed that **every key is unique**. Random unique identifiers solve this problem by drawing IDs randomly from a very large space of numbers. This means: it is _possible_ that two such IDs could collide by chance. But in practice, since e.g. a random UUID - is drawn from 2<sup>122</sup> numbers, the chance of observing the same number again is 1 / 5.3e36 - and that is less than winning the 6 of 49 lottery **five times in a row**.  
 
