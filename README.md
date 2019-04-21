@@ -24,26 +24,50 @@ unique numbers that can be produced in this format. That's ~3 x 10<sup>38</sup>,
 
 # 1 Overview:
 
-QQIDs are a special way to format [128-bit numbers](https://en.wikipedia.org/wiki/128-bit) constructed from two "cues" of short, common, English words, and Base64 encoded characters. Like RFC 4122 UUIDs, with which they can be identically interconverted, QQIDs are suitable as random unique identifiers for use as database keys and in a host of other applications. However they are more compact than UUIDs and it can be established at a  glance whether two keys are different or potentially identical. The `qqid` package contains functions to generate true random and pseudo-random QQIDs, to validate them, and to interconvert them with other 128-bit number representations. 
+_QQIDs_ are a representation of [128-bit](https://en.wikipedia.org/wiki/128-bit) numbers constructed from two "cues" of short, common, English words, and [`Base64`](https://en.wikipedia.org/wiki/Base64) encoded characters. Their primary intended use is for random unique identifiers, e.g. database keys, like [`RFC 4122 UUIDs`](https://tools.ietf.org/html/rfc4122). _QQIDs_ can be identically interconverted with [_UUIDs_](https://en.wikipedia.org/wiki/Universally_unique_identifier), [_IPv6_](https://en.wikipedia.org/wiki/IPv6) addresses, [_MD5_](https://en.wikipedia.org/wiki/MD5) hashes etc., and are suitable for a host of applications in which identifiers are read by humans. They are compact, can safely be transmitted in binary and text form, are useable in [_URLs_](https://en.wikipedia.org/wiki/URL), and it can be established at a glance whether two _QQIDs_ are different or potentially identical. The [`qqid` package](https://github.com/hyginn/qqid) contains functions to generate true random and pseudo-random _QQIDs_, to validate them, and to interconvert them with other 128-bit number representations. 
+
+## 1.1 Redux of use
+
+To use between 1 and ~ 1000 QQIDs at a time, create a closure, possibly in your `.Rprofile` session initialization:
+
+```R
+qQQID <- qQQIDfactory()
+```
+Creating the closure and filling its cache with random numbers from the quantum random server at ANU takes a few seconds. After that, QQID keys are quickly available.
+
+```R
+qQQID(3)
+
+# Conceptually ...
+N <- length(myFancyData)
+myDat = data.frame(ID = qQQID(N),
+                   dat = myFancyData,
+                   stringsAsFactors = FALSE)
+
+```
+
+To use many QQIDs all at once, use `rngQQID(n)`. This will take a few seconds to get a seed from the quantum-fluctuation randomness server at the Australian National University (ANU) in Canberra. But you can then generate many sane IDs in a short time. A million? Yes, takes a bit over two minutes. See the examples in the validation section below. 
 
 &nbsp;
 
 ## 1.1 Random unique identifiers and UUIDs
 
-Random unique identifiers are great wherever unique identifiers are needed and we have little or no control over who creates them. A typical use case might be to manage observations by a loosely knit group of researchers who contribute data to a common project. The IDs they use locally should be preserved, so they can find them elsewhere in their notes - but we don't know who the contributors are so we can't provide them with dedicated ranges of identifiers, or they might contribute only intermittently, and administering contributor-specific key prefixes would become a significant effort. However, it must be guaranteed that **every key is unique**. Random unique identifiers solve this problem by drawing IDs randomly from a very large space of numbers. This means: in theory, two such IDs could collide by chance. But in practice, since e.g. a random UUID (Universally Unique ID) - a popular type of random unique identifiers - is drawn from 2<sup>122</sup> numbers, the chance of observing the same number again is 1 / 5.3e36 - and that is less than winning the 6 of 49 lottery **five times in a row**.  
+There are many uses for 128-bit numbers (or _"hexlets"_), IPv6 addresses for example, or Md5 hashes. But the design use case for QQIDs is for _random unique identifiers_, and in that respect QQIDs are similar to ["UUID"s (Universally Unique ID)](https://en.wikipedia.org/wiki/Universally_unique_identifier) - which are a popular type of random unique identifier that is in widespread use.
 
-UUIDs are defined in an RFC of the governing body of the Internet - [RFC 4122](https://tools.ietf.org/html/rfc4122) - and they are formatted in a characteristic way from strings of 8-4-4-4-12 hyphen-separated hexadecimal characters.
+Random unique identifiers are great wherever unique IDs are needed and we have little or no control over who creates them. A typical use case might be to manage observations by a loosely knit group of researchers who contribute data to a common project. The IDs they use on their local machines be preserved once the observations are uploaded, so that they can stably cross-reference them with their notes - but we don't know who the contributors are so we can't provide them with dedicated ranges of identifiers, or they might contribute only intermittently, and for us to administer contributor-specific ID prefixes would become a significant effort. However, it still must be guaranteed that **every key is unique**. Random unique identifiers solve this problem by drawing IDs randomly from a very large space of numbers. This means: it is _possible_ that two such IDs could collide by chance. But in practice, since e.g. a random UUID - is drawn from 2<sup>122</sup> numbers, the chance of observing the same number again is 1 / 5.3e36 - and that is less than winning the 6 of 49 lottery **five times in a row**.  
+
+UUIDs are defined in an RFC of the governing body of the Internet - [RFC 4122](https://tools.ietf.org/html/rfc4122) - and they are formatted in a characteristic way from strings of `8-4-4-4-12` hyphen-separated hexadecimal characters.
 
 ```text
 f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 ```
 (A canonical example of a UUID (from [RFC 4122](https://tools.ietf.org/html/rfc4122)).)
 
-Six bits of a UUID are reserved for embedding information about how it was constructed, these six bits are no longer random (some UUID classes have even less randomness). Therefore the number space for RFC-conformant UUIDs is 2^122, not 2^128. Of course, you are not prevented from just using fully-random 128-bit numbers, and all such numbers can be translated into valid QQIDs. But strictly speaking, even though you can encode such a number in hexadecimal characters and add the correct pattern of hyphens, you might not want to call that a UUID anymore. Does it matter? Not until it did and something breaks. Other than that, UUIDs are a perfectly sane approach to representing 128-bit numbers and to share them across a wide variety of media, applications and channels.
+Six bits of a UUID are reserved for embedding information about how it was constructed, these six bits are no longer random (some UUID classes have even less randomness). Therefore the number space for RFC-conformant UUIDs is 2<sup>122</sup>, not 2<sup>128</sup>. Of course, you are not prevented from just using fully-random 128-bit numbers, and all such numbers can be translated into valid QQIDs (in fact `rngQQID()` explicitly provides that option). But strictly speaking, even though you can encode such a number in hexadecimal characters and add the correct pattern of hyphens, you might not want to call that a UUID anymore. Does it matter? Not until it did and something breaks. Other than that, UUIDs are a perfectly sane approach to representing 128-bit numbers and to share them across a wide variety of media, applications and channels.
 
-There are several possible sources for UUIDs: Simon Urbanek's R-package [**UUID**](https://CRAN.R-project.org/package=uuid) provides pseudo-random UUIDs with the `UUIDgenerate()` function. This is convenient, but can be compromised by a poorly initialized random number generator. UUIDs are generated one at a time. Siegfried Köstlmeier's [**qrandom**](https://CRAN.R-project.org/package=qrandom) package includes the `qUUID()` function that queries the API of the [QRNG](https://qrng.anu.edu.au/API/api-demo.php) server in Canberra, Australia, which provides high-bandwidth true random numbers from measurements of quantum fluctuations of the vacuum, to generate true random UUIDs that conform to [RFC 4122](https://tools.ietf.org/html/rfc4122). UUIDs are returned in batches of up to 1023 numbers and that can incur significant latency. The `qqid` package has tools to retrieve UUIDs from an internal cache, and also to generate any number of UUIDs from the internal RNG.
+There are several convenient sources for UUIDs in R: Simon Urbanek's [**uuid** package](https://CRAN.R-project.org/package=uuid) provides pseudo-random UUIDs with the `UUIDgenerate()` function. This is convenient, but can be compromised by a poorly initialized random number generator; those UUIDs are generated one at a time. Siegfried Köstlmeier's [**qrandom** package](https://CRAN.R-project.org/package=qrandom) includes the `qUUID()` function that queries the API of the [QRNG](https://qrng.anu.edu.au/API/api-demo.php) server in Canberra, Australia, from where it retrieves high-bandwidth, true random numbers from measurements of quantum fluctuations of the vacuum. Those are true random UUIDs that conform to [RFC 4122](https://tools.ietf.org/html/rfc4122) - and as long as quantum randomness is not exhausted, those will not recur. As an aside, qUUIDs are returned in batches of up to 1023 numbers and that can incur significant latency. The `qqid` package has a closure generator `qQQIDfactory()`, which returns QQIDs conveniently from a cache, and `rngQQID()` can generate any number of UUIDs from the internal RNG using a sane random seed strategy.
 
-We do have perfectly sane ways to generate UUIDs as random unique identifiers.
+Bottom line: there already exist perfectly sane ways to generate UUIDs as random unique identifiers.
 
 &nbsp;
 
@@ -51,7 +75,7 @@ We do have perfectly sane ways to generate UUIDs as random unique identifiers.
 
 So, what is the problem that QQIDs address?
 
-While UUIDs are an excellent technical solution for the internals of data management systems, they are not exactly easy to distinguish by eye.
+While UUIDs are an excellent technical solution for the internals of data management systems, they are hard to distinguish by eye.
 
 ```text
     b62f0fae-4445-8a82-9841-ba0715ded850
@@ -66,7 +90,7 @@ While UUIDs are an excellent technical solution for the internals of data manage
     c59db976-e141-3d32-db89-cc071401fe8d
 ```
 
-Practice shows that when we put them into spreadsheets during data entry, or need to tell them apart during testing and debugging of analysis code, it is surprisingly useful to be able to tell UUIDs apart by actually looking at them. UUIDs are also quite long and this may make them awkward to manage in tables, or reports.
+Practice shows that when we put them into spreadsheets during data entry, or need to tell them apart during testing and debugging of analysis code, it is surprisingly useful to be able to tell UUIDs apart by actually looking at them. UUIDs are also quite long and this may make them awkward to manage in tables, or reports. Curiously, the very existence of hyphens in UUIDs (or colons in IPv6 addresses) shows that the format was specified with consideration for human readability. Yet such readability can be much improved.
 
 &nbsp;
 
@@ -82,7 +106,7 @@ QQIDs are a formatted variant of 128-bit numbers. A QQID converts the first 20 b
 
 ```
 
-Taken by themselves, there are only on the order of 10<sup>6</sup> possible combinations of the Q-words. But we are not replacing the 128-bit number, we are just representing its first twenty bits differently, and none of the randomness gets lost. IDs that begin with different words are necessarily different. IDs that begin with the same words could be different - one needs to consider the rest of the ID. However the likelihood of them being different is small enough for any use case in which we ourselves would be looking at QQIDs; reasonably that would limit the number to, say, 1,000 IDs, and a thousand doublets of Q-words have a collision probability of less than 0.4 .
+Taken by themselves, there are only on the order of 10<sup>6</sup> possible combinations of the Q-words. But we are not replacing the 128-bit number, we are just representing its first twenty bits differently, and none of the randomness gets lost. IDs that begin with different words are necessarily different. IDs that begin with the same words could be different - one needs to consider the rest of the ID. However the likelihood of them having the same QQ head while actually having a different tail is small enough for any use case in which we would actually be looking at QQIDs with our own eyes; reasonably that would limit the number to, say, 1,000 IDs, and a thousand doublets of Q-words have a collision probability of less than 0.4 .
 
 ```R
 R > stats::pbirthday(n = 1000, classes = 1024^2, coincident = 2)
@@ -107,9 +131,9 @@ Even though the words are random, the labels makes QQIDs easily distinguishable.
 
 Quiz: look at these ten numbers. Have you seen any of them before? Exactly! Hello again, _bird carp_.
 
-The remaining 108 bits are simply converted to 18 groups of 6-bit patterns, and these are encoded in a standard [Base64](https://en.wikipedia.org/wiki/Base64) encoding.
+The remaining 108 bits are simply converted to 18 groups of 6-bit patterns, i.e. "octlets", and these are encoded in a standard [Base64](https://en.wikipedia.org/wiki/Base64) encoding.
 
-The nice thing here is that any UUID can be uniquely represented as a QQID, and uniquely recovered from that representation. QQIDs are fully backwards compatible with UUIDs, and by default the tools of the `qqid` package construct them to be forward compatible as well: unless explicitly instructed to disregard RFC 4122 compliance, a QQID can be converted into a valid UUID. 
+The nice thing here is that any UUID can be uniquely represented as a QQID, and uniquely recovered from that representation. QQIDs are fully backwards compatible with UUIDs, and by default the tools of the `qqid` package construct them to be forward compatible as well: unless explicitly instructed to disregard RFC 4122 compliance, a QQID can be converted into a valid "UUID v4". 
 
 
 <!-- Collision formula estimates 
@@ -222,26 +246,35 @@ Feature matrix of alternate 128-bit encoding schemes.
 
 &nbsp;
 
-## 1.6 verifying randomness of `rngQQID()`
+## 1.6 exploring randomness of `rngQQID()`
+
+It has been reported that applications that use UUIDs have experienced collisions. That's concerning and points to the difficulty of seeding RNGs well, in particularly from processes that only use a comparatively small initialization space - time and process ID - or worse, encode MAC addresses or timestamps in their supposedly random bits. The problem is exacerbated when processes are parallelized, and tasks take the RNG initialization state with them. That, incidentally, is a conceivable failure mode also in `qqid` applications.
+
+But what about the properties of QQIDs? 
 
 We can trust the underlying randomness of the IDs that `rngQQID()` returns to the same degree that we trust R's RNG in the first place: the  process is simply a mapping from `sample(c(0, 1), 128 * n, replace = TRUE)`. But we need to verify that the transformation is correct and we can check that indeed no collisions have occurred. 
 
 ```R
 # one million QQIDs
-set.seed(qrandom::qrandommaxint())              # initialize RNG with sane seed 
-system.time(x1 <- rngQQID(1e6, method = "n"))   
+system.time(
+  x1 <- rngQQID(1e6)   # Default: uses a large integer seed from ANU 
+)   
    user  system elapsed 
 144.137   2.225 146.672 
 
-# Repeat: another milion for a total of 2e06 QQIDs from two independent runs
-set.seed(qrandom::qrandommaxint())  # reinitialize
+# Repeat: another milion for a total of 2e06 QQIDs from two independent runs.
+# For demonstration, we fetch a reasonably sane seed fom ANU, set the RNG
+# outside of the function and then churn away. Note: this is method "n" -
+# "NO change of the existing .Random.seed . That's fast, but 
+set.seed(qrandom::qrandommaxint())  # quantum random seed
 system.time(x2 <- rngQQID(1e6, method = "n"))   # one more million QQIDs
    user  system elapsed 
-157.698   2.476 160.494 
-R > system.time(print(any(duplicated(c(x1, x2)))))  # any collisionsn?
+145.200   2.501 150.353  
+R > system.time(print(any(duplicated(c(x1, x2)))))  # any collisions?
 [1] FALSE                                           #  :-)
    user  system elapsed 
-  0.125   0.003   0.129 
+  0.137   0.011   0.148 
+  
 ```
 
 Explore the distribution of encoding characters:
@@ -278,19 +311,19 @@ barplot(sort(myTab),
 
 The barplot shows that classes of characters have discretely different frequencies. The reason for this is immediately obvious: QQIDs that are created to be convertible to RFC 4122 compliant UUIDs have six non-random bits, and those are not aligned with the encoding character boundaries. Since the distribution of the underlying 128-bit patterns is not uniformly random, neither is the distribution of the encoding characters. However the distribution of numbers that underlie our QQIDs is just as random as 2^122 bits suggests.
 
-But let's repeat the process with fully random 128-bit numbers:
+Let's repeat the process with fully random 128-bit numbers:
 
 ```R
 # repeat with fully random QQIDs (RFC4122compliant = FALSE)
 set.seed(qrandom::qrandommaxint())
 system.time(x3 <- rngQQID(1e6, method = "n", RFC4122compliant = FALSE))
    user  system elapsed 
-167.556   2.843 170.983 
+162.261   2.765 165.781 
 
 set.seed(qrandom::qrandommaxint())
 system.time(x4 <- rngQQID(1e6, method = "n", RFC4122compliant = FALSE))
    user  system elapsed 
-184.451   4.383 190.462 
+157.720   2.333 160.218 
 
 system.time(myRTab <- table(unlist(strsplit(substr(c(x3,x4), 11, 28), ""))))
    user  system elapsed 
@@ -368,6 +401,56 @@ Counts for 4 runs of 2e+06 Q-words, ranked by count from 1 to 1024 show no appar
 In summary: we appear to be rolling a fair die when we construct QQIDs, and we appear to
 interpret the underlying large numbers in an unbiased way.
 
+## Issues with setting `.Random.seed`, or not ...
+
+```R
+# Here's an aside: in order to play nice with other applications, rngQQID() does
+# NOT change the global .Random.seed, but resets it to the state it was found
+# in. However this means, if you generate the same number of QQIDs again
+# WITHOUT making a new seed, you'll be creating the exact same binary matrix
+# that you had before, and your new QQIDs WILL be the exact same numbers we had
+# before. Seriously ! The good news is that that's easy to spot - just compare
+# the head() of the vector.
+
+
+set.seed(qrandom::qrandommaxint())      # set a quantum random seed
+myIDs <- rngQQID(1e4, method = "n")     # generate a few thousand QQIDs
+head(myIDs)                             # inspect them
+                                        # repeat WITHOUT a new seed
+rngQQID(6, method = "n")                # Whoa! Exactly the same QQIDs again ...
+rngQQID(6, method = "n")                # ... and again.
+
+rngQQID(6, method = "R")   # Use R's initialization: internally set.seed(NULL).
+rngQQID(6, method = "n")   # ... but "n" gives us the same IDs as before.
+```
+
+Bottom line: try not to use method `"n"` unless understand it. When you do,
+you **MUST** set a sane seed before each run. But why are we doing this 
+in the first place? Why can't we just reset the seed every time? The reason
+is that `.Random.seed` is a global parameter, and unless it is explicitly 
+asked to do so, a function should never change global parameters. Here's how
+this is good:
+
+```R
+
+                 #                  We set up a reproducible computational 
+set.seed(112358) #                  experiment, ...
+runif(1)         # [1] 0.3187551    that involves getting a random number ...
+runif(1)         # [1] 0.7404076    and another one.
+
+# Next we do the same thing, but this time we generate a QQID between the two
+# calls to runif(). Method "R" resets .Random.seed inside the function.
+
+set.seed(112358)
+runif(1)                  # [1] 0.3187551   As expected, same as above ...
+rngQQID(1, method = "R")  # [1] "lute.most.Zg21LpZDlBQ88ivU-c"
+rngQQID(1, method = "R")  # [1] "west.harm.sqLGZgdM0ZdCcrmED-"    Different!
+runif(1)                  # [1] 0.7404076   That's what we had before!
+
+# Since we put everything back in its place when we exited rngQQID(),
+# the second number is still reproducible!
+```
+
 &nbsp;
 
 ----
@@ -382,30 +465,44 @@ The following functions are included in the `qqid` package:
 
 ## 2.1 `qQQIDfactory()`
 
-`qQQIDfactory` returns a closure (a function with an associated environment) that retrieves, caches, and returns true random QQIDs.
+`qQQIDfactory` returns a closure (a function with an associated environment) that retrieves, caches, and returns true random QQIDs from the quantum-random number server at ANU.
 
 &nbsp;
 
 ## 2.2 `rngQQID()`
-`rngQQID()` uses R's random number generator to generate a vector of pseudo-random QQIDs.
+`rngQQID()` uses R's random number generator to generate a vector of pseudo-random QQIDs. There are options to use a true-random seed, R's inbuilt RNG initialization, or to pass-through an external seed. The function is "RNG-safe", it does not change the global `.Random.seed`.
 
 &nbsp;
 
-## 2.3 `isValidQQID()` and `isValidUUID()`
+## 2.3 `is.QQID()` and `is.xlt()`
 
-`isValidQQID()` tests whether the function argument is a vector of valid QQIDs. `isValidUUID()` does the same for UUIDs.
-
-&nbsp;
-
-## 2.4 `uu2qq()` and `qq2uu()`
-
-`uu2qq()` converts a vector of UUIDs to QQIDs. `qq2uu()` performs the opposite operation. 
+`is.QQID()` tests whether the function argument is a vector of valid QQIDs. `is.UUID()` does the same for UUIDs, Md5 hashes, IPv6 addresses, or other 32-digit hexadecimal numbers (hexlets).
 
 &nbsp;
 
-## 2.5 `QQIDexample()` and `UUIDexample()`
+## 2.4 `xlt2qq()` and `qq2uu()`
 
-`QQIDexample()` returns synthetic, valid QQIDs for testing and development, which are easy to distinguish from "real" QQIDs to prevent their accidental use as IDs. `UUIDexample()` does the same for UUIDs.
+`xlt2qq()` converts a vector of UUIDs, Md5 hashes, IPv6 addresses, or other 32-digit hexadecimal numbers (hexlets) to QQIDs. `qq2uu()` converts QQIDs to UUIDs. 
+
+&nbsp;
+
+## 2.5 `QQIDexample()` and `xltIDexample()`
+
+`QQIDexample()` returns synthetic, valid QQIDs for testing and development, which are easy to distinguish from "real" QQIDs to prevent their accidental use as IDs. `xltIDexample()` does the same for "UUIDs"hexlets, which it presents in a named vector in different formats:
+
+```R
+xltIDexample()
+                                     md5  
+       "11111111111111111111111111111111"
+                                     hex
+     "0x22222222222222222222222222222222" 
+                                    UUID  
+   "33333333-3333-3333-3333-333333333333"
+                                    IPv6
+"4444:4444:4444:4444:4444:4444:4444:4444" 
+                                     hEx 
+     "0x55555555aaaaaaaa66666666BBBBBBBB" 
+```
 
 &nbsp;
 
@@ -415,9 +512,9 @@ The following functions are included in the `qqid` package:
 
 &nbsp;
 
-## 2.5 `b64Map()`
+## 2.5 `oltMap()`
 
-`b64Map` maps 6-character bit patterns to their corresponding Base64 characters or characters back to bit patterns.
+`oltMap` maps 6-digit bit pattern strings (octlets) to their corresponding Base64 characters, or Base64 characters 6-digit bit patterns.
 
 &nbsp;
 
@@ -428,7 +525,7 @@ The [latest development version of `qqid`](https://github.com/hyginn/qqid) is an
 * to be forked for collaboration and possible inclusion of pull-requests, and
 * to file issues. 
 
-To learn more about GRPS development (GitHub, R package, RStudio), see the template packages [`rpt`](https://github.com/hyginn/rpt) and [`rptPlus`](https://github.com/hyginn/rptPlus).
+To learn more about GRPS development (Github, R Package, rStudio), see the template packages [`rpt`](https://github.com/hyginn/rpt) and [`rptPlus`](https://github.com/hyginn/rptPlus).
 
 &nbsp;
 
@@ -436,7 +533,7 @@ To learn more about GRPS development (GitHub, R package, RStudio), see the templ
 # 5 FAQ
 
 ##### Can I edit my QQIDs? Could I create `some.fish.red_some-fish-blue`?
-Of course you can, `isValidQQID("some.fish.red_some-fish-blue")` returns `TRUE` since "some" and "fish" are Q-words and the rest are valid characters of Base64. You do realize that this is not a good random unique key - but you can use it anywhere uniqueness is not crucial  - cross-references in your lab notebook for example. The important things is, from **my** perspective, a string that you deliberately craft in any way is still just one of 3e38 numbers, and it won't interfere with my own _random_ QQIDs at all.
+Of course you can, `is.QQID("some.fish.red_some-fish-blue")` returns `TRUE` since "some" and "fish" are Q-words and the rest are valid characters of Base64. You do realize that this is not a good random unique key - but you can use it anywhere uniqueness is not crucial  - cross-references in your lab notebook for example. The important things is, from **my** perspective, a string that you deliberately craft in any way is still just one of 3e38 numbers, and it won't interfere with my own _random_ QQIDs at all.
 
 #### What if I change `bulk.skip.9zAY8L8jnyLuGYYHEq` to `this.task.9zAY8L8jnyLuGYYHEq`?
 It's actually quite harmless to hand-pick specific Q-words for some semantic purpose. You may increase Q-word collisions significantly, but that doesn't matter since a QQID's uniqueness does not come from the Q-words alone, and the remaining 18 Base64 character encode a 108-bit number which is 3.2e+32, i.e. plenty of randomness. However, encoding semantic information in unique keys is almost always a bad idea. The world changes, but our keys should remain.
@@ -445,17 +542,19 @@ It's actually quite harmless to hand-pick specific Q-words for some semantic pur
 
 # 6 Notes
 
-#### To Do
- - Travis CI would not run out of the box, since `libmpfr` could not be built. This is a `qrandom` dependency. Copied instructions from `qrandom`'s `.travis.yml`. This solved the issue. Perhaps need to follow up on this.
- - Travis CI failed during build of `qqid-manual.pdf` ... this didn't come up on local check. Why? Had to run `R CMD Rd2pdf .` to reproduce - turns out this was due to LaTeX failing on an innocuous "approximately equal" Unicode character in the doc header. Used tow inline latex equations instead. Horrible documentation. Still don't have a sane workflow to reproduce package building from RStudio and catch all errors. Need to follow up.
- - Manual shows that preformatted does not respect leading whitespace and linebreaks in uu2qq doc header when converted to pdf. Need to follow up.
+###### To Do
+ - Still need a sane workflow to reproduce package building from RStudio and catch all errors. Need to follow up. Missing: building pdf package documentation. Documentation on package build process from RStudio is not what it could be.
+ - Package documentation shows that `\preformatted{ }` does not respect leading whitespace and line breaks in `xlt2qq()` doc header when converted to pdf. Need to follow up.
+ - We could cache the first element of every run of an instance of `rngQQID()` in a session and warn about lack of sane initialization if we see repeats.
+ - More formats for `qq2 ... : should be able to get a max-integer for set.seed().
+ - Turn the RTEADME into a vignette?
  
 
 &nbsp;
 
 ## 6.1 Disclaimer and caution
 
-Although `qqid` has been written and tested with care, no suitability for any particular purpose, in particular no suitability for high-value transactions, for applications whose failure could endanger life or property, or for cryptography is claimed. The source code is published in full and it is up to the user to audit and adapt the code for their own purposes and needs.
+Although `qqid` was written and tested with care, no suitability for any particular purpose, in particular no suitability for high-value transactions, for applications whose failure could endanger life or property, or for cryptography is claimed. The source code is published in full and it is up to the user to audit and adapt the code for their own purposes and needs.
 
 &nbsp;
 
