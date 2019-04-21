@@ -5,5 +5,5 @@
 ^\.Rprofile$
 ^\.Rproj\.user$
 ^dev$
-^html$
+^docs$
 ^./inst/WORDLIST$
