@@ -554,6 +554,8 @@ It's actually quite harmless to hand-pick specific Q-words for some semantic pur
  - We could cache the first element of every run of an instance of `rngQQID()` in a session and warn about lack of sane initialization if we see repeats.
  - More formats for `qq2 ... : should be able to get a max-integer for set.seed(). Perhaps add a session startup closure that caches 1023 .Machine$integer.max
  - Turn the README into a vignette?
+ - BiocCheck: avoid `1:...` but consistently use `seq_len()`, `seq_along()` ...
+ - Consistently write function names in documentation with code and parentheses
  
 
 &nbsp;
