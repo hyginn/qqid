@@ -2,6 +2,8 @@
 ^\.appveyor\.yml$
 ^\.travis\.yml$
 ^.*\.Rproj$
+^\.Rprofile$
 ^\.Rproj\.user$
 ^dev$
+^html$
 ^./inst/WORDLIST$

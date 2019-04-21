@@ -15,11 +15,15 @@
 #'                     looking for.
 #' @param ext  (char)  a vector of regular expressions. Files with filenames
 #'                     matching any of the expressions will be included.
-#'                     Defaults to \code{c("\\.R$")}.
+#'                     Defaults to \code{c("\\.R$")}. If the word "all" is
+#'                     entered instead of a regualr expression, all files on
+#'                     the path that the system considers "text" files are
+#'                     scanned.
 #' @param paths (char) a vector of paths. Defaults to
-#'                     \code{c("./R", "./dev", "./inst/scripts", "./doc",
-#'                            "./src", "./tests/testthat")}.
-#' @return None. Invoked for the side-effect of printing a report to console.
+#'                     \code{c(".", "./R", "./dev", "./inst/scripts",
+#'                             "./doc", "./src", "./tests/testthat")}.
+#' @return NULL (invisible). Invoked for the side-effect of printing a report
+#'                           to console.
 #'
 #' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
 #'
@@ -31,10 +35,21 @@
 
 grepSrc <- function(patt,
                     ext   = c("\\.R$"),
-                    paths = c("./R", "./dev", "./inst/scripts",
+                    paths = c(".", "./R", "./dev", "./inst/scripts",
                              "./doc", "./src", "./tests/testthat")) {
 
   N <- 80  # max numbers of characters to print from matching line
+
+  checkText <- function(f) {
+    return(grepl("^.*: .+\\btext\\b", system(sprintf("file %s", f), intern = TRUE)))
+  }
+
+  grepAllText <- FALSE
+  if (ext == "all") {
+    grepAllText <- TRUE
+    ext <- "*"
+  }
+
 
   # make vector of files to process
   myFiles <- character()
@@ -44,6 +59,11 @@ grepSrc <- function(patt,
                                        pattern = myExt,
                                        full.names = TRUE))
     }
+  }
+
+  if (grepAllText) {
+    sel <- sapply(myFiles, FUN = checkText)
+    myFiles <- myFiles[sel]
   }
 
   for (myFile in myFiles) {                   # For all requested files ...
