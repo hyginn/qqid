@@ -40,7 +40,7 @@
 #' is.QQID(QQIDexample(1:2))   # TRUE  TRUE
 #'
 #' # convert a UUID and check it
-#' is.QQID(uu2qq("0c460ed3-b015-adc2-ab4a-01e093364f1f"))   # TRUE
+#' is.QQID(xlt2qq("0c460ed3-b015-adc2-ab4a-01e093364f1f"))   # TRUE
 #'
 #' # check a valid QQID, not a QQID, and an NA. Map NA to NA, not to FALSE.
 #' is.QQID(c(QQIDexample(3), "meh", NA), na.map = NA)   # TRUE  FALSE  NA

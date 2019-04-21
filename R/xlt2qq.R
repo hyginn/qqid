@@ -81,7 +81,7 @@
 #' myID == qq2uu(xlt2qq(myID))   # TRUE
 #'
 #' # Confirm that the example hexlets are converted correctly
-#' xlt2qq( xltExample(1:5) ) == QQIDexample(1:4)  # TRUE TRUE TRUE TRUE TRUE
+#' xlt2qq( xltIDExample(1:5) ) == QQIDexample(1:4)  # TRUE TRUE TRUE TRUE TRUE
 #'
 #' @export
 

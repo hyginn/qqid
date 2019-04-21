@@ -10,7 +10,7 @@
 #' specifies which QQIDs to return. More than five IDs can be requested by
 #' applying the usual subsetting rules. The QQIDs represent the exact same
 #' numbers provided by \code{\link{xltIDexample}}. However the \code{qqid}
-#' package provides only one format conversion at this time so the reverse
+#' package provides only format conversion to UUID at this time, so the reverse
 #' comparison will only succeed with \code{xltIDexample("UUID")}.
 #'
 #' @param sel (numeric, or logical) a subsetting vector
@@ -18,7 +18,8 @@
 #'
 #' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
 #'
-#' @seealso \code{\link{UUIDexample}} Returns five UUIDs
+#' @seealso \code{\link{xltIDexample}} Returns five 128-bit "hexlets", formatted
+#'   as Md5, hex-number, UUID, and IPv6.
 #'
 #' @examples
 #' QQIDexample()                                  # the five stored QQIDs
@@ -29,14 +30,14 @@
 #'
 #' @export
 
-QQIDexample <- function(idx = 1:5) {
+QQIDexample <- function(sel = 1:5) {
   myQQ <- c("bowl.foil.ERERERERERERERERER",
             "cost.mice.IiIiIiIiIiIiIiIiIi",
             "dues.soon.MzMzMzMzMzMzMzMzMz",
             "foil.bowl.RERERERERERERERERE",
             "gulf.gulf.VVqqqqqmZmZma7u7u7")
 
-  return(myQQ[idx])
+  return(myQQ[sel])
 }
 
 # [END]

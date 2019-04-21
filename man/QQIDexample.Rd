@@ -4,7 +4,7 @@
 \alias{QQIDexample}
 \title{QQIDexample}
 \usage{
-QQIDexample(idx = 1:5)
+QQIDexample(sel = 1:5)
 }
 \arguments{
 \item{sel}{(numeric, or logical) a subsetting vector}
@@ -22,7 +22,7 @@ The function stores five artificial QQIDs. Input is an index vector that
 specifies which QQIDs to return. More than five IDs can be requested by
 applying the usual subsetting rules. The QQIDs represent the exact same
 numbers provided by \code{\link{xltIDexample}}. However the \code{qqid}
-package provides only one format conversion at this time so the reverse
+package provides only format conversion to UUID at this time, so the reverse
 comparison will only succeed with \code{xltIDexample("UUID")}.
 }
 \examples{
@@ -34,7 +34,8 @@ QQIDexample() == xlt2qq(xltIDexample())        # TRUE TRUE TRUE TRUE TRUE
 
 }
 \seealso{
-\code{\link{UUIDexample}} Returns five UUIDs
+\code{\link{xltIDexample}} Returns five 128-bit "hexlets", formatted
+  as Md5, hex-number, UUID, and IPv6.
 }
 \author{
 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
