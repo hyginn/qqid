@@ -3,7 +3,7 @@
 #' is.xlt
 #'
 #' \code{is.xlt} tests whether the function argument is a vector of 32 digit
-#' hexadecimal numbers.
+#' hexadecimal numbers (a "hexlet").
 #'
 #' \code{is.xlt} accepts a vector of strings and returns a logical vector of the
 #' same length, \code{TRUE} for every element of the input that matches the
@@ -22,7 +22,7 @@
 #'
 #' @author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
 #'
-#' @seealso \code{\link{is.QQID}} to check QQIDs.
+#' @seealso \code{\link[=is.QQID]{is.QQID()}} to check QQIDs.
 #'
 #' @examples
 #' # check the example hexlet formats

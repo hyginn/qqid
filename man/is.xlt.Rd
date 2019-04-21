@@ -20,7 +20,7 @@ is.xlt(s, na.map = FALSE)
 }
 \description{
 \code{is.xlt} tests whether the function argument is a vector of 32 digit
-hexadecimal numbers.
+hexadecimal numbers (a "hexlet").
 }
 \details{
 \code{is.xlt} accepts a vector of strings and returns a logical vector of the
@@ -45,7 +45,7 @@ is.xlt(c("0c46:0ed3:b015:adc2:ab4a:01e0:9336:4f1f", # IPv6
 
 }
 \seealso{
-\code{\link{is.QQID}} to check QQIDs.
+\code{\link[=is.QQID]{is.QQID()}} to check QQIDs.
 }
 \author{
 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)

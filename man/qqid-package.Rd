@@ -4,20 +4,31 @@
 \name{qqid-package}
 \alias{qqid}
 \alias{qqid-package}
-\title{qqid: QQIDs - a human-compatible representation of 128-bit numbers}
+\title{QQIDs - human-compatible representation of 128-bit numbers}
 \description{
-qqid-pckage
+QQIDs are a representation of 128-bit numbers constructed
+             from two "cues" of short, common, English words, and Base64
+             encoded characters. Their primary intended use is for random
+             unique identifiers, e.g. database keys, like RFC 4122 UUIDs.
+             QQIDs can be identically interconverted with UUIDs, IPv6
+             addresses, MD5 hashes etc., and are suitable for a host of
+             applications in which identifiers are read by humans. They
+             are compact, can safely be transmitted in binary and text
+             form, are useable in URLs, and it can be established at a
+             glance whether two QQIDs are different or potentially
+             identical. The qqid package contains functions to generate
+             true random and pseudo-random QQIDs, to validate them, and
+             to interconvert them with other 128-bit number representations.
+             An example QQID is bird.carp.7TsBWtwqtKAeCTNk8f .
 }
 \section{RNG safe}{
-
-  Care has been taken that the \code{qqid} functions have
-  little risk of inadvertently changing the RNG's global initialization state
-  \code{.Random.seed}. Your random-reproducible simulation should not be
-  affected if you generate a few QQIDs in-between.
+ Care has been taken to ensure that the \code{qqid}
+  functions have little risk of inadvertently changing the RNG's global
+  initialization state \code{.Random.seed}. Your random-reproducible
+  simulation should not be affected if you generate a few QQIDs in-between.
 }
 
 \examples{
-{
   # Use rngQQID() to get a few QQIDS with R's internal RNG
   rngQQID(7, method = "R")
 
@@ -62,13 +73,15 @@ qqid-pckage
     # no trouble figuring out which ones were the same, and which ones were
     # different. That's the point of QQIDs.
   }
-}
+
 }
 \references{
-See the qqid package \code{README} on GitHub for more Details.
+See the
+  \href{https://rawgit.com/hyginn/qqid/html/README.html}{\code{qqid} README
+  on the Web} for more Details.
 }
 \seealso{
-\code{\link[qrandom]{qrandom::qQQID}}
+\code{\link[qrandom]{qUUID}},
 }
 \author{
 \strong{Maintainer}: Boris Steipe \email{boris.steipe@utoronto.ca} (0000-0002-1134-6758)

@@ -16,21 +16,21 @@ qq2uu(qq)
 \code{qq2uu} converts a vector of QQIDs to UUIDs.
 }
 \section{QQIDs}{
- QQIDs are specially formatted UUIDs. See \code{\link{xlt2qq}}
-  for the the motivation of mapping UUIDs to QQIDs and details on how QQIDs
-  are structured. This function reverses the mapping exactly to recover the
-  original UUID.
+ QQIDs are specially formatted 128-bit numbers (hexlets), just
+  like UUIDs. See \code{\link[=xlt2qq]{xlt2qq()}} for the the motivation of
+  mapping UUIDs to QQIDs and details on how QQIDs are structured.
+  \code{qq2uu} reverses the mapping exactly to recover the original UUID.
 }
 
 \section{Process}{
  To convert a QQID to a UUID, the two "Q-words" that head
   the QQID are mapped to their index in the 0:1023 Q-word vector (cf.
-  \code{\link{qMap}}), and the indices are converted to two ten bit numbers.
-  These twenty bits are expressed as a five-digit hexadecimal number which
-  replaces the two Q-words to recover the UUID. For details on UUID format
-  see \code{\link{is.xltID}}. The remaining 18 Base64 encoded characters are
-  converted to their corresponding 27 hex digits via an intermediate mapping
-  to bit-patterns.
+  \code{\link[=qMap]{qMap()}}), and the indices are converted to two ten bit
+  numbers. These twenty bits are expressed as a five-digit hexadecimal number
+  which replaces the two Q-words to recover the UUID. For details on UUID
+  format see \code{\link[=is.xlt]{is.xlt()}}. The remaining 18 Base64 encoded
+  characters are converted to their corresponding 27 hex digits via an
+  intermediate mapping to bit-patterns.
 }
 
 \section{Endianness}{
@@ -53,8 +53,8 @@ qq2uu( QQIDexample(3) ) == xltIDexample("UUID")  # TRUE
 
 }
 \seealso{
-\code{\link{xlt2qq}} to convert a vector of UUIDs, IPv6 addresses or
-  other hexlets to QQIDs.
+\code{\link[=xlt2qq]{xlt2qq()}} to convert a vector of UUIDs, IPv6
+  addresses or other hexlets to QQIDs.
 }
 \author{
 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)

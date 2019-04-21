@@ -1,23 +1,21 @@
 # qqid-package.R
 
-#' qqid-pckage
+#' @title QQIDs - human-compatible representation of 128-bit numbers
 #'
-#' @section RNG safe:
-#'   Care has been taken that the \code{qqid} functions have
-#'   little risk of inadvertently changing the RNG's global initialization state
-#'   \code{.Random.seed}. Your random-reproducible simulation should not be
-#'   affected if you generate a few QQIDs in-between.
+#' @section RNG safe: Care has been taken to ensure that the \code{qqid}
+#'   functions have little risk of inadvertently changing the RNG's global
+#'   initialization state \code{.Random.seed}. Your random-reproducible
+#'   simulation should not be affected if you generate a few QQIDs in-between.
 #'
-#' @references
-#'   See the qqid package \code{README} on GitHub for more Details.
-#' @seealso
-#' \code{\link[qrandom]{qrandom::qQQID}}
+#' @references See the
+#'   \href{https://rawgit.com/hyginn/qqid/html/README.html}{\code{qqid} README
+#'   on the Web} for more Details.
+#'
+#' @seealso \code{\link[qrandom]{qUUID}},
+#'
 #' @keywords  internal
-#' @alias qqid-package
-#' @alias qqid
-#' @title QQIDs - a human-compatible representation of 128-bit numbers}
 #'
-#' @examples{
+#' @examples
 #'   # Use rngQQID() to get a few QQIDS with R's internal RNG
 #'   rngQQID(7, method = "R")
 #'
@@ -62,7 +60,8 @@
 #'     # no trouble figuring out which ones were the same, and which ones were
 #'     # different. That's the point of QQIDs.
 #'   }
-#' }
+#'
 "_PACKAGE"
 
 # [END]
+

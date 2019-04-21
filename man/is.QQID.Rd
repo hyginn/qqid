@@ -27,12 +27,12 @@ QQID. \code{NA} values are mapped to \code{FALSE} (default) or can be
 replaced with \code{NA} to preserve them. Note: arguments passed to
 \code{na.map} are implicitly converted to type logical. A valid QQID has the
 form: \code{"qqqq.qqqq.BBBBBBBBBBBBBBBBBB"} where each \code{"qqqq"} is a
-Q-word (cf. \code{\link{qMap}}) encoding 10 bit, and \code{"B"} is a Base64
-character encoding 6 bits each for \code{10 + 10 + (18 * 6) == 128} bits. The
-two Q-words of the QQID are separated by a "." which does not appear in UUIDs
-nor in the Base64 alphabet and thus the Q-words bead, beef, dead, deaf, deed,
-face, and fade can be easily distinguished from 4 digit hexadecimal numbers
-in a QQID or a Base64 encoded number.
+Q-word (cf. \code{\link[=qMap]{qMap()}}) encoding 10 bit, and \code{"B"} is a
+Base64 character encoding 6 bits each for \code{10 + 10 + (18 * 6) == 128}
+bits. The two Q-words of the QQID are separated by a "." which does not
+appear in UUIDs nor in the Base64 alphabet and thus the Q-words bead, beef,
+dead, deaf, deed, face, and fade can be easily distinguished from 4 digit
+hexadecimal numbers in a QQID or a Base64 encoded number.
 }
 \examples{
 # check one invalid QQID
@@ -52,8 +52,8 @@ is.QQID(c(QQIDexample(3), "meh", NA), na.map = NA)   # TRUE  FALSE  NA
 
 }
 \seealso{
-\code{\link{is.xlt}} to check UUIDs, MD5s, IPv6 addresses and other
-  hexlets.
+\code{\link[=is.xlt]{is.xlt()}} to check UUIDs, MD5s, IPv6 addresses
+  and other hexlets.
 }
 \author{
 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)

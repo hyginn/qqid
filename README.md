@@ -550,10 +550,9 @@ It's actually quite harmless to hand-pick specific Q-words for some semantic pur
 # 6 Notes
 
 ###### To Do
- - Still need a sane workflow to reproduce package building from RStudio and catch all errors. Need to follow up. Missing: building pdf package documentation. Documentation on package build process from RStudio is not what it could be.
  - Package documentation shows that `\preformatted{ }` does not respect leading whitespace and line breaks in `xlt2qq()` doc header when converted to pdf. Need to follow up.
  - We could cache the first element of every run of an instance of `rngQQID()` in a session and warn about lack of sane initialization if we see repeats.
- - More formats for `qq2 ... : should be able to get a max-integer for set.seed().
+ - More formats for `qq2 ... : should be able to get a max-integer for set.seed(). Perhaps add a session startup closure that caches 1023 .Machine$integer.max
  - Turn the README into a vignette?
  
 

@@ -22,7 +22,7 @@ application.
 The function stores five artificial sample IDs. Input is a subsetting vector
 that specifies which IDs to return. More than five IDs can be requested by
 applying the usual subsetting rules. The IDs can be converted to the exact
-same QQIDs provided by \code{\link{QQIDexample}}. The formats available are
+same QQIDs provided by \code{\link[=QQIDexample]{QQIDexample()}}. The formats available are
 \code{"md5"}: 32 hex numerals; \code{"hex"}: 32 hex numerals with \code{"0x"}
 prefix; \code{"UUID"}: Universally Unique Identifier format; \code{"IPv6"}:
 IPv6 formatted address; \code{"hEx"}: 32 hex numerals with mixed case.
@@ -36,7 +36,7 @@ xltIDexample("UUID") == qq2uu(QQIDexample(3))   # TRUE (correct conversion)
 
 }
 \seealso{
-\code{\link{QQIDexample}} Returns five QQIDs
+\code{\link[=QQIDexample]{QQIDexample()}} Returns five QQIDs
 }
 \author{
 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)

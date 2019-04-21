@@ -14,25 +14,26 @@
 #'
 #'@section qQQIDs vs. rngQQIDs: Whether to use true random or pseudo-random
 #'  QQIDs is a tradeoff between speed and safety. The ANU quantum  random number
-#'  server can have considerable latency (a problem that
-#'  \code{\link{qQQIDfactory}} addresses through caching), but pseudo-random
-#'  numbers may not be as safe for use cases that depend on the uniqueness of
-#'  the resulting numbers. The RNGs provided by R are very good, however all
-#'  RNGs potentially suffer from the possibility of an initialization collision,
-#'  i.e. when two runs of the RNG are accidentally initialized with the same
-#'  seed, due to an improper and /or unrecognized use of \code{set.seed()} in
-#'  another function, script or package, or due to the limited randomness of
-#'  time- and machine-state based seeds. This is not a problem for long runs of
-#'  keys on a single machine, but it may be for the decentralized generation of
-#'  random unique keys, which is the design use case of \code{qqid}. The only
-#'  way to prevent this with certainty is to use true random keys (see
-#'  \code{\link{qQQIDfactory}}). True random qQQIDs have a 50\% collision
-#'  probability in \eqn{\approx 2.7 \times 10^{18}}{=~ 2.7e+18} keys, and this
-#'  is the same at all times, regardless of the state of the requesting machine.
-#'  Thus unless throughput of keys is a critical concern, it is advisable to use
-#'  true random QQIDs from a \link[=text]{qQQIDfactory} closure over those
-#'  returned by a \code{\link{qQQIDfactory}} closure, or at least to initialize
-#'  the RNG with a true random seed with the default \code{method = "q"}.
+#'  server can have considerable latency (a problem that \code{qQQIDfactory}
+#'  addresses through caching), but pseudo-random numbers may not be
+#'  sufficiently collision-safe for use cases that depend on the uniqueness of
+#'  the resulting numbers: while the RNGs provided by R are very good, all RNGs
+#'  potentially suffer from the possibility of an \strong{initialization}
+#'  collision, i.e. when two runs of the RNG are accidentally initialized with
+#'  the same seed, due to an improper and/or unrecognized use of
+#'  \code{set.seed()} in another function, script or package, or due to the
+#'  limited randomness of time- and machine-state based seeds. This is not a
+#'  problem for long runs of key-generation on a single machine, but it may be
+#'  an issue for the decentralized generation of random unique keys, which is
+#'  the design use case of \code{qqid}. The only way to prevent this with
+#'  certainty is to use true random keys (as provided with this function). True
+#'  random qQQIDs have a 50\% collision probability in \eqn{\approx 2.7 \times
+#'  10^{18}}{=~ 2.7e+18} keys, and this is the same at all times, regardless of
+#'  the state of the requesting machine. Thus unless throughput of keys is a
+#'  critical concern, it is advisable to use true random QQIDs from a
+#'  \code{qQQIDfactory} closure over those returned by a \code{\link[=rngQQID]{rngQQID()}}
+#'  process, or at least to initialize the RNG with a true random seed (method "q", the
+#'  default option for \code{rngQQID}).
 #'
 #'@section 128 vs. 122 bit random:  By default, QQIDs produced with
 #'  \code{rngQQID()} can be converted to
@@ -49,7 +50,7 @@
 #'  The default method is \code{"q"} and uses a true random seed retrieved from
 #'  the ANU quantum random number server. An alternative method is \code{"r"},
 #'  which uses R's inbuilt random initialization (cf. the behaviour of
-#'  \code{set.seed(NULL)} in the \link{set.seed} documentation). Finally, the
+#'  \code{set.seed(NULL)} in the \link[=set.seed]{set.seed()} documentation). Finally, the
 #'  function can be run without a random seed with \code{"n"}, which allows
 #'  either to define one's own sane RNG initialization, or use a specific seed
 #'  for reproducible randomization - assuming that the risks are clearly
@@ -88,7 +89,8 @@
 #'
 #'@author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
 #'
-#'@seealso \code{\link{qQQIDfactory}} to create a closure that returns cached,
+#'@seealso \code{\link[=qQQIDfactory]{qQQIDfactory()}} to create a closure that
+#'  returns cached,
 #'  true random QQIDs.
 #'
 #' @examples

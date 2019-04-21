@@ -55,7 +55,7 @@ notation, UUID format, IPv6 addresses, or MD5 hashes to QQIDs.
   representing digits 1:5 of the input, and the 18 Base64 encoded digits
   6:32 of the input as its tail. Since the mapping is fully reversible, QQIDs
   have exactly the same statistical properties as the input. For details on
-  QQID format see \code{\link{is.QQID}}.
+  QQID format see \code{\link[=is.QQID]{is.QQID()}}.
 }
 
 \section{Input formats}{
@@ -97,7 +97,7 @@ xlt2qq( xltIDExample(1:5) ) == QQIDexample(1:4)  # TRUE TRUE TRUE TRUE TRUE
 
 }
 \seealso{
-\code{\link{qq2uu}} to convert a vector of QQIDs to UUIDs.
+\code{\link[=qq2uu()]{qq2uu}} to convert a vector of QQIDs to UUIDs.
 }
 \author{
 \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)

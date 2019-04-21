@@ -3,7 +3,7 @@
 #'qQQIDfactory
 #'
 #'\code{qQQIDfactory} returns a closure (a function with an associated
-#'environment) that retrieves, caches, and returns true random QQIDs.
+#'environment) that retrieves, caches, and returns quantum-random QQIDs.
 #'
 #'In what follows we will call the closure that is produced by
 #'\code{qQQIDfactory}  "\code{qQQID()}" (even though you could assign it to a
@@ -47,26 +47,28 @@
 #'@section qQQIDs vs. rngQQIDs: Whether to use true random or pseudo-random
 #'  QQIDs is a tradeoff between speed and safety. The ANU quantum  random number
 #'  server can have considerable latency (a problem that \code{qQQIDfactory}
-#'  addresses through caching), but pseudo-random numbers may not be as safe for
-#'  use cases that depend on the uniqueness of the resulting numbers. The RNGs
-#'  provided by R are very good, however all RNGs potentially suffer from the
-#'  possibility of an initialization collision, i.e. when two runs of the RNG
-#'  are accidentally initialized with the same seed, due to an improper and /or
-#'  unrecognized use of \code{set.seed()} in another function, script or
-#'  package, or due to the limited randomness of time- and machine-state based
-#'  seeds. This is not a problem for long runs of keys on a single machine, but
-#'  it may be for the decentralized generation of random unique keys, which is
+#'  addresses through caching), but pseudo-random numbers may not be
+#'  sufficiently collision-safe for use cases that depend on the uniqueness of
+#'  the resulting numbers: while the RNGs provided by R are very good, all RNGs
+#'  potentially suffer from the possibility of an \strong{initialization}
+#'  collision, i.e. when two runs of the RNG are accidentally initialized with
+#'  the same seed, due to an improper and/or unrecognized use of
+#'  \code{set.seed()} in another function, script or package, or due to the
+#'  limited randomness of time- and machine-state based seeds. This is not a
+#'  problem for long runs of key-generation on a single machine, but it may be
+#'  an issue for the decentralized generation of random unique keys, which is
 #'  the design use case of \code{qqid}. The only way to prevent this with
 #'  certainty is to use true random keys (as provided with this function). True
 #'  random qQQIDs have a 50\% collision probability in \eqn{\approx 2.7 \times
 #'  10^{18}}{=~ 2.7e+18} keys, and this is the same at all times, regardless of
 #'  the state of the requesting machine. Thus unless throughput of keys is a
 #'  critical concern, it is advisable to use true random QQIDs from a
-#'  \code{qQQIDfactory} closure over those returned by a \code{\link{rngQQID}}
-#'  process, or at least to initialize the RNG with a true random seed (the
-#'  default option for \code{\link{rngQQID}}).
+#'  \code{qQQIDfactory} closure over those returned by a
+#'  \code{\link[=rngQQID]{rngQQID()}} process, or at least to initialize the RNG
+#'  with a true random seed (the default option for
+#'  \code{\link[=rngQQID]{rngQQID()}}).
 #'
-#'@section caching QQIDs to avoid latency: The ANU server produces true random
+#'@section Caching QQIDs to avoid latency: The ANU server produces true random
 #'  numbers from quantum fluctuations of the vacuum. The high latency of
 #'  requests for quantum random numbers from the ANU server - between 6 to 10
 #'  seconds per request - is practically independent of the size of the
@@ -115,7 +117,8 @@
 #'
 #'@author \href{https://orcid.org/0000-0002-1134-6758}{Boris Steipe} (aut)
 #'
-#'@seealso \code{\link{rngQQID}} to generate QQIDs via the inbuilt RNG.
+#'@seealso \code{\link[=rngQQID]{rngQQID()}} to generate QQIDs via the inbuilt
+#'  RNG.
 #'
 #' @examples
 #' \dontrun{

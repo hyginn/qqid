@@ -3,7 +3,7 @@
 #' oltMap
 #'
 #' \code{oltMap} maps 6-character bit patterns to their corresponding Base64
-#' characters or characters back to bit patterns.
+#' characters (an "octlet"), or characters back to bit patterns.
 #'
 #' @section Description: If the input is a vector of 6-character bit patterns,
 #'   \code{oltMap} returns the corresponding character from the Base64
@@ -19,7 +19,7 @@
 #'   \code{000000} to \code{111111}:
 #'   \code{"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"}
 #'   This is safe for most applications; one exception is Microsoft Excel where
-#'   strings beginning with a \code{"-"} are silently convert to formulas.
+#'   strings that begin with a \code{"-"} are silently convert to formulas.
 #'   (QQIDs are not affected by this problem since they always begin with
 #'   a lowercase alphabetic character.)
 #'
