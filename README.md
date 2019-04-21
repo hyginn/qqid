@@ -1,3 +1,10 @@
+---
+output: 
+  html_document: 
+    smart: no
+    toc: yes
+    toc_depth: 2
+---
 # qqid
 
 [![Travis build status](https://travis-ci.org/hyginn/qqid.svg?branch=master)](https://travis-ci.org/hyginn/qqid)
@@ -424,7 +431,7 @@ rngQQID(6, method = "R")   # Use R's initialization: internally set.seed(NULL).
 rngQQID(6, method = "n")   # ... but "n" gives us the same IDs as before.
 ```
 
-Bottom line: try not to use method `"n"` unless understand it. When you do,
+Bottom line: try not to use method `"n"` unless you understand the risks and benefits. When you do,
 you **MUST** set a sane seed before each run. But why are we doing this 
 in the first place? Why can't we just reset the seed every time? The reason
 is that `.Random.seed` is a global parameter, and unless it is explicitly 
@@ -547,7 +554,7 @@ It's actually quite harmless to hand-pick specific Q-words for some semantic pur
  - Package documentation shows that `\preformatted{ }` does not respect leading whitespace and line breaks in `xlt2qq()` doc header when converted to pdf. Need to follow up.
  - We could cache the first element of every run of an instance of `rngQQID()` in a session and warn about lack of sane initialization if we see repeats.
  - More formats for `qq2 ... : should be able to get a max-integer for set.seed().
- - Turn the RTEADME into a vignette?
+ - Turn the README into a vignette?
  
 
 &nbsp;
