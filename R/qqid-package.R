@@ -8,7 +8,7 @@
 #'   simulation should not be affected if you generate a few QQIDs in-between.
 #'
 #' @references See the
-#'   \href{https://rawgit.com/hyginn/qqid/html/README.html}{\code{qqid} README
+#'   \href{http://hyginn.github.io/qqid/}{\code{qqid} README
 #'   on the Web} for more Details.
 #'
 #' @seealso \code{\link[qrandom]{qUUID}},

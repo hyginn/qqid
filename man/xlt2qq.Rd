@@ -35,8 +35,8 @@ notation, UUID format, IPv6 addresses, or MD5 hashes to QQIDs.
   Q-words can encode 20 bits, or 5 hexadecimal letters:
   \preformatted{
 .
-.          [0-9a-f]   [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]
-.  hex:  |--0x[1]--||--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--|
+.          [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]    [0-9a-f]
+.  hex:  |--0x[1]--| |--0x[2]--| |--0x[3]--| |--0x[4]--| |--0x[5]--|
 .  bit:  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 .        |----------int[1]-----------| |----------int[2]-----------|
 .  int:            (0, 1023)                      (0,1023)
