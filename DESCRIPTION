@@ -9,17 +9,21 @@ Authors@R: c(
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-1134-6758"))
     )
-Description: 'QQIDs' are a representation of 128-bit numbers constructed from
-             two "cues" of short, common, English words, and 'Base64' encoded
-             characters. Like 'RFC 4122 UUIDs', with which they can be
-             identically interconverted, 'QQIDs' are suitable as random unique
-             identifiers for use as database keys and in a host of other
-             applications. However they are more compact than 'UUIDs' and one
-             can see at a glance whether two keys are different or potentially
-             identical. The 'qqid' package contains functions to generate true
-             random and pseudo-random 'QQIDs', to validate them, and to
-             interconvert them with other 128-bit number representations. An
-             exmple 'QQID' is 'bird.carp.7TsBWtwqtKAeCTNk8f' .
+Description: 'QQIDs' are a representation of 128-bit numbers constructed
+             from two "cues" of short, common, English words, and 'Base64'
+             encoded characters. Their primary intended use is for random
+             unique identifiers, e.g. database keys, like 'RFC 4122 UUIDs'.
+             'QQIDs' can be identically interconverted with 'UUIDs', 'IPv6'
+             addresses, 'MD5' hashes etc., and are suitable for a host of
+             applications in which identifiers are read by humans. They
+             are compact, can safely be transmitted in binary and text
+             form, are useable in 'URLs', and it can be established at a
+             glance whether two 'QQIDs' are different or potentially
+             identical. The 'qqid' package contains functions to generate
+             true random and pseudo-random 'QQIDs', to validate them, and
+             to interconvert them with other 128-bit number
+             representations. An example 'QQID' is
+             'bird.carp.7TsBWtwqtKAeCTNk8f' .
 License: file LICENSE
 Language: en-GB
 Encoding: UTF-8
@@ -31,5 +35,5 @@ Suggests:
     digest,
     testthat
 RoxygenNote: 6.1.1
-URL: <https://github.com/hyginn/qqid>
-BugReports: <https://github.com/hyginn/qqid/issues>
+URL: https://github.com/hyginn/qqid
+BugReports: https://github.com/hyginn/qqid/issues
