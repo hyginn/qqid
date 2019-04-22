@@ -404,33 +404,55 @@ interpret the underlying large numbers in an unbiased way.
 
 ## Issues with setting `.Random.seed`, or not ...
 
+Here's an aside: in order to play nice with other applications, `rngQQID()` does **NOT change the global `.Random.seed`**, but resets it to the state it was found in. However this means, if you generate another batch of QQIDs **WITHOUT** setting a new seed, you'll be starting with the exact same binary matrix that you had before, and your new QQIDs **WILL** be the exact same numbers you got before. Seriously ! The good news is that that's easy to spot - just compare the `head()` of the vector.
+
+
 ```R
-# Here's an aside: in order to play nice with other applications, rngQQID() does
-# NOT change the global .Random.seed, but resets it to the state it was found
-# in. However this means, if you generate the same number of QQIDs again
-# WITHOUT making a new seed, you'll be creating the exact same binary matrix
-# that you had before, and your new QQIDs WILL be the exact same numbers we had
-# before. Seriously ! The good news is that that's easy to spot - just compare
-# the head() of the vector.
-
-
 set.seed(qrandom::qrandommaxint())      # set a quantum random seed
 myIDs <- rngQQID(1e4, method = "n")     # generate a few thousand QQIDs
 head(myIDs)                             # inspect them
-                                        # repeat WITHOUT a new seed
-rngQQID(6, method = "n")                # Whoa! Exactly the same QQIDs again ...
-rngQQID(6, method = "n")                # ... and again.
 
-rngQQID(6, method = "R")   # Use R's initialization: internally set.seed(NULL).
-rngQQID(6, method = "n")   # ... but "n" gives us the same IDs as before.
+#  [1] "paid.rush.tBCG-fRLHsDTyCcFFd" "inns.show.1TI5LMBJWLswhM5UDl"
+#  [3] "band.whim.VhWuv4hMkFOq1IWJ1v" "heir.grow.RjWay_JFV-mOMCEK2K"
+#  [5] "eggs.fume.ZEvYXClM3kLHAFSM24" "host.ware.dzoHyuhNVkBOnMS5tS"
+
+                                        # make more QQIDS WITHOUT a new seed
+rngQQID(6, method = "n")                # Whoa! Exactly the same QQIDs again ...
+
+#  [1] "paid.rush.tBCG-fRLHsDTyCcFFd" "inns.show.1TI5LMBJWLswhM5UDl"
+#  [3] "band.whim.VhWuv4hMkFOq1IWJ1v" "heir.grow.RjWay_JFV-mOMCEK2K"
+#  [5] "eggs.fume.ZEvYXClM3kLHAFSM24" "host.ware.dzoHyuhNVkBOnMS5tS"
+
+rngQQID(6, method = "n")                # ... and again, as you can see.
+
+#  [1] "paid.rush.tBCG-fRLHsDTyCcFFd" "inns.show.1TI5LMBJWLswhM5UDl"
+#  [3] "band.whim.VhWuv4hMkFOq1IWJ1v" "heir.grow.RjWay_JFV-mOMCEK2K"
+#  [5] "eggs.fume.ZEvYXClM3kLHAFSM24" "host.ware.dzoHyuhNVkBOnMS5tS"
+
+
+# The fix is easy: initialize the RNG, best with the default method q, or
+# with R's internal method:
+
+rngQQID(6, method = "R")   # Use R's initialization: internally set.seed(NULL)...
+
+#  [1] "warp.bent.bW6r6mFA0OetnDFKpw" "walk.whip.ouev17RIGv_BbHmXv2"
+#  [3] "tern.worn.dVF-fPBAVbZ3OSS0yB" "dose.drip.PGwi_ORB2649e3oVzP"
+#  [5] "deck.what.xEmDXZdOXPhY6iiU4O" "gems.fall.Iok5WC5Dl11BdK9-z3"
+
+rngQQID(6, method = "R")   # ... now, repeating the procedure generates
+                           # different UUIDs.
+
+#  [1] "fall.vole.Sook7oxOU9uec0etM6" "rift.term.ibCHVklLGng_xxDzd3"
+#  [3] "wide.rats.iBexYrhKXs5I7Ikzpc" "vote.doll.mPTZX1dDUjeuWKc1XJ"
+#  [5] "swap.dive.C1qc9nVJlXkwQ34fl1" "hose.wink.Nby-_Y5AFDNzzoHrAa"
+
+# ... and that's how it should be.
+
 ```
 
-Bottom line: try not to use method `"n"` unless you understand the risks and benefits. When you do,
-you **MUST** set a sane seed before each run. But why are we doing this 
-in the first place? Why can't we just reset the seed every time? The reason
-is that `.Random.seed` is a global parameter, and unless it is explicitly 
-asked to do so, a function should never change global parameters. Here's how
-this is good:
+Bottom line: try not to use method `"n"` unless you understand the risks and benefits. When you do, you yourself are responsible to set a sane seed before each run use of `rngQQID()`.
+
+But why are we doing this in the first place? Why can't `rngQQID()` just reset the seed internally, every time it runs? The reason is that `.Random.seed` is a global parameter, and unless it is explicitly  asked to do so, a function should never change global parameters. Here's how this is good:
 
 ```R
 
