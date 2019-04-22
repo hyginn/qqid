@@ -12,7 +12,7 @@
 #'
 #' @references See the
 #'   \href{http://hyginn.github.io/qqid/}{\code{qqid} README
-#'   on the Web} for more Details.
+#'   on the Web} for more Details.  \href{https://zenodo.org/record/2648318}{\code{DOI:10.5281/zenodo.2648318}}
 #'
 #' @seealso \code{\link[qrandom]{qUUID}},
 #'

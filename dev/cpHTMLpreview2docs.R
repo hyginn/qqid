@@ -1,8 +1,8 @@
-# mvHTMLpreview2docs.R
+# cpHTMLpreview2docs.R
 
-#' mvHTMLpreview2docs
+#' cpHTMLpreview2docs
 #'
-#' \code{mvHTMLpreview2docs} Utility to move a copy of the preview created by
+#' \code{cpHTMLpreview2docs} Utility to move a copy of the preview created by
 #' \code{pandoc()} to \code{index.html} in the \code{./docs} folder.
 #'
 #' @section Details: GitHub pages expects \code{index.html} in the \code{./docs}
@@ -21,11 +21,11 @@
 #' @examples
 #' \dontrun{
 #' # run the function
-#' mvHTMLpreview2docs()
+#' cpHTMLpreview2docs()
 #' }
 #'
 
-mvHTMLpreview2docs <- function(targetFile = "./docs/index.html") {
+cpHTMLpreview2docs <- function(targetFile = "./docs/index.html") {
 
   pandocDir <- list.files(path = tempdir(),
                           pattern = "^preview.+\\.dir$",

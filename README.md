@@ -3,6 +3,7 @@
 [![Travis build status](https://travis-ci.org/hyginn/qqid.svg?branch=master)](https://travis-ci.org/hyginn/qqid)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hyginn/qqid?branch=master&svg=true)](https://ci.appveyor.com/project/hyginn/qqid)
 [![Coverage status](https://codecov.io/gh/hyginn/qqid/branch/master/graph/badge.svg)](https://codecov.io/github/hyginn/qqid?branch=master)
+[![DOI](https://zenodo.org/badge/181088210.svg)](https://zenodo.org/badge/latestdoi/181088210)
 [![MIT license](https://raw.github.com/hyginn/qqid/master/inst/img/license-MIT.svg?sanitize=true)](http://opensource.org/licenses/MIT)
 [![qqid-home](https://raw.github.com/hyginn/qqid/master/inst/img/bird.carp.7TsBWtwqtKAeCTNk8f.svg?sanitize=true)](https://github.com/hyginn/qqid)
 
