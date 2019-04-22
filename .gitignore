@@ -4,4 +4,7 @@
 .Rhistory
 .RData
 .Ruserdata
-./man/*.Rd
+man
+man/*
+dev_private
+dev_private/*
