@@ -1,0 +1,22 @@
+citHeader("GitHub for latest release; Zenodo for packaged archive with doi.")
+
+bibentry(bibtype = "Manual",
+         title = "{qqid: QQIDs - a human-compatible representation of 128-bit numbers}",
+         author = c(
+           person("Boris", "Steipe")
+           ),
+         year = sub("-.*", "", meta$Date),
+         note = sprintf("R package version %s", meta$Version),
+         url = "https://github.com/hyginn/qqid")
+
+bibentry(bibtype = "Manual",
+         title = "{qqid: QQIDs - a human-compatible representation of 128-bit numbers}",
+         author = c(
+           person("Boris", "Steipe")
+           ),
+         year = sub("-.*", "", meta$Date),
+         note = sprintf("R package version %s. %s",
+                        meta$Version,
+                        "Boris Steipe: ORCID 0000-0002-1134-6758"),
+         doi = "TBD",
+         url = "TBD")
