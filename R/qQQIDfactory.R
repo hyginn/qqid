@@ -169,8 +169,9 @@ qQQIDfactory <- function(nBatch = 1023) {
   if (is.null(uu)) {
     return(invisible(NULL))
   } else {
-    QQ <- xlt2qq(uu)         # place QQ into the enclosing environment of
-                             # the returned closure
+    QQ <- xlt2qq(uu)         # Place QQ into the enclosing environment of
+                             # the returned closure. Note: implicitly
+                             # forcing evaluation here.
   }
 
   return(function(n = 1, inspectOnly = FALSE) {  # Here we define the closure

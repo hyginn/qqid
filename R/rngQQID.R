@@ -163,15 +163,15 @@ rngQQID <- function(n = 1, method = "q", RFC4122compliant = TRUE) {
 
   # generate matrix of n * 128 {0, 1}
   x <- matrix(sample(c(0, 1), 128 * n, replace = TRUE),
-              byrow = TRUE, #<--- This is both risky and safe: the risk is that
-              nrow = n)         # repeated runs with the same seed will not be
-                                # folded into the columns, but we will get
+              byrow = TRUE, #<--- This is an important safety issue:
+              nrow = n)         # previously repeated runs with the same seed
+                                # appeared deceptively different, if they had
+                                # diffferent lengths. Now, we will get
                                 # identical IDs, and we WILL have collisions.
-                                # The safe part is that we can easily notice
+                                # However we can easily notice
                                 # this by comparing the head()s of the vectors.
-                                # Otherwise there might be hidden correlations.
 
-  if (RFC4122compliant) { # stamp UUID version
+  if (RFC4122compliant) { # stamp UUID version 4 code
     x[ , 61] <- 0
     x[ , 62] <- 1
     x[ , 63] <- 0
