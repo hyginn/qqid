@@ -65,7 +65,7 @@ qq2uu <- function(qq) {
     j1 <- (((j-1)*6)+21)
     j2 <- j1 + 5
     jq <- j+10
-    I[ , j1:j2] <- i2bit(olt2i(substr(qq, jq, jq)), l = 6)
+    I[ , j1:j2] <- i2bit(sxt2i(substr(qq, jq, jq)), l = 6)
   }
 
   # hex Matrix
@@ -128,11 +128,11 @@ i2bit <- function(x, l) {
 # }
 
 
-olt2i <- function(x) {
+sxt2i <- function(x) {
   # Non exported. Convert a vector of Base 64 characters to their
   # corresponding integers.
-  olt <- oltMap(1:64)
-  return(match(x, olt) - 1)
+  sxt <- sxtMap(1:64)
+  return(match(x, sxt) - 1)
 }
 
 

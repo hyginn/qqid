@@ -586,21 +586,37 @@ runif(1)                  # [1] 0.7404076   That's what we had before!
 <div id="qqqidfactory" class="section level2">
 <h2>2.1 <code>qQQIDfactory()</code></h2>
 <p><code>qQQIDfactory</code> returns a closure (a function with an associated environment) that retrieves, caches, and returns true random QQIDs from the quantum-random number server at ANU.</p>
+<pre class="r"><code>myQQIDcache &lt;- qQQIDfactory()
+myQQIDcache(4)
+[1] &quot;prep.scam.lFfWZoApgo5H6fGxNz&quot; &quot;spin.bugs.HeWF3o0tgaUWD2V-jp&quot;
+[3] &quot;hush.earn.N-6RFjMmvb9B_OUS_G&quot; &quot;food.like.MDqvW5knl5t0Z5gmD3&quot;</code></pre>
 <p> </p>
 </div>
 <div id="rngqqid" class="section level2">
 <h2>2.2 <code>rngQQID()</code></h2>
 <p><code>rngQQID()</code> uses R’s random number generator to generate a vector of pseudo-random QQIDs. There are options to use a true-random seed, R’s inbuilt RNG initialization, or to pass-through an external seed. The function is “RNG-safe”, it does not change the global <code>.Random.seed</code>.</p>
+<pre class="r"><code>rngQQID()
+[1] &quot;land.cast.sgDulfpNkggHWyqIxN&quot;</code></pre>
 <p> </p>
 </div>
 <div id="is.qqid-and-is.xlt" class="section level2">
 <h2>2.3 <code>is.QQID()</code> and <code>is.xlt()</code></h2>
 <p><code>is.QQID()</code> tests whether the function argument is a vector of valid QQIDs. <code>is.UUID()</code> does the same for UUIDs, MD5 hashes, IPv6 addresses, or other 32-digit hexadecimal numbers (hexlets).</p>
+<pre class="r"><code>is.QQID(&quot;bird.carp.7TsBWtwqtKAeCTNk8f&quot;)
+[1] TRUE
+
+is.xlt(&quot;0x0c460ed3b015adc2ab4a01e093364f1f&quot;)  # hexadeximal number with &quot;0x&quot; prefix
+[1] TRUE</code></pre>
 <p> </p>
 </div>
 <div id="xlt2qq-and-qq2uu" class="section level2">
 <h2>2.4 <code>xlt2qq()</code> and <code>qq2uu()</code></h2>
 <p><code>xlt2qq()</code> converts a vector of UUIDs, MD5 hashes, IPv6 addresses, or other 32-digit hexadecimal numbers (hexlets) to QQIDs. <code>qq2uu()</code> converts QQIDs to UUIDs.</p>
+<pre class="r"><code>xlt2qq(&quot;0c460ed3-b015-adc2-ab4a-01e093364f1f&quot;)
+[1] &quot;bird.carp.7TsBWtwqtKAeCTNk8f&quot;
+
+qq2uu(&quot;bird.carp.7TsBWtwqtKAeCTNk8f&quot;)
+[1] &quot;0c460ed3-b015-adc2-ab4a-01e093364f1f&quot;</code></pre>
 <p> </p>
 </div>
 <div id="qqidexample-and-xltidexample" class="section level2">
@@ -621,23 +637,38 @@ runif(1)                  # [1] 0.7404076   That's what we had before!
 </div>
 <div id="qmap" class="section level2">
 <h2>2.4 <code>qMap()</code></h2>
-<p><code>qMap</code> maps numbers to Q-words, or Q-words to their index in (0, 1023). <code>qMap(0:1023)</code> returns the full list of 1024 Q-words (see appendix).</p>
+<p><code>qMap</code> maps numbers to Q-words, or Q-words to their index in (0, 1023). <code>qMap(0:1023)</code> returns the full list of 1024 Q-words (see Appendix).</p>
+<pre class="r"><code>qMap(144)
+[1] &quot;crow&quot;
+
+qMap(&quot;crow&quot;)
+[1] 144</code></pre>
 <p> </p>
 </div>
-<div id="oltmap" class="section level2">
-<h2>2.5 <code>oltMap()</code></h2>
-<p><code>oltMap</code> maps 6-digit bit pattern strings (octlets) to their corresponding Base64 characters, or Base64 characters 6-digit bit patterns.</p>
+<div id="sxtmap" class="section level2">
+<h2>2.5 <code>sxtMap()</code></h2>
+<p><code>sxtMap</code> maps 6-digit bit pattern strings (sextets) to their corresponding Base64 characters, or Base64 characters to 6-digit bit patterns.</p>
+<pre class="r"><code>sxtMap(&quot;001011&quot;)
+001011 
+   &quot;L&quot; 
+sxtMap(&quot;L&quot;)
+[1] &quot;001011&quot;</code></pre>
 <p> </p>
 </div>
 </div>
 <div id="the-qqid-github-project" class="section level1">
 <h1>3 The <code>qqid</code> GitHub project</h1>
-<p>The <a href="https://github.com/hyginn/qqid">latest development version of <code>qqid</code></a> is an RStudio project hosted on GitHub, and available for * download and experimentation to your local machine, * to be forked for collaboration and possible inclusion of pull-requests, and * to file issues.</p>
+<p>The <a href="https://github.com/hyginn/qqid">latest development version of <code>qqid</code></a> is an RStudio project hosted on GitHub, and available for</p>
+<ul>
+<li>download and experimentation to your local machine,</li>
+<li>to be forked for collaboration and possible inclusion of pull-requests, and</li>
+<li>to file issues.</li>
+</ul>
 <p>To learn more about GRPS development (Github, R Package, rStudio), see the template packages <a href="https://github.com/hyginn/rpt"><code>rpt</code></a> and <a href="https://github.com/hyginn/rptPlus"><code>rptPlus</code></a>.</p>
 <p> </p>
 </div>
 <div id="faq" class="section level1">
-<h1>5 FAQ</h1>
+<h1>4 FAQ</h1>
 <div id="can-i-edit-my-qqids-could-i-create-some.fish.red_some-fish-blue" class="section level5">
 <h5>Can I edit my QQIDs? Could I create <code>some.fish.red_some-fish-blue</code>?</h5>
 <p>Of course you can, <code>is.QQID(&quot;some.fish.red_some-fish-blue&quot;)</code> returns <code>TRUE</code> since “some” and “fish” are Q-words and the rest are valid characters of Base64. You do realize that this is not a good random unique key - but you can use it anywhere uniqueness is not crucial - cross-references in your lab notebook for example. The important things is, from <strong>my</strong> perspective, a string that you deliberately craft in any way is still just one of 3e38 numbers, and it won’t interfere with my own <em>random</em> QQIDs at all.</p>
@@ -649,7 +680,7 @@ runif(1)                  # [1] 0.7404076   That's what we had before!
 </div>
 </div>
 <div id="notes" class="section level1">
-<h1>6 Notes</h1>
+<h1>5 Notes</h1>
 <div id="to-do" class="section level6">
 <h6>To Do</h6>
 <ul>
@@ -658,13 +689,13 @@ runif(1)                  # [1] 0.7404076   That's what we had before!
 <p> </p>
 </div>
 <div id="disclaimer-and-caution" class="section level2">
-<h2>6.1 Disclaimer and caution</h2>
+<h2>5.1 Disclaimer and caution</h2>
 <p>Although <code>qqid</code> was written and tested with care, no suitability for any particular purpose, in particular no suitability for high-value transactions, for applications whose failure could endanger life or property, or for cryptography is claimed. The source code is published in full and it is up to the user to audit and adapt the code for their own purposes and needs.</p>
 <p> </p>
 </div>
 </div>
 <div id="further-reading" class="section level1">
-<h1>7 Further reading</h1>
+<h1>6 Further reading</h1>
 <ul>
 <li><a href="https://qrng.anu.edu.au/">the Australian National University’s Quantum Random Number Server</a></li>
 <li><a href="https://tools.ietf.org/html/rfc4122">RFC 4122: A Universally Unique IDentifier (UUID) URN Namespace</a></li>
@@ -676,7 +707,7 @@ runif(1)                  # [1] 0.7404076   That's what we had before!
 <p> </p>
 </div>
 <div id="acknowledgements" class="section level1">
-<h1>8 Acknowledgements</h1>
+<h1>7 Acknowledgements</h1>
 <p>I enjoyed contributing to Siegfried Köstlmeier’s <a href="https://cran.r-project.org/package=qrandom"><code>qrandom</code></a> package, whose convenient interface to quantum random numbers at <a href="https://qrng.anu.edu.au/">ANU</a> made <code>qqid</code> possible, since the concept of pseudo-random universal IDs is perhaps less sound than it might seem at first.</p>
 <p>Thanks to <a href="https://shields.io/">shields.io</a> for fun with badges.</p>
 <p> </p>

@@ -131,7 +131,7 @@ bitMat2QQ <- function(x) {
   QQ[ ,  3] <- qMap(bit2int(x[ ,11:20, drop = FALSE]))
   QQ[ ,  4] <- "."
   for (i in 0:17) {
-    QQ[ , i+5] <- oltMap(apply(x[ ,(21+(i*6)):(26+(i*6)), drop = FALSE],
+    QQ[ , i+5] <- sxtMap(apply(x[ ,(21+(i*6)):(26+(i*6)), drop = FALSE],
                                1,
                                paste, collapse = ""))
   }

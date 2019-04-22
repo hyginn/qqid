@@ -497,23 +497,46 @@ The following functions are included in the `qqid` package:
 ## 2.1 `qQQIDfactory()`
 
 `qQQIDfactory` returns a closure (a function with an associated environment) that retrieves, caches, and returns true random QQIDs from the quantum-random number server at ANU.
+```R
+myQQIDcache <- qQQIDfactory()
+myQQIDcache(4)
+[1] "prep.scam.lFfWZoApgo5H6fGxNz" "spin.bugs.HeWF3o0tgaUWD2V-jp"
+[3] "hush.earn.N-6RFjMmvb9B_OUS_G" "food.like.MDqvW5knl5t0Z5gmD3"
+```
 
 &nbsp;
 
 ## 2.2 `rngQQID()`
 `rngQQID()` uses R's random number generator to generate a vector of pseudo-random QQIDs. There are options to use a true-random seed, R's inbuilt RNG initialization, or to pass-through an external seed. The function is "RNG-safe", it does not change the global `.Random.seed`.
-
+```R
+rngQQID()
+[1] "land.cast.sgDulfpNkggHWyqIxN"
+```
 &nbsp;
 
 ## 2.3 `is.QQID()` and `is.xlt()`
 
 `is.QQID()` tests whether the function argument is a vector of valid QQIDs. `is.UUID()` does the same for UUIDs, MD5 hashes, IPv6 addresses, or other 32-digit hexadecimal numbers (hexlets).
+```R
+is.QQID("bird.carp.7TsBWtwqtKAeCTNk8f")
+[1] TRUE
+
+is.xlt("0x0c460ed3b015adc2ab4a01e093364f1f")  # hexadeximal number with "0x" prefix
+[1] TRUE
+```
 
 &nbsp;
 
 ## 2.4 `xlt2qq()` and `qq2uu()`
 
 `xlt2qq()` converts a vector of UUIDs, MD5 hashes, IPv6 addresses, or other 32-digit hexadecimal numbers (hexlets) to QQIDs. `qq2uu()` converts QQIDs to UUIDs. 
+```R
+xlt2qq("0c460ed3-b015-adc2-ab4a-01e093364f1f")
+[1] "bird.carp.7TsBWtwqtKAeCTNk8f"
+
+qq2uu("bird.carp.7TsBWtwqtKAeCTNk8f")
+[1] "0c460ed3-b015-adc2-ab4a-01e093364f1f"
+```
 
 &nbsp;
 
@@ -539,19 +562,33 @@ xltIDexample()
 
 ## 2.4 `qMap()`
 
-`qMap` maps numbers to Q-words, or Q-words to their index in (0, 1023). `qMap(0:1023)` returns the full list of 1024 Q-words (see appendix).
+`qMap` maps numbers to Q-words, or Q-words to their index in (0, 1023). `qMap(0:1023)` returns the full list of 1024 Q-words (see Appendix).
+```R
+qMap(144)
+[1] "crow"
 
+qMap("crow")
+[1] 144
+```
 &nbsp;
 
-## 2.5 `oltMap()`
+## 2.5 `sxtMap()`
 
-`oltMap` maps 6-digit bit pattern strings (octlets) to their corresponding Base64 characters, or Base64 characters 6-digit bit patterns.
+`sxtMap` maps 6-digit bit pattern strings (sextets) to their corresponding Base64 characters, or Base64 characters to 6-digit bit patterns.
+```R
+sxtMap("001011")
+001011 
+   "L" 
+sxtMap("L")
+[1] "001011"
+```
 
 &nbsp;
 
 # 3 The `qqid` GitHub project
 
 The [latest development version of `qqid`](https://github.com/hyginn/qqid) is an RStudio project hosted on GitHub, and available for 
+
 * download and experimentation to your local machine, 
 * to be forked for collaboration and possible inclusion of pull-requests, and
 * to file issues. 
@@ -561,7 +598,7 @@ To learn more about GRPS development (Github, R Package, rStudio), see the templ
 &nbsp;
 
 
-# 5 FAQ
+# 4 FAQ
 
 ##### Can I edit my QQIDs? Could I create `some.fish.red_some-fish-blue`?
 Of course you can, `is.QQID("some.fish.red_some-fish-blue")` returns `TRUE` since "some" and "fish" are Q-words and the rest are valid characters of Base64. You do realize that this is not a good random unique key - but you can use it anywhere uniqueness is not crucial  - cross-references in your lab notebook for example. The important things is, from **my** perspective, a string that you deliberately craft in any way is still just one of 3e38 numbers, and it won't interfere with my own _random_ QQIDs at all.
@@ -571,20 +608,20 @@ It's actually quite harmless to hand-pick specific Q-words for some semantic pur
 
 &nbsp;
 
-# 6 Notes
+# 5 Notes
 
 ###### To Do
   - More formats for `qq2 ...` : e.g. should be able to get a max-integer for `set.seed()`. 
 
 &nbsp;
 
-## 6.1 Disclaimer and caution
+## 5.1 Disclaimer and caution
 
 Although `qqid` was written and tested with care, no suitability for any particular purpose, in particular no suitability for high-value transactions, for applications whose failure could endanger life or property, or for cryptography is claimed. The source code is published in full and it is up to the user to audit and adapt the code for their own purposes and needs.
 
 &nbsp;
 
-# 7 Further reading
+# 6 Further reading
 
 * [the Australian National University's Quantum Random Number Server](https://qrng.anu.edu.au/)
 * [RFC 4122: A Universally Unique IDentifier (UUID) URN Namespace](https://tools.ietf.org/html/rfc4122)
@@ -595,7 +632,7 @@ Although `qqid` was written and tested with care, no suitability for any particu
 
 &nbsp;
 
-# 8 Acknowledgements
+# 7 Acknowledgements
 
 I enjoyed contributing to Siegfried Köstlmeier's [`qrandom`](https://cran.r-project.org/package=qrandom) package, whose convenient interface to quantum random numbers at [ANU](https://qrng.anu.edu.au/) made `qqid` possible, since the concept of pseudo-random universal IDs is perhaps less sound than it might seem at first.
 
