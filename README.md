@@ -7,14 +7,22 @@
 [![MIT license](https://raw.github.com/hyginn/qqid/master/inst/img/license-MIT.svg?sanitize=true)](http://opensource.org/licenses/MIT)
 [![qqid-home](https://raw.github.com/hyginn/qqid/master/inst/img/bird.carp.7TsBWtwqtKAeCTNk8f.svg?sanitize=true)](https://github.com/hyginn/qqid)
 
+&nbsp;
 
-###### [Boris Steipe](https://orcid.org/0000-0002-1134-6758), Department of Biochemistry and Department of Molecular Genetics, University of Toronto, Canada. &lt;boris.steipe@utoronto.ca&gt;
+<sup>[**Boris Steipe**](https://orcid.org/0000-0002-1134-6758)</sup><br/>
+<sup>Department of Biochemistry and Department of Molecular Genetics</sup><br/>
+<sup>University of Toronto, Canada</sup><br/>
+<sup>&lt; boris.steipe@utoronto.ca &gt;</sup>
 
 ----
+
+<sup>The html version of this `README` is available at https://hyginn.github.io/qqid/ .</sup>
 
 **If any of this information is ambiguous, inaccurate, outdated, or incomplete, please check the [most recent version](https://github.com/hyginn/qqid) of the package on GitHub and [file an issue](https://github.com/hyginn/qqid/issues).**
 
 ----
+
+&nbsp;
 
 ## `bird.carp.7TsBWtwqtKAeCTNk8f`
 
