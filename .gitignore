@@ -4,7 +4,5 @@
 .Rhistory
 .RData
 .Ruserdata
-man
-man/*
 dev_private
 dev_private/*
