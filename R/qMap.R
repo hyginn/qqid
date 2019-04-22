@@ -13,12 +13,17 @@
 #'
 #' @section Q-Words: A table of 1,024 four-letter words is encoded in this
 #'   function. Four-letter English words were chosen and manually refined to
-#'   yield short, unique labels that: \itemize{ \item are monosyllabic, \item
-#'   are easy to spell and pronounce, \item are individually not offensive,
-#'   \item are unlikely to be offensive in random combination, \item are in
-#'   common use, \item avoid homophones and consonant clusters, \item do not
-#'   contain jargon, intentional misspellings, acronyms or overly specialized
-#'   technical or sports terms. } The table is alphabetically sorted.
+#'   yield short, unique labels that:
+#'   \itemize{
+#'      \item are monosyllabic,
+#'      \item are easy to spell and pronounce,
+#'      \item are individually not offensive,
+#'      \item are unlikely to be offensive in random combination,
+#'      \item are in common use,
+#'      \item avoid homophones and consonant clusters,
+#'      \item do not contain jargon, intentional misspellings, acronyms
+#'            or overly specialized technical or sports terms. }
+#'   The table is alphabetically sorted.
 #'
 #' @param x (character or numeric) A vector.
 #' @return (numeric or character) A vector of indices, Q-words, or NA of the

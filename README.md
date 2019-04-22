@@ -543,7 +543,7 @@ It's actually quite harmless to hand-pick specific Q-words for some semantic pur
 # 6 Notes
 
 ###### To Do
-  - More formats for `qq2 ... : e.g. should be able to get a max-integer for set.seed(). 
+  - More formats for `qq2 ...` : e.g. should be able to get a max-integer for `set.seed()`. 
 
 &nbsp;
 
