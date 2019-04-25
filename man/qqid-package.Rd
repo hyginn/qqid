@@ -15,7 +15,7 @@ The string "bird.carp.7TsBWtwqtKAeCTNk8f" is a "QQID":
              standard.  QQIDs can be identically interconverted with
              UUIDs, IPv6 addresses, MD5 hashes etc., and are suitable
              for a host of applications in which identifiers are read
-             by humans.   They are compact, can safely be transmitted
+             by humans.  They are compact, can safely be transmitted
              in binary and text form, can be used as components of
              URLs, and it can be established at a glance whether two
              QQIDs are different or potentially identical.  The qqid

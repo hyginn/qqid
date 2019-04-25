@@ -1,8 +1,8 @@
 Package: qqid
 Type: Package
-Title: QQIDs - a human-compatible representation of 128-bit numbers
-Version: 1.0.2
-Date: 2019-04-22
+Title: Generation and Support of QQIDs - A Human-Compatible Representation of 128-bit Numbers
+Version: 1.0.3
+Date: 2019-04-25
 Authors@R: c(
     person("Boris", "Steipe",
            email = "boris.steipe@utoronto.ca",
@@ -18,7 +18,7 @@ Description: The string "bird.carp.7TsBWtwqtKAeCTNk8f" is a "QQID":
              standard.  QQIDs can be identically interconverted with
              UUIDs, IPv6 addresses, MD5 hashes etc., and are suitable
              for a host of applications in which identifiers are read
-             by humans.   They are compact, can safely be transmitted
+             by humans.  They are compact, can safely be transmitted
              in binary and text form, can be used as components of
              URLs, and it can be established at a glance whether two
              QQIDs are different or potentially identical.  The qqid
