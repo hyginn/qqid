@@ -1,8 +1,8 @@
 Package: qqid
 Type: Package
 Title: Generation and Support of QQIDs - A Human-Compatible Representation of 128-bit Numbers
-Version: 1.0.3
-Date: 2019-04-25
+Version: 1.0.4
+Date: 2019-04-29
 Authors@R: c(
     person("Boris", "Steipe",
            email = "boris.steipe@utoronto.ca",

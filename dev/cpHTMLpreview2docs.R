@@ -6,9 +6,9 @@
 #' \code{pandoc()} to \code{index.html} in the \code{./docs} folder.
 #'
 #' @section Details: GitHub pages expects \code{index.html} in the \code{./docs}
-#' folder of the repository. This function puts the pandoc preview of
+#' folder of the repository. This function puts the latest pandoc preview of
 #' \code{README.md} into the location defined by \code{targetFile}. The function
-#' aborts if the preview directory or file is not unique.
+#' aborts if the preview file is not unique.
 #'
 #' @params targetFile (character) the filename to write to. Default:
 #' \code{./docs/index.html}.
@@ -30,7 +30,11 @@ cpHTMLpreview2docs <- function(targetFile = "./docs/index.html") {
   pandocDir <- list.files(path = tempdir(),
                           pattern = "^preview.+\\.dir$",
                           full.names = TRUE)
-  stopifnot(length(pandocDir) == 1)
+  stopifnot(length(pandocDir) > 0)
+
+  # get most recent directory
+  x <- file.mtime(pandocDir)
+  pandocDir <- pandocDir[which(x == max(x))]
 
   previewFile <- list.files(path = pandocDir,
                           pattern = "^README\\.html$",

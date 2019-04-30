@@ -1,5 +1,7 @@
 # qqid
-
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/qqid)](https://cran.r-project.org/package=qqid)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/qqid?color=lightgrey)](https://CRAN.R-project.org/package=qqid)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Travis build status](https://travis-ci.org/hyginn/qqid.svg?branch=master)](https://travis-ci.org/hyginn/qqid)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hyginn/qqid?branch=master&svg=true)](https://ci.appveyor.com/project/hyginn/qqid)
 [![Coverage status](https://codecov.io/gh/hyginn/qqid/branch/master/graph/badge.svg)](https://codecov.io/github/hyginn/qqid?branch=master)
@@ -105,7 +107,7 @@ Practice shows that when we put them into spreadsheets during data entry, or nee
 
 ## 1.3 The QQID concept
 
-QQIDs are a formatted variant of 128-bit numbers. A QQID converts the first 20 bit (five hexadecimal characters) of the number to two integers (0, 1023), and uses the integers to pick two "Q-words" words from a table of English four-letter, monosyllabic words. 
+QQIDs are a formatted variant of 128-bit numbers. A QQID converts the first 20 bit (five hexadecimal characters) of the number to two integers (0, 1023), and uses the integers to pick two "Q-words" from a table of English four-letter, monosyllabic words. 
 
 ```text
 
@@ -715,6 +717,9 @@ for(i in seq(0, 1023, by = 16)) {
 0976:  webs week weep weld well went were west what when whim whip whom wick wide wife
 0992:  wigs wild will wind wine wing wink wins wipe wise wish with wolf wood wool word
 1008:  wore work worm worn wove wrap wren yard yarn yawn year yell your zest zinc zone
+
+
+# [END]
 ```
 
 <!-- END -->

@@ -1,4 +1,4 @@
-b168bb88754b5d15d0a729e567b7f9bc *DESCRIPTION
+81351c95ab56b44ddbefec81dedb96fb *DESCRIPTION
 d1099b956a1e4408b1fb14536d42eeaf *inst/CITATION
 9b3e3a2e5eee6498a8dfd3f52a49dc48 *inst/img/barplot128bitRandom.svg
 66d305ddf2fe4a56401935962159e70b *inst/img/barplotRFC4122conforming.svg
@@ -121,7 +121,7 @@ da4fe9f06053f31c53ef996babd814d5 *qqid.Rcheck/tests/testthat/test_xlt2qq.R
 5d0863ee51a0ead0c4e199d1900ecc8b *R/xlt2qq.R
 923279a6ada2e83edeb0b303b1c2ef17 *R/xltIDexample.R
 904f372c5d0d3a65324856067bbf4268 *R/zzz.R
-e6bfda73e3fb5af4cbf002b93258b69f *README.md
+24b005e3bd42cd806cd394577dd3ef9e *README.md
 f9daeb3683ee9b0c55fecf07636d0be0 *tests/testthat.R
 1a062b9c573b33d08ce91355a31353ad *tests/testthat/test_isValid.R
 7a6b8fed3b5efea3395f2ea2ecdd08bf *tests/testthat/test_qMap.R
